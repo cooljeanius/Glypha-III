@@ -1,0 +1,13 @@
+*.pbxuser
+*.perspectivev3
+*.build
+build/*
+*.cache
+*.log
+*.o
+*~
+*.hash-criteria
+*.status
+Source/config.h
+*stamp-h*
+Source/Makefile

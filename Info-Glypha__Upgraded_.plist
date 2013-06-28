@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSHumanReadableCopyright</key>
+	<string>Public Domain</string>
+	<key>CFBundleDisplayName</key>
+	<string>Glypha III</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>Glypha III</string>
+	<key>CFBundleGetInfoString</key>
+	<string>Glypha III 1.1.1; John Calhoun &amp; Mark Pazolli; Public Domain 2001;</string>
+	<key>CFBundleIconFile</key>
+	<string>Glypha.icns</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.mps.glypha</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Glypha III</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.1.1</string>
+	<key>CFBundleSignature</key>
+	<string>zade</string>
+	<key>CFBundleVersion</key>
+	<string>1.1.1</string>
+	<key>CSResourcesFileMapped</key>
+	<true/>
+</dict>
+</plist>

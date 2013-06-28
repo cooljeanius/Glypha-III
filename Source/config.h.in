@@ -1,0 +1,112 @@
+/* config.h.in.  Generated from configure.ac by autoheader.  */
+
+/* Define to 1 if you have the <CarbonCore/Files.h> header file. */
+#undef HAVE_CARBONCORE_FILES_H
+
+/* Define to 1 if you have the <CarbonCore/MacMemory.h> header file. */
+#undef HAVE_CARBONCORE_MACMEMORY_H
+
+/* Define to 1 if you have the <CarbonCore/OSUtils.h> header file. */
+#undef HAVE_CARBONCORE_OSUTILS_H
+
+/* Define to 1 if you have the <CarbonSound/Sound.h> header file. */
+#undef HAVE_CARBONSOUND_SOUND_H
+
+/* Define to 1 if you have the <Carbon/Carbon.h> header file. */
+#undef HAVE_CARBON_CARBON_H
+
+/* Define to 1 if you have the <Carbon.h> header file. */
+#undef HAVE_CARBON_H
+
+/* Define to 1 if you have the <HIToolbox/Events.h> header file. */
+#undef HAVE_HITOOLBOX_EVENTS_H
+
+/* Define to 1 if you have the <HIToolbox/MacWindows.h> header file. */
+#undef HAVE_HITOOLBOX_MACWINDOWS_H
+
+/* Define to 1 if you have the <HIToolbox/Menus.h> header file. */
+#undef HAVE_HITOOLBOX_MENUS_H
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have the `stdc++' library (-lstdc++). */
+#undef HAVE_LIBSTDC__
+
+/* Define to 1 if you have the `stdc++-static' library (-lstdc++-static). */
+#undef HAVE_LIBSTDC___STATIC
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Define to 1 if you have the <QD/QuickdrawAPI.h> header file. */
+#undef HAVE_QD_QUICKDRAWAPI_H
+
+/* Define to 1 if you have the `sleep' function. */
+#undef HAVE_SLEEP
+
+/* Define to 1 if stdbool.h conforms to C99. */
+#undef HAVE_STDBOOL_H
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdio.h> header file. */
+#undef HAVE_STDIO_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Define to 1 if the system has the type `_Bool'. */
+#undef HAVE__BOOL
+
+/* Define to 1 if your C compiler doesn't accept -c and -o together. */
+#undef NO_MINUS_C_MINUS_O
+
+/* Name of package */
+#undef PACKAGE
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+
+/* Define to the home page for this package. */
+#undef PACKAGE_URL
+
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
+
+/* Define to 1 if the C compiler supports function prototypes. */
+#undef PROTOTYPES
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Version number of package */
+#undef VERSION
+
+/* Define like PROTOTYPES; this can be used by system headers. */
+#undef __PROTOTYPES

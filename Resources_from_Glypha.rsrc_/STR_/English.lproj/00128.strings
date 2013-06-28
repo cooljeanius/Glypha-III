@@ -1,0 +1,4 @@
+"128,0" = "Sorry, Glypha II needs a color Mac.  Try Glypha 3.0 (b&w).  Exit to Finder.";
+"128,1" = "Sorry, Glypha II requires a monitor at least 640 x 480.  Exit to Finder. ";
+"128,2" = "Glypha II requires the monitor set to 16 colors (4 bit).  Relaunch Glypha when you have switched to 16 colors.";
+"128,3" = "Yow!  Error initializing (nil handle).  We may need more memory or Glypha is damaged.  Exit to Finder.";
