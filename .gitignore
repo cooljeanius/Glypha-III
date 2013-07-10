@@ -11,3 +11,4 @@ build/*
 Source/config.h
 *stamp-h*
 Source/Makefile
+*DS_Store*
