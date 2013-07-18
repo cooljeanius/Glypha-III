@@ -86,8 +86,8 @@
 		6157CB10177B48B200E53D75 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
 		6157CB11177B48B200E53D75 /* libstdc++-static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0249A669FF388E3911CA2CEA /* libstdc++-static.a */; };
 		6157CB13177B48B200E53D75 /* Glypha.rsrc in Rez */ = {isa = PBXBuildFile; fileRef = 00C05EF200D9F94A7F000001 /* Glypha.rsrc */; };
-		6157CE27177B4DAC00E53D75 /* Glypha A.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6157CE26177B4DAC00E53D75 /* Glypha A.icns */; };
-		6157CE37177B4E6200E53D75 /* Glypha B.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6157CE36177B4E6200E53D75 /* Glypha B.icns */; };
+		6157CE27177B4DAC00E53D75 /* Glypha_A.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6157CE26177B4DAC00E53D75 /* Glypha_A.icns */; };
+		6157CE37177B4E6200E53D75 /* Glypha_B.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6157CE36177B4E6200E53D75 /* Glypha_B.icns */; };
 		6157CE3F177B4ED900E53D75 /* 00137_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6157CE3D177B4ED900E53D75 /* 00137_icon.png */; };
 		6157CE40177B4ED900E53D75 /* 00997_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6157CE3E177B4ED900E53D75 /* 00997_icon.png */; };
 		6157CE6C177B4EED00E53D75 /* 00128.pict in Resources */ = {isa = PBXBuildFile; fileRef = 6157CE42177B4EED00E53D75 /* 00128.pict */; };
@@ -199,8 +199,8 @@
 		6157CB18177B48B200E53D75 /* Info-Glypha__Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Glypha__Upgraded_.plist"; sourceTree = "<group>"; };
 		6157CB19177B48B200E53D75 /* Glypha III.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Glypha III.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6157CE1E177B4D8E00E53D75 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
-		6157CE26177B4DAC00E53D75 /* Glypha A.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "Glypha A.icns"; sourceTree = "<group>"; };
-		6157CE36177B4E6200E53D75 /* Glypha B.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "Glypha B.icns"; sourceTree = "<group>"; };
+		6157CE26177B4DAC00E53D75 /* Glypha_A.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Glypha_A.icns; sourceTree = "<group>"; };
+		6157CE36177B4E6200E53D75 /* Glypha_B.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Glypha_B.icns; sourceTree = "<group>"; };
 		6157CE3D177B4ED900E53D75 /* 00137_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 00137_icon.png; sourceTree = "<group>"; };
 		6157CE3E177B4ED900E53D75 /* 00997_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 00997_icon.png; sourceTree = "<group>"; };
 		6157CE42177B4EED00E53D75 /* 00128.pict */ = {isa = PBXFileReference; lastKnownFileType = image.pict; path = 00128.pict; sourceTree = "<group>"; };
@@ -249,8 +249,6 @@
 		6157CEDD177B4F2B00E53D75 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/00129.strings; sourceTree = "<group>"; };
 		6157CEDE177B4F2B00E53D75 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/00160_Prefs.strings; sourceTree = "<group>"; };
 		6157CEE3177B4F5500E53D75 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = English; path = English.lproj/00000_Owner_resource.zade; sourceTree = "<group>"; };
-		6157CEE5177B4F6700E53D75 /* Glypha.pch.gch.hash-criteria */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Glypha.pch.gch.hash-criteria"; path = "Source/Glypha.pch.gch.hash-criteria"; sourceTree = "<group>"; };
-		6157CEE6177B4F6700E53D75 /* Glypha.pch.pth.hash-criteria */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Glypha.pch.pth.hash-criteria"; path = "Source/Glypha.pch.pth.hash-criteria"; sourceTree = "<group>"; };
 		6157CF16177B52CD00E53D75 /* 01000_Ahnk.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = 01000_Ahnk.aiff; sourceTree = "<group>"; };
 		6157CF17177B52CD00E53D75 /* 01000_Ahnk.snd */ = {isa = PBXFileReference; lastKnownFileType = file; path = 01000_Ahnk.snd; sourceTree = "<group>"; };
 		6157CF18177B52CD00E53D75 /* 01001_Bird.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = 01001_Bird.aiff; sourceTree = "<group>"; };
@@ -342,8 +340,6 @@
 			isa = PBXGroup;
 			children = (
 				6157D0F8177BC74800E53D75 /* config.h */,
-				6157CEE5177B4F6700E53D75 /* Glypha.pch.gch.hash-criteria */,
-				6157CEE6177B4F6700E53D75 /* Glypha.pch.pth.hash-criteria */,
 				00C05EF400D9F9A97F000001 /* Externs.h */,
 				00C05EF500D9F9A97F000001 /* Enemy.c */,
 				00C05EF600D9F9A97F000001 /* Graphics.c */,
@@ -366,8 +362,8 @@
 				6157CEDB177B4F2B00E53D75 /* strings */,
 				6157CE41177B4EED00E53D75 /* picts */,
 				6157CE3C177B4ED900E53D75 /* icons */,
-				6157CE36177B4E6200E53D75 /* Glypha B.icns */,
-				6157CE26177B4DAC00E53D75 /* Glypha A.icns */,
+				6157CE36177B4E6200E53D75 /* Glypha_B.icns */,
+				6157CE26177B4DAC00E53D75 /* Glypha_A.icns */,
 				00C05EF200D9F94A7F000001 /* Glypha.rsrc */,
 				04DED90400DCE4907F000001 /* Glypha.icns */,
 			);
@@ -595,8 +591,8 @@
 			files = (
 				6157CB04177B48B200E53D75 /* Glypha.icns in Resources */,
 				6157CF7B177B53C500E53D75 /* Credits.rtf in Resources */,
-				6157CE27177B4DAC00E53D75 /* Glypha A.icns in Resources */,
-				6157CE37177B4E6200E53D75 /* Glypha B.icns in Resources */,
+				6157CE27177B4DAC00E53D75 /* Glypha_A.icns in Resources */,
+				6157CE37177B4E6200E53D75 /* Glypha_B.icns in Resources */,
 				6157CE3F177B4ED900E53D75 /* 00137_icon.png in Resources */,
 				6157CE40177B4ED900E53D75 /* 00997_icon.png in Resources */,
 				6157CE6C177B4EED00E53D75 /* 00128.pict in Resources */,
@@ -894,6 +890,7 @@
 				GCC_AUTO_VECTORIZATION = YES;
 				GCC_ENABLE_EXCEPTIONS = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_PASCAL_STRINGS = YES;
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_ENABLE_SSE41_EXTENSIONS = YES;
 				GCC_ENABLE_SSE42_EXTENSIONS = YES;

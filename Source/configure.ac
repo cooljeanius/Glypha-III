@@ -1,5 +1,5 @@
-#                                               -*- Autoconf -*-
-# Process this file with autoconf to produce a configure script.
+dnl#                                               -*- Autoconf -*-
+dnl# Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.61])
 AC_INIT([Glypha], [III])
@@ -7,17 +7,20 @@ AC_CONFIG_SRCDIR([Enemy.c])
 AC_CONFIG_HEADER([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CANONICAL_TARGET
-AM_INIT_AUTOMAKE([1.11 foreign])
+AM_INIT_AUTOMAKE([1.11 foreign dejagnu dist-bzip2 dist-zip no-installinfo -Wall])
 AM_MAINTAINER_MODE
 EBG_DEVELOPER_DIR
 
 # Checks for programs.
-AC_PROG_CC
+AC_LANG([C])
 AM_PROG_CC_C_O
-AC_PROG_CPP
+AC_PROG_OBJC
+XORG_PROG_RAWCPP
+XORG_LD_WRAP
 AC_GCC_TRADITIONAL
 AC_BAKEFILE_PROG_MWCC
 AC_BAKEFILE_PROG_MWCXX
+AC_BAKEFILE_METROWERKS_EXTO
 AX_COMPILER_VENDOR
 
 AC_PATH_PROG([XCODEBUILD], [xcodebuild], [AC_MSG_ERROR([xcodebuild is required to build.])])
@@ -47,15 +50,22 @@ AC_BAKEFILE_PRECOMP_HEADERS
 AC_BAKEFILE_CREATE_FILE_BK_MAKE_PCH
 AC_C_PROTOTYPES
 AC_HEADER_STDC
-AC_CHECK_HEADERS([Carbon.h Carbon/Carbon.h CarbonCore/Files.h CarbonCore/MacMemory.h CarbonCore/OSUtils.h CarbonSound/Sound.h \
-                  HIToolbox/Events.h HIToolbox/MacWindows.h HIToolbox/Menus.h QD/QuickdrawAPI.h])
+AC_CHECK_HEADERS([Carbon.h Carbon/Carbon.h CarbonCore/Files.h \
+                  CarbonCore/MacMemory.h CarbonCore/OSUtils.h \
+                  CarbonSound/Sound.h HIToolbox/Events.h \
+                  HIToolbox/MacWindows.h HIToolbox/Menus.h \
+                  QD/QuickdrawAPI.h])
 AC_CHECK_HEADERS([stdio.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_HEADER_STDBOOL
+XORG_MEMORY_CHECK_FLAGS
+XORG_CHECK_MALLOC_ZERO
+XORG_CWARNFLAGS
 
 # Checks for library functions.
 AC_CHECK_FUNCS([sleep])
 
+# Output
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
