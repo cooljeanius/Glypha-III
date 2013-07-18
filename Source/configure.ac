@@ -62,6 +62,11 @@ AC_HEADER_STDBOOL
 XORG_MEMORY_CHECK_FLAGS
 XORG_CHECK_MALLOC_ZERO
 XORG_CWARNFLAGS
+AX_GCC_ARCHFLAG
+
+#FIXME: This check will say that the compiler does not support the
+# -fpascal-strings flag, even when it does actually support it
+AX_CHECK_COMPILE_FLAG([-fpascal-strings])
 
 # Checks for library functions.
 AC_CHECK_FUNCS([sleep])

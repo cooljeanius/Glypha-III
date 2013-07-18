@@ -623,6 +623,7 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
+PRTDIAG
 CWARNFLAGS
 BASE_CFLAGS
 XTMALLOC_ZERO_CFLAGS
@@ -775,6 +776,7 @@ enable_dependency_tracking
 enable_precomp_headers
 enable_malloc0returnsnull
 enable_selective_werror
+with_gcc_arch
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1431,6 +1433,8 @@ Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
   --with-developer-dir=PATH    use PATH as location for Xcode developer tools
+  --with-gcc-arch=<arch>  use architecture <arch> for gcc -march/-mtune,
+                          instead of guessing
 
 Some influential environment variables:
   CC          C compiler command
@@ -5150,10 +5154,8 @@ if ac_fn_c_try_compile "$LINENO"; then :
   bakefile_cv_c_compiler___MWERKS__=yes
 else
   bakefile_cv_c_compiler___MWERKS__=no
-
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
-
 
 fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $bakefile_cv_c_compiler___MWERKS__" >&5
@@ -5589,10 +5591,8 @@ if ac_fn_cxx_try_compile "$LINENO"; then :
   bakefile_cv_cxx_compiler___MWERKS__=yes
 else
   bakefile_cv_cxx_compiler___MWERKS__=no
-
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
-
 
 fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $bakefile_cv_cxx_compiler___MWERKS__" >&5
@@ -5607,6 +5607,8 @@ ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
 
 
 
@@ -7396,8 +7398,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wall"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wall" >&5
-$as_echo_n "checking if $CC supports-Wall... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wall" >&5
+$as_echo_n "checking if $CC supports -Wall... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wall
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -7514,8 +7516,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wpointer-arith"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wpointer-arith" >&5
-$as_echo_n "checking if $CC supports-Wpointer-arith... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wpointer-arith" >&5
+$as_echo_n "checking if $CC supports -Wpointer-arith... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wpointer_arith
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -7632,8 +7634,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wmissing-declarations"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wmissing-declarations" >&5
-$as_echo_n "checking if $CC supports-Wmissing-declarations... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wmissing-declarations" >&5
+$as_echo_n "checking if $CC supports -Wmissing-declarations... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wmissing_declarations
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -7748,10 +7750,10 @@ found="no"
 			CFLAGS="$CFLAGS -Werror=unused-command-line-argument"
 		fi
 
-		CFLAGS="$CFLAGS -Wformat=2"
+		CFLAGS="$CFLAGS -Wformat=2,-Wformat"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wformat=2" >&5
-$as_echo_n "checking if $CC supports-Wformat=2... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wformat=2" >&5
+$as_echo_n "checking if $CC supports -Wformat=2... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wformat_2
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -7783,56 +7785,7 @@ fi
 		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $supported" >&5
 $as_echo "$supported" >&6; }
 		if test "$supported" = "yes" ; then
-			BASE_CFLAGS="$BASE_CFLAGS -Wformat=2"
-			found="yes"
-		fi
-	fi
-
-	if test $found = "no" ; then
-		if test "x$xorg_testset_unknown_warning_option" = "xyes" ; then
-			CFLAGS="$CFLAGS -Werror=unknown-warning-option"
-		fi
-
-		if test "x$xorg_testset_unused_command_line_argument" = "xyes" ; then
-			CFLAGS="$CFLAGS -Werror=unused-command-line-argument"
-		fi
-
-		CFLAGS="$CFLAGS -Wformat"
-
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wformat" >&5
-$as_echo_n "checking if $CC supports-Wformat... " >&6; }
-		cacheid=xorg_cv_cc_flag__Wformat
-		if eval \${$cacheid+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-int i;
-int
-main ()
-{
-
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_c_try_link "$LINENO"; then :
-  eval $cacheid=yes
-else
-  eval $cacheid=no
-fi
-rm -f core conftest.err conftest.$ac_objext \
-    conftest$ac_exeext conftest.$ac_ext
-fi
-
-
-		CFLAGS="$xorg_testset_save_CFLAGS"
-
-		eval supported=\$$cacheid
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $supported" >&5
-$as_echo "$supported" >&6; }
-		if test "$supported" = "yes" ; then
-			BASE_CFLAGS="$BASE_CFLAGS -Wformat"
+			BASE_CFLAGS="$BASE_CFLAGS -Wformat=2,-Wformat"
 			found="yes"
 		fi
 	fi
@@ -7919,8 +7872,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wstrict-prototypes"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wstrict-prototypes" >&5
-$as_echo_n "checking if $CC supports-Wstrict-prototypes... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wstrict-prototypes" >&5
+$as_echo_n "checking if $CC supports -Wstrict-prototypes... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wstrict_prototypes
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -8037,8 +7990,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wmissing-prototypes"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wmissing-prototypes" >&5
-$as_echo_n "checking if $CC supports-Wmissing-prototypes... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wmissing-prototypes" >&5
+$as_echo_n "checking if $CC supports -Wmissing-prototypes... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wmissing_prototypes
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -8155,8 +8108,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wnested-externs"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wnested-externs" >&5
-$as_echo_n "checking if $CC supports-Wnested-externs... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wnested-externs" >&5
+$as_echo_n "checking if $CC supports -Wnested-externs... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wnested_externs
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -8273,8 +8226,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wbad-function-cast"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wbad-function-cast" >&5
-$as_echo_n "checking if $CC supports-Wbad-function-cast... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wbad-function-cast" >&5
+$as_echo_n "checking if $CC supports -Wbad-function-cast... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wbad_function_cast
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -8391,8 +8344,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wold-style-definition"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wold-style-definition" >&5
-$as_echo_n "checking if $CC supports-Wold-style-definition... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wold-style-definition" >&5
+$as_echo_n "checking if $CC supports -Wold-style-definition... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wold_style_definition
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -8509,8 +8462,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wdeclaration-after-statement"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wdeclaration-after-statement" >&5
-$as_echo_n "checking if $CC supports-Wdeclaration-after-statement... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wdeclaration-after-statement" >&5
+$as_echo_n "checking if $CC supports -Wdeclaration-after-statement... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wdeclaration_after_statement
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -8546,7 +8499,6 @@ $as_echo "$supported" >&6; }
 			found="yes"
 		fi
 	fi
-
 
 
 
@@ -8631,8 +8583,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wunused"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wunused" >&5
-$as_echo_n "checking if $CC supports-Wunused... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wunused" >&5
+$as_echo_n "checking if $CC supports -Wunused... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wunused
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -8749,8 +8701,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wuninitialized"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wuninitialized" >&5
-$as_echo_n "checking if $CC supports-Wuninitialized... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wuninitialized" >&5
+$as_echo_n "checking if $CC supports -Wuninitialized... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wuninitialized
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -8867,8 +8819,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wshadow"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wshadow" >&5
-$as_echo_n "checking if $CC supports-Wshadow... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wshadow" >&5
+$as_echo_n "checking if $CC supports -Wshadow... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wshadow
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -8985,8 +8937,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wcast-qual"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wcast-qual" >&5
-$as_echo_n "checking if $CC supports-Wcast-qual... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wcast-qual" >&5
+$as_echo_n "checking if $CC supports -Wcast-qual... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wcast_qual
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -9103,8 +9055,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wmissing-noreturn"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wmissing-noreturn" >&5
-$as_echo_n "checking if $CC supports-Wmissing-noreturn... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wmissing-noreturn" >&5
+$as_echo_n "checking if $CC supports -Wmissing-noreturn... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wmissing_noreturn
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -9221,8 +9173,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wmissing-format-attribute"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wmissing-format-attribute" >&5
-$as_echo_n "checking if $CC supports-Wmissing-format-attribute... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wmissing-format-attribute" >&5
+$as_echo_n "checking if $CC supports -Wmissing-format-attribute... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wmissing_format_attribute
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -9339,8 +9291,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wredundant-decls"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wredundant-decls" >&5
-$as_echo_n "checking if $CC supports-Wredundant-decls... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wredundant-decls" >&5
+$as_echo_n "checking if $CC supports -Wredundant-decls... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wredundant_decls
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -9467,10 +9419,10 @@ found="no"
 			CFLAGS="$CFLAGS -Werror=unused-command-line-argument"
 		fi
 
-		CFLAGS="$CFLAGS -Werror=implicit"
+		CFLAGS="$CFLAGS -Werror=implicit,-errwarn=E_NO_EXPLICIT_TYPE_GIVEN -errwarn=E_NO_IMPLICIT_DECL_ALLOWED"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Werror=implicit" >&5
-$as_echo_n "checking if $CC supports-Werror=implicit... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Werror=implicit" >&5
+$as_echo_n "checking if $CC supports -Werror=implicit... " >&6; }
 		cacheid=xorg_cv_cc_flag__Werror_implicit
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -9502,56 +9454,7 @@ fi
 		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $supported" >&5
 $as_echo "$supported" >&6; }
 		if test "$supported" = "yes" ; then
-			BASE_CFLAGS="$BASE_CFLAGS -Werror=implicit"
-			found="yes"
-		fi
-	fi
-
-	if test $found = "no" ; then
-		if test "x$xorg_testset_unknown_warning_option" = "xyes" ; then
-			CFLAGS="$CFLAGS -Werror=unknown-warning-option"
-		fi
-
-		if test "x$xorg_testset_unused_command_line_argument" = "xyes" ; then
-			CFLAGS="$CFLAGS -Werror=unused-command-line-argument"
-		fi
-
-		CFLAGS="$CFLAGS -errwarn=E_NO_EXPLICIT_TYPE_GIVEN -errwarn=E_NO_IMPLICIT_DECL_ALLOWED"
-
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-errwarn=E_NO_EXPLICIT_TYPE_GIVEN -errwarn=E_NO_IMPLICIT_DECL_ALLOWED" >&5
-$as_echo_n "checking if $CC supports-errwarn=E_NO_EXPLICIT_TYPE_GIVEN -errwarn=E_NO_IMPLICIT_DECL_ALLOWED... " >&6; }
-		cacheid=xorg_cv_cc_flag__errwarn_E_NO_EXPLICIT_TYPE_GIVEN__errwarn_E_NO_IMPLICIT_DECL_ALLOWED
-		if eval \${$cacheid+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-int i;
-int
-main ()
-{
-
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_c_try_link "$LINENO"; then :
-  eval $cacheid=yes
-else
-  eval $cacheid=no
-fi
-rm -f core conftest.err conftest.$ac_objext \
-    conftest$ac_exeext conftest.$ac_ext
-fi
-
-
-		CFLAGS="$xorg_testset_save_CFLAGS"
-
-		eval supported=\$$cacheid
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $supported" >&5
-$as_echo "$supported" >&6; }
-		if test "$supported" = "yes" ; then
-			BASE_CFLAGS="$BASE_CFLAGS -errwarn=E_NO_EXPLICIT_TYPE_GIVEN -errwarn=E_NO_IMPLICIT_DECL_ALLOWED"
+			BASE_CFLAGS="$BASE_CFLAGS -Werror=implicit,-errwarn=E_NO_EXPLICIT_TYPE_GIVEN -errwarn=E_NO_IMPLICIT_DECL_ALLOWED"
 			found="yes"
 		fi
 	fi
@@ -9636,8 +9539,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Werror=nonnull"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Werror=nonnull" >&5
-$as_echo_n "checking if $CC supports-Werror=nonnull... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Werror=nonnull" >&5
+$as_echo_n "checking if $CC supports -Werror=nonnull... " >&6; }
 		cacheid=xorg_cv_cc_flag__Werror_nonnull
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -9754,8 +9657,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Werror=init-self"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Werror=init-self" >&5
-$as_echo_n "checking if $CC supports-Werror=init-self... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Werror=init-self" >&5
+$as_echo_n "checking if $CC supports -Werror=init-self... " >&6; }
 		cacheid=xorg_cv_cc_flag__Werror_init_self
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -9872,8 +9775,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Werror=main"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Werror=main" >&5
-$as_echo_n "checking if $CC supports-Werror=main... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Werror=main" >&5
+$as_echo_n "checking if $CC supports -Werror=main... " >&6; }
 		cacheid=xorg_cv_cc_flag__Werror_main
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -9990,8 +9893,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Werror=missing-braces"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Werror=missing-braces" >&5
-$as_echo_n "checking if $CC supports-Werror=missing-braces... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Werror=missing-braces" >&5
+$as_echo_n "checking if $CC supports -Werror=missing-braces... " >&6; }
 		cacheid=xorg_cv_cc_flag__Werror_missing_braces
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -10108,8 +10011,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Werror=sequence-point"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Werror=sequence-point" >&5
-$as_echo_n "checking if $CC supports-Werror=sequence-point... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Werror=sequence-point" >&5
+$as_echo_n "checking if $CC supports -Werror=sequence-point... " >&6; }
 		cacheid=xorg_cv_cc_flag__Werror_sequence_point
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -10224,10 +10127,10 @@ found="no"
 			CFLAGS="$CFLAGS -Werror=unused-command-line-argument"
 		fi
 
-		CFLAGS="$CFLAGS -Werror=return-type"
+		CFLAGS="$CFLAGS -Werror=return-type,-errwarn=E_FUNC_HAS_NO_RETURN_STMT"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Werror=return-type" >&5
-$as_echo_n "checking if $CC supports-Werror=return-type... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Werror=return-type" >&5
+$as_echo_n "checking if $CC supports -Werror=return-type... " >&6; }
 		cacheid=xorg_cv_cc_flag__Werror_return_type
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -10259,56 +10162,7 @@ fi
 		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $supported" >&5
 $as_echo "$supported" >&6; }
 		if test "$supported" = "yes" ; then
-			BASE_CFLAGS="$BASE_CFLAGS -Werror=return-type"
-			found="yes"
-		fi
-	fi
-
-	if test $found = "no" ; then
-		if test "x$xorg_testset_unknown_warning_option" = "xyes" ; then
-			CFLAGS="$CFLAGS -Werror=unknown-warning-option"
-		fi
-
-		if test "x$xorg_testset_unused_command_line_argument" = "xyes" ; then
-			CFLAGS="$CFLAGS -Werror=unused-command-line-argument"
-		fi
-
-		CFLAGS="$CFLAGS -errwarn=E_FUNC_HAS_NO_RETURN_STMT"
-
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-errwarn=E_FUNC_HAS_NO_RETURN_STMT" >&5
-$as_echo_n "checking if $CC supports-errwarn=E_FUNC_HAS_NO_RETURN_STMT... " >&6; }
-		cacheid=xorg_cv_cc_flag__errwarn_E_FUNC_HAS_NO_RETURN_STMT
-		if eval \${$cacheid+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-int i;
-int
-main ()
-{
-
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_c_try_link "$LINENO"; then :
-  eval $cacheid=yes
-else
-  eval $cacheid=no
-fi
-rm -f core conftest.err conftest.$ac_objext \
-    conftest$ac_exeext conftest.$ac_ext
-fi
-
-
-		CFLAGS="$xorg_testset_save_CFLAGS"
-
-		eval supported=\$$cacheid
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $supported" >&5
-$as_echo "$supported" >&6; }
-		if test "$supported" = "yes" ; then
-			BASE_CFLAGS="$BASE_CFLAGS -errwarn=E_FUNC_HAS_NO_RETURN_STMT"
+			BASE_CFLAGS="$BASE_CFLAGS -Werror=return-type,-errwarn=E_FUNC_HAS_NO_RETURN_STMT"
 			found="yes"
 		fi
 	fi
@@ -10393,8 +10247,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Werror=trigraphs"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Werror=trigraphs" >&5
-$as_echo_n "checking if $CC supports-Werror=trigraphs... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Werror=trigraphs" >&5
+$as_echo_n "checking if $CC supports -Werror=trigraphs... " >&6; }
 		cacheid=xorg_cv_cc_flag__Werror_trigraphs
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -10511,8 +10365,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Werror=array-bounds"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Werror=array-bounds" >&5
-$as_echo_n "checking if $CC supports-Werror=array-bounds... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Werror=array-bounds" >&5
+$as_echo_n "checking if $CC supports -Werror=array-bounds... " >&6; }
 		cacheid=xorg_cv_cc_flag__Werror_array_bounds
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -10629,8 +10483,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Werror=write-strings"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Werror=write-strings" >&5
-$as_echo_n "checking if $CC supports-Werror=write-strings... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Werror=write-strings" >&5
+$as_echo_n "checking if $CC supports -Werror=write-strings... " >&6; }
 		cacheid=xorg_cv_cc_flag__Werror_write_strings
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -10747,8 +10601,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Werror=address"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Werror=address" >&5
-$as_echo_n "checking if $CC supports-Werror=address... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Werror=address" >&5
+$as_echo_n "checking if $CC supports -Werror=address... " >&6; }
 		cacheid=xorg_cv_cc_flag__Werror_address
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -10863,10 +10717,10 @@ found="no"
 			CFLAGS="$CFLAGS -Werror=unused-command-line-argument"
 		fi
 
-		CFLAGS="$CFLAGS -Werror=int-to-pointer-cast"
+		CFLAGS="$CFLAGS -Werror=int-to-pointer-cast,-errwarn=E_BAD_PTR_INT_COMBINATION"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Werror=int-to-pointer-cast" >&5
-$as_echo_n "checking if $CC supports-Werror=int-to-pointer-cast... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Werror=int-to-pointer-cast" >&5
+$as_echo_n "checking if $CC supports -Werror=int-to-pointer-cast... " >&6; }
 		cacheid=xorg_cv_cc_flag__Werror_int_to_pointer_cast
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -10898,56 +10752,7 @@ fi
 		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $supported" >&5
 $as_echo "$supported" >&6; }
 		if test "$supported" = "yes" ; then
-			BASE_CFLAGS="$BASE_CFLAGS -Werror=int-to-pointer-cast"
-			found="yes"
-		fi
-	fi
-
-	if test $found = "no" ; then
-		if test "x$xorg_testset_unknown_warning_option" = "xyes" ; then
-			CFLAGS="$CFLAGS -Werror=unknown-warning-option"
-		fi
-
-		if test "x$xorg_testset_unused_command_line_argument" = "xyes" ; then
-			CFLAGS="$CFLAGS -Werror=unused-command-line-argument"
-		fi
-
-		CFLAGS="$CFLAGS -errwarn=E_BAD_PTR_INT_COMBINATION"
-
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-errwarn=E_BAD_PTR_INT_COMBINATION" >&5
-$as_echo_n "checking if $CC supports-errwarn=E_BAD_PTR_INT_COMBINATION... " >&6; }
-		cacheid=xorg_cv_cc_flag__errwarn_E_BAD_PTR_INT_COMBINATION
-		if eval \${$cacheid+:} false; then :
-  $as_echo_n "(cached) " >&6
-else
-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-int i;
-int
-main ()
-{
-
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_c_try_link "$LINENO"; then :
-  eval $cacheid=yes
-else
-  eval $cacheid=no
-fi
-rm -f core conftest.err conftest.$ac_objext \
-    conftest$ac_exeext conftest.$ac_ext
-fi
-
-
-		CFLAGS="$xorg_testset_save_CFLAGS"
-
-		eval supported=\$$cacheid
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $supported" >&5
-$as_echo "$supported" >&6; }
-		if test "$supported" = "yes" ; then
-			BASE_CFLAGS="$BASE_CFLAGS -errwarn=E_BAD_PTR_INT_COMBINATION"
+			BASE_CFLAGS="$BASE_CFLAGS -Werror=int-to-pointer-cast,-errwarn=E_BAD_PTR_INT_COMBINATION"
 			found="yes"
 		fi
 	fi
@@ -11032,8 +10837,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Werror=pointer-to-int-cast"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Werror=pointer-to-int-cast" >&5
-$as_echo_n "checking if $CC supports-Werror=pointer-to-int-cast... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Werror=pointer-to-int-cast" >&5
+$as_echo_n "checking if $CC supports -Werror=pointer-to-int-cast... " >&6; }
 		cacheid=xorg_cv_cc_flag__Werror_pointer_to_int_cast
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -11153,8 +10958,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wimplicit"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wimplicit" >&5
-$as_echo_n "checking if $CC supports-Wimplicit... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wimplicit" >&5
+$as_echo_n "checking if $CC supports -Wimplicit... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wimplicit
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -11271,8 +11076,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wnonnull"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wnonnull" >&5
-$as_echo_n "checking if $CC supports-Wnonnull... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wnonnull" >&5
+$as_echo_n "checking if $CC supports -Wnonnull... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wnonnull
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -11389,8 +11194,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Winit-self"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Winit-self" >&5
-$as_echo_n "checking if $CC supports-Winit-self... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Winit-self" >&5
+$as_echo_n "checking if $CC supports -Winit-self... " >&6; }
 		cacheid=xorg_cv_cc_flag__Winit_self
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -11507,8 +11312,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wmain"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wmain" >&5
-$as_echo_n "checking if $CC supports-Wmain... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wmain" >&5
+$as_echo_n "checking if $CC supports -Wmain... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wmain
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -11625,8 +11430,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wmissing-braces"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wmissing-braces" >&5
-$as_echo_n "checking if $CC supports-Wmissing-braces... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wmissing-braces" >&5
+$as_echo_n "checking if $CC supports -Wmissing-braces... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wmissing_braces
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -11743,8 +11548,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wsequence-point"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wsequence-point" >&5
-$as_echo_n "checking if $CC supports-Wsequence-point... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wsequence-point" >&5
+$as_echo_n "checking if $CC supports -Wsequence-point... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wsequence_point
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -11861,8 +11666,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wreturn-type"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wreturn-type" >&5
-$as_echo_n "checking if $CC supports-Wreturn-type... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wreturn-type" >&5
+$as_echo_n "checking if $CC supports -Wreturn-type... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wreturn_type
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -11979,8 +11784,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wtrigraphs"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wtrigraphs" >&5
-$as_echo_n "checking if $CC supports-Wtrigraphs... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wtrigraphs" >&5
+$as_echo_n "checking if $CC supports -Wtrigraphs... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wtrigraphs
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -12097,8 +11902,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Warray-bounds"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Warray-bounds" >&5
-$as_echo_n "checking if $CC supports-Warray-bounds... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Warray-bounds" >&5
+$as_echo_n "checking if $CC supports -Warray-bounds... " >&6; }
 		cacheid=xorg_cv_cc_flag__Warray_bounds
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -12215,8 +12020,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wwrite-strings"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wwrite-strings" >&5
-$as_echo_n "checking if $CC supports-Wwrite-strings... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wwrite-strings" >&5
+$as_echo_n "checking if $CC supports -Wwrite-strings... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wwrite_strings
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -12333,8 +12138,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Waddress"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Waddress" >&5
-$as_echo_n "checking if $CC supports-Waddress... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Waddress" >&5
+$as_echo_n "checking if $CC supports -Waddress... " >&6; }
 		cacheid=xorg_cv_cc_flag__Waddress
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -12451,8 +12256,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wint-to-pointer-cast"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wint-to-pointer-cast" >&5
-$as_echo_n "checking if $CC supports-Wint-to-pointer-cast... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wint-to-pointer-cast" >&5
+$as_echo_n "checking if $CC supports -Wint-to-pointer-cast... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wint_to_pointer_cast
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -12569,8 +12374,8 @@ found="no"
 
 		CFLAGS="$CFLAGS -Wpointer-to-int-cast"
 
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports-Wpointer-to-int-cast" >&5
-$as_echo_n "checking if $CC supports-Wpointer-to-int-cast... " >&6; }
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports -Wpointer-to-int-cast" >&5
+$as_echo_n "checking if $CC supports -Wpointer-to-int-cast... " >&6; }
 		cacheid=xorg_cv_cc_flag__Wpointer_to_int_cast
 		if eval \${$cacheid+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -12623,6 +12428,452 @@ fi
 
 
 
+
+
+
+
+# Check whether --with-gcc-arch was given.
+if test "${with_gcc_arch+set}" = set; then :
+  withval=$with_gcc_arch; ax_gcc_arch=$withval
+else
+  ax_gcc_arch=yes
+fi
+
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for gcc architecture flag" >&5
+$as_echo_n "checking for gcc architecture flag... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: " >&5
+$as_echo "" >&6; }
+if ${ax_cv_gcc_archflag+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+ax_cv_gcc_archflag="unknown"
+
+if test "$GCC" = yes; then
+
+if test "x$ax_gcc_arch" = xyes; then
+ax_gcc_arch=""
+if test "$cross_compiling" = no; then
+case $host_cpu in
+  i[3456]86*|x86_64*) # use cpuid codes
+
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for x86 cpuid 0 output" >&5
+$as_echo_n "checking for x86 cpuid 0 output... " >&6; }
+if ${ax_cv_gcc_x86_cpuid_0+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  if test "$cross_compiling" = yes; then :
+  ax_cv_gcc_x86_cpuid_0=unknown
+else
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <stdio.h>
+int
+main ()
+{
+
+     int op = 0, eax, ebx, ecx, edx;
+     FILE *f;
+      __asm__("cpuid"
+        : "=a" (eax), "=b" (ebx), "=c" (ecx), "=d" (edx)
+        : "a" (op));
+     f = fopen("conftest_cpuid", "w"); if (!f) return 1;
+     fprintf(f, "%x:%x:%x:%x\n", eax, ebx, ecx, edx);
+     fclose(f);
+     return 0;
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_run "$LINENO"; then :
+  ax_cv_gcc_x86_cpuid_0=`cat conftest_cpuid`; rm -f conftest_cpuid
+else
+  ax_cv_gcc_x86_cpuid_0=unknown; rm -f conftest_cpuid
+fi
+rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+  conftest.$ac_objext conftest.beam conftest.$ac_ext
+fi
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_gcc_x86_cpuid_0" >&5
+$as_echo "$ax_cv_gcc_x86_cpuid_0" >&6; }
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
+
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for x86 cpuid 1 output" >&5
+$as_echo_n "checking for x86 cpuid 1 output... " >&6; }
+if ${ax_cv_gcc_x86_cpuid_1+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  if test "$cross_compiling" = yes; then :
+  ax_cv_gcc_x86_cpuid_1=unknown
+else
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <stdio.h>
+int
+main ()
+{
+
+     int op = 1, eax, ebx, ecx, edx;
+     FILE *f;
+      __asm__("cpuid"
+        : "=a" (eax), "=b" (ebx), "=c" (ecx), "=d" (edx)
+        : "a" (op));
+     f = fopen("conftest_cpuid", "w"); if (!f) return 1;
+     fprintf(f, "%x:%x:%x:%x\n", eax, ebx, ecx, edx);
+     fclose(f);
+     return 0;
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_run "$LINENO"; then :
+  ax_cv_gcc_x86_cpuid_1=`cat conftest_cpuid`; rm -f conftest_cpuid
+else
+  ax_cv_gcc_x86_cpuid_1=unknown; rm -f conftest_cpuid
+fi
+rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+  conftest.$ac_objext conftest.beam conftest.$ac_ext
+fi
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_gcc_x86_cpuid_1" >&5
+$as_echo "$ax_cv_gcc_x86_cpuid_1" >&6; }
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
+     case $ax_cv_gcc_x86_cpuid_0 in
+       *:756e6547:*:*) # Intel
+          case $ax_cv_gcc_x86_cpuid_1 in
+	    *5[48]?:*:*:*) ax_gcc_arch="pentium-mmx pentium" ;;
+	    *5??:*:*:*) ax_gcc_arch=pentium ;;
+	    *0?6[3456]?:*:*:*) ax_gcc_arch="pentium2 pentiumpro" ;;
+	    *0?6a?:*[01]:*:*) ax_gcc_arch="pentium2 pentiumpro" ;;
+	    *0?6a?:*[234]:*:*) ax_gcc_arch="pentium3 pentiumpro" ;;
+	    *0?6[9de]?:*:*:*) ax_gcc_arch="pentium-m pentium3 pentiumpro" ;;
+	    *0?6[78b]?:*:*:*) ax_gcc_arch="pentium3 pentiumpro" ;;
+	    *0?6f?:*:*:*|*1?66?:*:*:*) ax_gcc_arch="core2 pentium-m pentium3 pentiumpro" ;;
+	    *1?6[7d]?:*:*:*) ax_gcc_arch="penryn core2 pentium-m pentium3 pentiumpro" ;;
+	    *1?6[aef]?:*:*:*|*2?6[5cef]?:*:*:*) ax_gcc_arch="corei7 core2 pentium-m pentium3 pentiumpro" ;;
+	    *1?6c?:*:*:*|*[23]?66?:*:*:*) ax_gcc_arch="atom core2 pentium-m pentium3 pentiumpro" ;;
+	    *2?6[ad]?:*:*:*) ax_gcc_arch="corei7-avx corei7 core2 pentium-m pentium3 pentiumpro" ;;
+	    *0?6??:*:*:*) ax_gcc_arch=pentiumpro ;;
+	    *6??:*:*:*) ax_gcc_arch="core2 pentiumpro" ;;
+	    ?000?f3[347]:*:*:*|?000?f41347:*:*:*|?000?f6?:*:*:*)
+		case $host_cpu in
+	          x86_64*) ax_gcc_arch="nocona pentium4 pentiumpro" ;;
+	          *) ax_gcc_arch="prescott pentium4 pentiumpro" ;;
+	        esac ;;
+	    ?000?f??:*:*:*) ax_gcc_arch="pentium4 pentiumpro";;
+          esac ;;
+       *:68747541:*:*) # AMD
+          case $ax_cv_gcc_x86_cpuid_1 in
+	    *5[67]?:*:*:*) ax_gcc_arch=k6 ;;
+	    *5[8d]?:*:*:*) ax_gcc_arch="k6-2 k6" ;;
+	    *5[9]?:*:*:*) ax_gcc_arch="k6-3 k6" ;;
+	    *60?:*:*:*) ax_gcc_arch=k7 ;;
+	    *6[12]?:*:*:*) ax_gcc_arch="athlon k7" ;;
+	    *6[34]?:*:*:*) ax_gcc_arch="athlon-tbird k7" ;;
+	    *67?:*:*:*) ax_gcc_arch="athlon-4 athlon k7" ;;
+	    *6[68a]?:*:*:*)
+
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for x86 cpuid 0x80000006 output" >&5
+$as_echo_n "checking for x86 cpuid 0x80000006 output... " >&6; }
+if ${ax_cv_gcc_x86_cpuid_0x80000006+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  if test "$cross_compiling" = yes; then :
+  ax_cv_gcc_x86_cpuid_0x80000006=unknown
+else
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <stdio.h>
+int
+main ()
+{
+
+     int op = 0x80000006, eax, ebx, ecx, edx;
+     FILE *f;
+      __asm__("cpuid"
+        : "=a" (eax), "=b" (ebx), "=c" (ecx), "=d" (edx)
+        : "a" (op));
+     f = fopen("conftest_cpuid", "w"); if (!f) return 1;
+     fprintf(f, "%x:%x:%x:%x\n", eax, ebx, ecx, edx);
+     fclose(f);
+     return 0;
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_run "$LINENO"; then :
+  ax_cv_gcc_x86_cpuid_0x80000006=`cat conftest_cpuid`; rm -f conftest_cpuid
+else
+  ax_cv_gcc_x86_cpuid_0x80000006=unknown; rm -f conftest_cpuid
+fi
+rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+  conftest.$ac_objext conftest.beam conftest.$ac_ext
+fi
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_gcc_x86_cpuid_0x80000006" >&5
+$as_echo "$ax_cv_gcc_x86_cpuid_0x80000006" >&6; }
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+ # L2 cache size
+	       case $ax_cv_gcc_x86_cpuid_0x80000006 in
+                 *:*:*[1-9a-f]??????:*) # (L2 = ecx >> 16) >= 256
+			ax_gcc_arch="athlon-xp athlon-4 athlon k7" ;;
+                 *) ax_gcc_arch="athlon-4 athlon k7" ;;
+	       esac ;;
+	    ?00??f[4cef8b]?:*:*:*) ax_gcc_arch="athlon64 k8" ;;
+	    ?00??f5?:*:*:*) ax_gcc_arch="opteron k8" ;;
+	    ?00??f7?:*:*:*) ax_gcc_arch="athlon-fx opteron k8" ;;
+	    ?00??f??:*:*:*) ax_gcc_arch="k8" ;;
+	    ?05??f??:*:*:*) ax_gcc_arch="btver1 amdfam10 k8" ;;
+	    ?06??f??:*:*:*) ax_gcc_arch="bdver1 amdfam10 k8" ;;
+	    *f??:*:*:*) ax_gcc_arch="amdfam10 k8" ;;
+          esac ;;
+	*:746e6543:*:*) # IDT
+	   case $ax_cv_gcc_x86_cpuid_1 in
+	     *54?:*:*:*) ax_gcc_arch=winchip-c6 ;;
+	     *58?:*:*:*) ax_gcc_arch=winchip2 ;;
+	     *6[78]?:*:*:*) ax_gcc_arch=c3 ;;
+	     *69?:*:*:*) ax_gcc_arch="c3-2 c3" ;;
+	   esac ;;
+     esac
+     if test x"$ax_gcc_arch" = x; then # fallback
+	case $host_cpu in
+	  i586*) ax_gcc_arch=pentium ;;
+	  i686*) ax_gcc_arch=pentiumpro ;;
+        esac
+     fi
+     ;;
+
+  sparc*)
+     # Extract the first word of "prtdiag", so it can be a program name with args.
+set dummy prtdiag; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_PRTDIAG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $PRTDIAG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PRTDIAG="$PRTDIAG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+as_dummy="$PATH:/usr/platform/`uname -i`/sbin/:/usr/platform/`uname -m`/sbin/"
+for as_dir in $as_dummy
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_PRTDIAG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  test -z "$ac_cv_path_PRTDIAG" && ac_cv_path_PRTDIAG="prtdiag"
+  ;;
+esac
+fi
+PRTDIAG=$ac_cv_path_PRTDIAG
+if test -n "$PRTDIAG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $PRTDIAG" >&5
+$as_echo "$PRTDIAG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+     cputype=`(((grep cpu /proc/cpuinfo | cut -d: -f2) ; ($PRTDIAG -v |grep -i sparc) ; grep -i cpu /var/run/dmesg.boot ) | head -n 1) 2> /dev/null`
+     cputype=`echo "$cputype" | tr -d ' -' |tr $as_cr_LETTERS $as_cr_letters`
+     case $cputype in
+         *ultrasparciv*) ax_gcc_arch="ultrasparc4 ultrasparc3 ultrasparc v9" ;;
+         *ultrasparciii*) ax_gcc_arch="ultrasparc3 ultrasparc v9" ;;
+         *ultrasparc*) ax_gcc_arch="ultrasparc v9" ;;
+         *supersparc*|*tms390z5[05]*) ax_gcc_arch="supersparc v8" ;;
+         *hypersparc*|*rt62[056]*) ax_gcc_arch="hypersparc v8" ;;
+         *cypress*) ax_gcc_arch=cypress ;;
+     esac ;;
+
+  alphaev5) ax_gcc_arch=ev5 ;;
+  alphaev56) ax_gcc_arch=ev56 ;;
+  alphapca56) ax_gcc_arch="pca56 ev56" ;;
+  alphapca57) ax_gcc_arch="pca57 pca56 ev56" ;;
+  alphaev6) ax_gcc_arch=ev6 ;;
+  alphaev67) ax_gcc_arch=ev67 ;;
+  alphaev68) ax_gcc_arch="ev68 ev67" ;;
+  alphaev69) ax_gcc_arch="ev69 ev68 ev67" ;;
+  alphaev7) ax_gcc_arch="ev7 ev69 ev68 ev67" ;;
+  alphaev79) ax_gcc_arch="ev79 ev7 ev69 ev68 ev67" ;;
+
+  powerpc*)
+     cputype=`((grep cpu /proc/cpuinfo | head -n 1 | cut -d: -f2 | cut -d, -f1 | sed 's/ //g') ; /usr/bin/machine ; /bin/machine; grep CPU /var/run/dmesg.boot | head -n 1 | cut -d" " -f2) 2> /dev/null`
+     cputype=`echo $cputype | sed -e 's/ppc//g;s/ *//g'`
+     case $cputype in
+       *750*) ax_gcc_arch="750 G3" ;;
+       *740[0-9]*) ax_gcc_arch="$cputype 7400 G4" ;;
+       *74[4-5][0-9]*) ax_gcc_arch="$cputype 7450 G4" ;;
+       *74[0-9][0-9]*) ax_gcc_arch="$cputype G4" ;;
+       *970*) ax_gcc_arch="970 G5 power4";;
+       *POWER4*|*power4*|*gq*) ax_gcc_arch="power4 970";;
+       *POWER5*|*power5*|*gr*|*gs*) ax_gcc_arch="power5 power4 970";;
+       603ev|8240) ax_gcc_arch="$cputype 603e 603";;
+       *) ax_gcc_arch=$cputype ;;
+     esac
+     ax_gcc_arch="$ax_gcc_arch powerpc"
+     ;;
+esac
+fi # not cross-compiling
+fi # guess arch
+
+if test "x$ax_gcc_arch" != x -a "x$ax_gcc_arch" != xno; then
+for arch in $ax_gcc_arch; do
+  if test "xyes" = xyes; then # if we require portable code
+    flags="-mtune=$arch"
+    # -mcpu=$arch and m$arch generate nonportable code on every arch except
+    # x86.  And some other arches (e.g. Alpha) don't accept -mtune.  Grrr.
+    case $host_cpu in i*86|x86_64*) flags="$flags -mcpu=$arch -m$arch";; esac
+  else
+    flags="-march=$arch -mcpu=$arch -m$arch"
+  fi
+  for flag in $flags; do
+    as_CACHEVAR=`$as_echo "ax_cv_check_cflags__$flag" | $as_tr_sh`
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts $flag" >&5
+$as_echo_n "checking whether C compiler accepts $flag... " >&6; }
+if eval \${$as_CACHEVAR+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+  ax_check_save_flags=$CFLAGS
+  CFLAGS="$CFLAGS  $flag"
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_compile "$LINENO"; then :
+  eval "$as_CACHEVAR=yes"
+else
+  eval "$as_CACHEVAR=no"
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+  CFLAGS=$ax_check_save_flags
+fi
+eval ac_res=\$$as_CACHEVAR
+	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
+$as_echo "$ac_res" >&6; }
+if test x"`eval 'as_val=${'CACHEVAR'};$as_echo "$as_val"'`" = xyes; then :
+  ax_cv_gcc_archflag=$flag; break
+else
+  :
+fi
+
+  done
+  test "x$ax_cv_gcc_archflag" = xunknown || break
+done
+fi
+
+fi # $GCC=yes
+
+fi
+
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for gcc architecture flag" >&5
+$as_echo_n "checking for gcc architecture flag... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_gcc_archflag" >&5
+$as_echo "$ax_cv_gcc_archflag" >&6; }
+if test "x$ax_cv_gcc_archflag" = xunknown; then
+  :
+else
+  CFLAGS="$CFLAGS $ax_cv_gcc_archflag"
+fi
+
+
+#FIXME: This check will say that the compiler does not support the
+# -fpascal-strings flag, even when it does actually support it
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts -fpascal-strings" >&5
+$as_echo_n "checking whether C compiler accepts -fpascal-strings... " >&6; }
+if ${ax_cv_check_cflags___fpascal_strings+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+  ax_check_save_flags=$CFLAGS
+  CFLAGS="$CFLAGS  -fpascal-strings"
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_compile "$LINENO"; then :
+  ax_cv_check_cflags___fpascal_strings=yes
+else
+  ax_cv_check_cflags___fpascal_strings=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+  CFLAGS=$ax_check_save_flags
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cflags___fpascal_strings" >&5
+$as_echo "$ax_cv_check_cflags___fpascal_strings" >&6; }
+if test x"$ax_cv_check_cflags___fpascal_strings" = xyes; then :
+  :
+else
+  :
+fi
 
 
 # Checks for library functions.
