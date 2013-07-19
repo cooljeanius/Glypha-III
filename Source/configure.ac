@@ -1,8 +1,8 @@
 dnl#                                               -*- Autoconf -*-
 dnl# Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.61])
-AC_INIT([Glypha], [III])
+AC_PREREQ([2.69])
+AC_INIT([Glypha],[III])
 AC_CONFIG_SRCDIR([Enemy.c])
 AC_CONFIG_HEADER([config.h])
 AC_CONFIG_MACRO_DIR([m4])
@@ -17,7 +17,7 @@ AM_PROG_CC_C_O
 AC_PROG_OBJC
 XORG_PROG_RAWCPP
 XORG_LD_WRAP
-AC_GCC_TRADITIONAL
+AC_PROG_GCC_TRADITIONAL
 AC_BAKEFILE_PROG_MWCC
 AC_BAKEFILE_PROG_MWCXX
 AC_BAKEFILE_METROWERKS_EXTO
