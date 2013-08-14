@@ -52,13 +52,15 @@ AC_C_PROTOTYPES
 AC_HEADER_STDC
 AC_CHECK_HEADERS([Carbon.h Carbon/Carbon.h CarbonCore/Files.h \
                   CarbonCore/MacMemory.h CarbonCore/OSUtils.h \
-                  CarbonSound/Sound.h HIToolbox/Events.h \
+                  CarbonCore/TextUtils.h CarbonSound/Sound.h \
+                  CoreServices/CoreServices.h HIToolbox/Events.h \
                   HIToolbox/MacWindows.h HIToolbox/Menus.h \
                   QD/QuickdrawAPI.h])
 AC_CHECK_HEADERS([stdio.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_HEADER_STDBOOL
+AC_C_BIGENDIAN
 XORG_MEMORY_CHECK_FLAGS
 XORG_CHECK_MALLOC_ZERO
 XORG_CWARNFLAGS
@@ -69,7 +71,7 @@ AX_GCC_ARCHFLAG
 AX_CHECK_COMPILE_FLAG([-fpascal-strings])
 
 # Checks for library functions.
-AC_CHECK_FUNCS([sleep])
+AC_CHECK_FUNCS([CopyPascalStringToC p2cstr sleep])
 
 # Output
 AC_CONFIG_FILES([Makefile])

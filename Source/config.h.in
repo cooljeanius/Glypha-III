@@ -1,5 +1,8 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
+/* Define if building universal (internal helper macro) */
+#undef AC_APPLE_UNIVERSAL_BUILD
+
 /* Define to 1 if you have the <CarbonCore/Files.h> header file. */
 #undef HAVE_CARBONCORE_FILES_H
 
@@ -9,6 +12,9 @@
 /* Define to 1 if you have the <CarbonCore/OSUtils.h> header file. */
 #undef HAVE_CARBONCORE_OSUTILS_H
 
+/* Define to 1 if you have the <CarbonCore/TextUtils.h> header file. */
+#undef HAVE_CARBONCORE_TEXTUTILS_H
+
 /* Define to 1 if you have the <CarbonSound/Sound.h> header file. */
 #undef HAVE_CARBONSOUND_SOUND_H
 
@@ -17,6 +23,12 @@
 
 /* Define to 1 if you have the <Carbon.h> header file. */
 #undef HAVE_CARBON_H
+
+/* Define to 1 if you have the `CopyPascalStringToC' function. */
+#undef HAVE_COPYPASCALSTRINGTOC
+
+/* Define to 1 if you have the <CoreServices/CoreServices.h> header file. */
+#undef HAVE_CORESERVICES_CORESERVICES_H
 
 /* Define to 1 if you have the <HIToolbox/Events.h> header file. */
 #undef HAVE_HITOOLBOX_EVENTS_H
@@ -38,6 +50,9 @@
 
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
+
+/* Define to 1 if you have the `p2cstr' function. */
+#undef HAVE_P2CSTR
 
 /* Define to 1 if you have the <QD/QuickdrawAPI.h> header file. */
 #undef HAVE_QD_QUICKDRAWAPI_H
@@ -104,6 +119,18 @@
 
 /* Version number of package */
 #undef VERSION
+
+/* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
+   significant byte first (like Motorola and SPARC, unlike Intel). */
+#if defined AC_APPLE_UNIVERSAL_BUILD
+# if defined __BIG_ENDIAN__
+#  define WORDS_BIGENDIAN 1
+# endif
+#else
+# ifndef WORDS_BIGENDIAN
+#  undef WORDS_BIGENDIAN
+# endif
+#endif
 
 /* Define like PROTOTYPES; this can be used by system headers. */
 #undef __PROTOTYPES

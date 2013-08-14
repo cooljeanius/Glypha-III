@@ -561,8 +561,8 @@ AC_DEFUN([AC_BAKEFILE_DEPS],
             DEPSMODE=gcc
             case "${BAKEFILE_HOST}" in
                 *-*-darwin* )
-                    dnl -cpp-precomp (the default) conflicts with -MMD option
-                    dnl used by bk-deps (see also http://developer.apple.com/documentation/Darwin/Conceptual/PortingUnix/compiling/chapter_4_section_3.html)
+                    dnl# -cpp-precomp (the default) conflicts with -MMD option
+                    dnl# used by bk-deps (see also http://developer.apple.com/documentation/Darwin/Conceptual/PortingUnix/compiling/chapter_4_section_3.html)
                     DEPSFLAG="-no-cpp-precomp -MMD"
                 ;;
                 * )
@@ -604,8 +604,8 @@ AC_DEFUN([AC_BAKEFILE_DEPS],
         fi
     fi
 
-    AC_SUBST(DEPS_TRACKING)
-    AC_SUBST(BK_DEPS)
+    AC_SUBST([DEPS_TRACKING])
+    AC_SUBST([BK_DEPS])
 ])
 
 dnl ---------------------------------------------------------------------------
@@ -681,19 +681,19 @@ AC_DEFUN([AC_BAKEFILE_RES_COMPILERS],
 [
     case ${BAKEFILE_HOST} in
         *-*-cygwin* | *-*-mingw32* )
-            dnl Check for win32 resources compiler:
-            AC_CHECK_TOOL(WINDRES, windres)
+            dnl# Check for win32 resources compiler:
+            AC_CHECK_TOOL([WINDRES], [windres])
          ;;
 
       *-*-darwin* | powerpc-apple-macos* )
-            AC_CHECK_PROG(REZ, Rez, Rez, /Developer/Tools/Rez)
-            AC_CHECK_PROG(SETFILE, SetFile, SetFile, /Developer/Tools/SetFile)
+            AC_CHECK_PROG([REZ], [Rez], [Rez], [/Developer/Tools/Rez])
+            AC_CHECK_PROG([SETFILE], [SetFile], [SetFile], [/Developer/Tools/SetFile])
         ;;
     esac
 
-    AC_SUBST(WINDRES)
-    AC_SUBST(REZ)
-    AC_SUBST(SETFILE)
+    AC_SUBST([WINDRES])
+    AC_SUBST([REZ])
+    AC_SUBST([SETFILE])
 ])
 
 dnl ---------------------------------------------------------------------------
@@ -717,19 +717,19 @@ AC_DEFUN([AC_BAKEFILE_PRECOMP_HEADERS],
 
     case ${BAKEFILE_HOST} in
         *-*-cygwin* )
-            dnl PCH support is broken in cygwin gcc because of unportable
-            dnl assumptions about mmap() in gcc code which make PCH generation
-            dnl fail erratically; disable PCH completely until this is fixed
+            dnl# PCH support is broken in cygwin gcc because of unportable
+            dnl# assumptions about mmap() in gcc code which make PCH generation
+            dnl# fail erratically; disable PCH completely until this is fixed
             bk_use_pch="no"
             ;;
     esac
 
     if test "x$bk_use_pch" = "x" -o "x$bk_use_pch" = "xyes" ; then
         if test "x$GCC" = "xyes"; then
-            dnl test if we have gcc-3.4:
+            dnl# test if we have gcc-3.4:
             AC_MSG_CHECKING([if the compiler supports precompiled headers])
-            AC_TRY_COMPILE([],
-                [
+            AC_COMPILE_IFELSE([AC_LANG_SOURCE([[]],
+                [[
                     #if !defined(__GNUC__) || !defined(__GNUC_MINOR__)
                         There is no PCH support
                     #endif
@@ -742,7 +742,7 @@ AC_DEFUN([AC_BAKEFILE_PRECOMP_HEADERS],
                        ( defined(__INTEL_COMPILER) )
                         There is no PCH support
                     #endif
-                ],
+                ]])],
                 [
                     AC_MSG_RESULT([yes])
                     GCC_PCH=1
@@ -766,19 +766,19 @@ AC_DEFUN([AC_BAKEFILE_PRECOMP_HEADERS],
                 USE_PCH=1
                 AC_BAKEFILE_CREATE_FILE_BK_MAKE_PCH
                 chmod +x bk-make-pch
-                dnl FIXME: make this $(top_builddir)/bk-make-pch once
-                dnl        autoconf-2.60 is required (and so top_builddir is
-                dnl        never empty):
+                dnl# FIXME: make this $(top_builddir)/bk-make-pch once
+                dnl#        autoconf-2.60 is required (and so top_builddir is
+                dnl#        never empty):
                 BK_MAKE_PCH="`pwd`/bk-make-pch"
             fi
         fi
     fi
 
-    AC_SUBST(GCC_PCH)
-    AC_SUBST(ICC_PCH)
-    AC_SUBST(ICC_PCH_CREATE_SWITCH)
-    AC_SUBST(ICC_PCH_USE_SWITCH)
-    AC_SUBST(BK_MAKE_PCH)
+    AC_SUBST([GCC_PCH])
+    AC_SUBST([ICC_PCH])
+    AC_SUBST([ICC_PCH_CREATE_SWITCH])
+    AC_SUBST([ICC_PCH_USE_SWITCH])
+    AC_SUBST([BK_MAKE_PCH])
 ])
 
 
