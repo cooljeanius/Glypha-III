@@ -30,6 +30,9 @@
 /* Define to 1 if you have the <CoreServices/CoreServices.h> header file. */
 #undef HAVE_CORESERVICES_CORESERVICES_H
 
+/* Define to 1 if you have the `getpagesize' function. */
+#undef HAVE_GETPAGESIZE
+
 /* Define to 1 if you have the <HIToolbox/Events.h> header file. */
 #undef HAVE_HITOOLBOX_EVENTS_H
 
@@ -50,6 +53,9 @@
 
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
+
+/* Define to 1 if you have a working `mmap' system call. */
+#undef HAVE_MMAP
 
 /* Define to 1 if you have the `p2cstr' function. */
 #undef HAVE_P2CSTR
@@ -77,6 +83,9 @@
 
 /* Define to 1 if you have the <string.h> header file. */
 #undef HAVE_STRING_H
+
+/* Define to 1 if you have the <sys/param.h> header file. */
+#undef HAVE_SYS_PARAM_H
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #undef HAVE_SYS_STAT_H
