@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 45;
 	objects = {
 
 /* Begin PBXApplicationTarget section */
@@ -58,7 +58,6 @@
 /* End PBXApplicationTarget section */
 
 /* Begin PBXBuildFile section */
-		00C05EF300D9F94A7F000001 /* Glypha.rsrc in Rez */ = {isa = PBXBuildFile; fileRef = 00C05EF200D9F94A7F000001 /* Glypha.rsrc */; };
 		00C05EFE00D9F9A97F000001 /* Externs.h in Headers */ = {isa = PBXBuildFile; fileRef = 00C05EF400D9F9A97F000001 /* Externs.h */; };
 		00C05EFF00D9F9A97F000001 /* Enemy.c in Sources */ = {isa = PBXBuildFile; fileRef = 00C05EF500D9F9A97F000001 /* Enemy.c */; };
 		00C05F0000D9F9A97F000001 /* Graphics.c in Sources */ = {isa = PBXBuildFile; fileRef = 00C05EF600D9F9A97F000001 /* Graphics.c */; };
@@ -85,7 +84,6 @@
 		6157CB0E177B48B200E53D75 /* Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 00C05EFD00D9F9A97F000001 /* Utilities.c */; };
 		6157CB10177B48B200E53D75 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
 		6157CB11177B48B200E53D75 /* libstdc++-static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0249A669FF388E3911CA2CEA /* libstdc++-static.a */; };
-		6157CB13177B48B200E53D75 /* Glypha.rsrc in Rez */ = {isa = PBXBuildFile; fileRef = 00C05EF200D9F94A7F000001 /* Glypha.rsrc */; };
 		6157CE27177B4DAC00E53D75 /* Glypha_A.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6157CE26177B4DAC00E53D75 /* Glypha_A.icns */; };
 		6157CE37177B4E6200E53D75 /* Glypha_B.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6157CE36177B4E6200E53D75 /* Glypha_B.icns */; };
 		6157CE3F177B4ED900E53D75 /* 00137_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6157CE3D177B4ED900E53D75 /* 00137_icon.png */; };
@@ -175,11 +173,13 @@
 		6157CF7B177B53C500E53D75 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6157CF7A177B53C500E53D75 /* Credits.rtf */; };
 		6157CFA5177B556900E53D75 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6157CFA4177B556900E53D75 /* Localizable.strings */; };
 		6157CFB3177B55C200E53D75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6157CFB2177B55C200E53D75 /* InfoPlist.strings */; };
-		6157D0FC177BC86A00E53D75 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 6157D0F8177BC74800E53D75 /* config.h */; };
+		A59D4C6D191814F4001D2167 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A59D4C6C191814F4001D2167 /* AudioToolbox.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A59D4D0619182B4D001D2167 /* SysBeepTest.c in Sources */ = {isa = PBXBuildFile; fileRef = A59D4D0519182B4D001D2167 /* SysBeepTest.c */; };
+		A59D4D0919182B5C001D2167 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
+		A5A2680C1917BC6F00EEBBC2 /* Glypha.r in Rez */ = {isa = PBXBuildFile; fileRef = A5A2680B1917BC6F00EEBBC2 /* Glypha.r */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		00C05EF200D9F94A7F000001 /* Glypha.rsrc */ = {isa = PBXFileReference; lastKnownFileType = archive.rsrc; path = Glypha.rsrc; sourceTree = "<group>"; };
 		00C05EF400D9F9A97F000001 /* Externs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Externs.h; path = Source/Externs.h; sourceTree = "<group>"; };
 		00C05EF500D9F9A97F000001 /* Enemy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = Enemy.c; path = Source/Enemy.c; sourceTree = "<group>"; };
 		00C05EF600D9F9A97F000001 /* Graphics.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = Graphics.c; path = Source/Graphics.c; sourceTree = "<group>"; };
@@ -287,7 +287,10 @@
 		6157CF5B177B52DD00E53D75 /* 00997.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = 00997.ico; sourceTree = "<group>"; };
 		6157CFA2177B555B00E53D75 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6157CFB0177B55B300E53D75 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6157D0F8177BC74800E53D75 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = config.h; path = Source/config.h; sourceTree = "<group>"; };
+		A59D4C6C191814F4001D2167 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
+		A59D4CFD19182B36001D2167 /* SysBeepTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SysBeepTest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A59D4D0519182B4D001D2167 /* SysBeepTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SysBeepTest.c; path = Source/SysBeepTest.c; sourceTree = "<group>"; };
+		A5A2680B1917BC6F00EEBBC2 /* Glypha.r */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.rez; path = Glypha.r; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +309,15 @@
 			files = (
 				6157CB10177B48B200E53D75 /* Carbon.framework in Frameworks */,
 				6157CB11177B48B200E53D75 /* libstdc++-static.a in Frameworks */,
+				A59D4C6D191814F4001D2167 /* AudioToolbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A59D4CFB19182B36001D2167 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A59D4D0919182B5C001D2167 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +329,7 @@
 			children = (
 				0249A665FF388DC511CA2CEA /* Glypha III.app */,
 				6157CB19177B48B200E53D75 /* Glypha III.app */,
+				A59D4CFD19182B36001D2167 /* SysBeepTest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -339,7 +352,7 @@
 		20286C2AFDCF999611CA2CEA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				6157D0F8177BC74800E53D75 /* config.h */,
+				A59D4D0519182B4D001D2167 /* SysBeepTest.c */,
 				00C05EF400D9F9A97F000001 /* Externs.h */,
 				00C05EF500D9F9A97F000001 /* Enemy.c */,
 				00C05EF600D9F9A97F000001 /* Graphics.c */,
@@ -364,7 +377,7 @@
 				6157CE3C177B4ED900E53D75 /* icons */,
 				6157CE36177B4E6200E53D75 /* Glypha_B.icns */,
 				6157CE26177B4DAC00E53D75 /* Glypha_A.icns */,
-				00C05EF200D9F94A7F000001 /* Glypha.rsrc */,
+				A5A2680B1917BC6F00EEBBC2 /* Glypha.r */,
 				04DED90400DCE4907F000001 /* Glypha.icns */,
 			);
 			name = Resources;
@@ -376,6 +389,7 @@
 				20286C33FDCF999611CA2CEA /* Carbon.framework */,
 				0249A669FF388E3911CA2CEA /* libstdc++-static.a */,
 				0640BAA4FFF0323A11CA0E50 /* ApplicationServices.framework */,
+				A59D4C6C191814F4001D2167 /* AudioToolbox.framework */,
 				0640BAA5FFF0323A11CA0E50 /* CoreServices.framework */,
 			);
 			name = Frameworks;
@@ -520,7 +534,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6157D0FC177BC86A00E53D75 /* config.h in Headers */,
 				6157CB02177B48B200E53D75 /* Externs.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -548,6 +561,22 @@
 			productReference = 6157CB19177B48B200E53D75 /* Glypha III.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A59D4CFC19182B36001D2167 /* SysBeepTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A59D4D0419182B40001D2167 /* Build configuration list for PBXNativeTarget "SysBeepTest" */;
+			buildPhases = (
+				A59D4CFA19182B36001D2167 /* Sources */,
+				A59D4CFB19182B36001D2167 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SysBeepTest;
+			productName = SysBeepTest;
+			productReference = A59D4CFD19182B36001D2167 /* SysBeepTest */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -557,7 +586,7 @@
 				ORGANIZATIONNAME = com.mps.glypha;
 			};
 			buildConfigurationList = A593095D1523076F006EE7A4 /* Build configuration list for PBXProject "Glypha" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -572,6 +601,7 @@
 			targets = (
 				6157CB00177B48B200E53D75 /* Glypha (Upgraded) */,
 				20286C34FDCF999611CA2CEA /* Glypha */,
+				A59D4CFC19182B36001D2167 /* SysBeepTest */,
 			);
 		};
 /* End PBXProject section */
@@ -689,7 +719,6 @@
 			isa = PBXRezBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00C05EF300D9F94A7F000001 /* Glypha.rsrc in Rez */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,7 +726,7 @@
 			isa = PBXRezBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6157CB13177B48B200E53D75 /* Glypha.rsrc in Rez */,
+				A5A2680C1917BC6F00EEBBC2 /* Glypha.r in Rez */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -733,6 +762,14 @@
 				6157CB0C177B48B200E53D75 /* SetUpTakeDown.c in Sources */,
 				6157CB0D177B48B200E53D75 /* Sound.c in Sources */,
 				6157CB0E177B48B200E53D75 /* Utilities.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A59D4CFA19182B36001D2167 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A59D4D0619182B4D001D2167 /* SysBeepTest.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -806,15 +843,19 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Info-Glypha__Upgraded_.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CFLAGS = "";
+				OTHER_CFLAGS = (
+					"-g",
+					"-ftrapv",
+				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
+				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
 				PRODUCT_NAME = "Glypha III";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -831,19 +872,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = OBSCURE_CURSOR_DURING_PLAY;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				"GCC_VERSION[sdk=macosx10.6][arch=x86_64]" = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Info-Glypha__Upgraded_.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
+				LLVM_LTO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = "Glypha III";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -869,7 +914,6 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = "Glypha III";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -884,10 +928,18 @@
 		A59309571523076E006EE7A4 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"ARCHS[sdk=macosx10.5]" = (
+					ppc,
+					ppc64,
+					i386,
+					x86_64,
+				);
 				COPYING_PRESERVES_HFS_DATA = YES;
+				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_AUTO_VECTORIZATION = YES;
+				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_ENABLE_EXCEPTIONS = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_PASCAL_STRINGS = YES;
@@ -897,8 +949,12 @@
 				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
 				GCC_ENABLE_TRIGRAPHS = YES;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				"GCC_MODEL_PPC64[arch=ppc64]" = YES;
+				"GCC_MODEL_TUNING[arch=ppc64]" = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Source/Externs.h;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_GLOBAL_CONSTRUCTORS = YES;
@@ -915,7 +971,7 @@
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_PEDANTIC = YES;
-				GCC_WARN_PROTOTYPE_CONVERSION = NO;
+				GCC_WARN_PROTOTYPE_CONVERSION = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
@@ -932,6 +988,11 @@
 				LD_GENERATE_MAP_FILE = YES;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				"SDKROOT[arch=ppc64]" = macosx10.5;
+				"SDKROOT[arch=x86_64]" = macosx10.6;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -940,12 +1001,90 @@
 		A59309581523076E006EE7A4 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"ARCHS[sdk=macosx10.4]" = (
+					ppc,
+					i386,
+				);
+				"ARCHS[sdk=macosx10.5]" = (
+					ppc,
+					ppc64,
+					i386,
+					x86_64,
+				);
+				"ARCHS[sdk=macosx10.6]" = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPYING_PRESERVES_HFS_DATA = YES;
+				GCC_ALTIVEC_EXTENSIONS = YES;
+				GCC_AUTO_VECTORIZATION = YES;
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_EXCEPTIONS = YES;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_ENABLE_SSE41_EXTENSIONS = YES;
+				GCC_ENABLE_SSE42_EXTENSIONS = YES;
+				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
+				GCC_ENABLE_TRIGRAPHS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				"GCC_MODEL_PPC64[arch=ppc64]" = YES;
+				"GCC_MODEL_TUNING[arch=ppc64]" = G5;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Source/Externs.h;
+				GCC_STRICT_ALIASING = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_UNROLL_LOOPS = YES;
+				"GCC_VERSION[sdk=macosx10.4][arch=*]" = 4.0;
+				"GCC_VERSION[sdk=macosx10.6][arch=x86_64]" = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GENERATE_PKGINFO_FILE = YES;
+				LD_GENERATE_MAP_FILE = YES;
+				LLVM_LTO = YES;
+				"MACOSX_DEPLOYMENT_TARGET[sdk=macosx10.4][arch=ppc]" = 10.3;
+				"MACOSX_DEPLOYMENT_TARGET[sdk=macosx10.5][arch=i386]" = 10.4;
+				"MACOSX_DEPLOYMENT_TARGET[sdk=macosx10.6][arch=i386]" = 10.4;
+				"MACOSX_DEPLOYMENT_TARGET[sdk=macosx10.6][arch=ppc64]" = 10.5;
+				"MACOSX_DEPLOYMENT_TARGET[sdk=macosx10.6][arch=x86_64]" = 10.5;
+				OTHER_CFLAGS = "-m32";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				SDKROOT = macosx10.5;
+				"SDKROOT[arch=i386]" = macosx10.4;
+				"SDKROOT[arch=ppc64]" = macosx10.5;
+				"SDKROOT[arch=ppc]" = macosx10.4;
+				"SDKROOT[arch=x86_64]" = macosx10.6;
+				SEPARATE_STRIP = YES;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Deployment;
 		};
 		A59309591523076E006EE7A4 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"ARCHS[sdk=macosx10.5]" = (
+					ppc,
+					ppc64,
+					i386,
+					x86_64,
+				);
+				COPYING_PRESERVES_HFS_DATA = YES;
+				GCC_ALTIVEC_EXTENSIONS = YES;
+				GCC_ENABLE_EXCEPTIONS = YES;
+				GCC_ENABLE_TRIGRAPHS = YES;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				"GCC_MODEL_PPC64[arch=ppc64]" = YES;
+				"GCC_MODEL_TUNING[arch=ppc64]" = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Source/Externs.h;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GENERATE_PKGINFO_FILE = YES;
+				LD_GENERATE_MAP_FILE = YES;
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				"SDKROOT[arch=ppc64]" = macosx10.5;
+				"SDKROOT[arch=x86_64]" = macosx10.6;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Default;
 		};
@@ -988,7 +1127,7 @@
 				HEADER_SEARCH_PATHS = "";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CFLAGS = " -DOBSCURE_CURSOR_DURING_PLAY";
+				OTHER_CFLAGS = "-DOBSCURE_CURSOR_DURING_PLAY";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = "Glypha III";
@@ -1026,6 +1165,57 @@
 			};
 			name = Default;
 		};
+		A59D4CFF19182B37001D2167 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = SysBeepTest;
+			};
+			name = Development;
+		};
+		A59D4D0019182B37001D2167 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				"GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS[sdk=macosx10.5][arch=ppc]" = NO;
+				INSTALL_PATH = /usr/local/bin;
+				OTHER_CFLAGS = (
+					"-m32",
+					"-g3",
+					"-ggdb3",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = SysBeepTest;
+				"SDKROOT[arch=ppc]" = macosx10.5;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		A59D4D0119182B37001D2167 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = SysBeepTest;
+			};
+			name = Default;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1055,6 +1245,16 @@
 				A593095A1523076E006EE7A4 /* Development */,
 				A593095B1523076E006EE7A4 /* Deployment */,
 				A593095C1523076E006EE7A4 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		A59D4D0419182B40001D2167 /* Build configuration list for PBXNativeTarget "SysBeepTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A59D4CFF19182B37001D2167 /* Development */,
+				A59D4D0019182B37001D2167 /* Deployment */,
+				A59D4D0119182B37001D2167 /* Default */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Default;
