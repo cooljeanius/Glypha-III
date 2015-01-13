@@ -1,9 +1,9 @@
 
-/*============================================================================
- *----------------------------------------------------------------------------
+/*=========================================================================
+ *-------------------------------------------------------------------------
  *									Enemy.c
- *----------------------------------------------------------------------------
- *============================================================================
+ *-------------------------------------------------------------------------
+ *=========================================================================
  */
 
 #ifndef __GLYPHA_III_EXTERNS_H__
@@ -57,8 +57,8 @@ extern	short		levelOn, lightH, lightV;
 extern	Boolean		evenFrame, doEnemyFlapSound, doEnemyScrapeSound;
 
 
-/*==============================================================  Functions */
-/*------------------------------------------------  SetEnemyInitialLocation */
+/*===========================================================  Functions */
+/*---------------------------------------------  SetEnemyInitialLocation */
 
 Boolean SetEnemyInitialLocation(Rect *theRect)
 {
@@ -76,7 +76,7 @@ Boolean SetEnemyInitialLocation(Rect *theRect)
 		break;
 
 		case 3:
-		if (RandomInt(2) == 0) {
+		if (RandomInt((short)2) == 0) {
 			facing = TRUE;
 		} else {
 			facing = FALSE;
@@ -89,7 +89,7 @@ Boolean SetEnemyInitialLocation(Rect *theRect)
 	}
 
 	if ((levelOn % 5) == 4)	{		/* Egg Wave */
-		theRect->left += (12 + RandomInt(48) - 24);
+		theRect->left += (12 + RandomInt((short)48) - 24);
 		theRect->right = (theRect->left + 24);
 		theRect->top = (theRect->bottom - 24);
 	}
@@ -97,7 +97,7 @@ Boolean SetEnemyInitialLocation(Rect *theRect)
 	return (facing);
 }
 
-/*------------------------------------------------------  SetEnemyAttributes */
+/*--------------------------------------------------  SetEnemyAttributes */
 
 void SetEnemyAttributes(short i)
 {
@@ -124,10 +124,11 @@ void SetEnemyAttributes(short i)
 		break;
 
 		case kWolf:
-		if (theEnemies[i].facingRight)
+        if (theEnemies[i].facingRight) {
 			theEnemies[i].srcNum = 4;
-		else
+		} else {
 			theEnemies[i].srcNum = 6;
+        }
 		theEnemies[i].maxHVel = kWolfMaxHVel;
 		theEnemies[i].maxVVel = kWolfMaxVVel;
 		theEnemies[i].heightSmell = kWolfHeightSmell;
@@ -135,25 +136,31 @@ void SetEnemyAttributes(short i)
 		break;
 
 		case kJackal:
-		if (theEnemies[i].facingRight)
+        if (theEnemies[i].facingRight) {
 			theEnemies[i].srcNum = 8;
-		else
+		} else {
 			theEnemies[i].srcNum = 10;
+        }
 		theEnemies[i].maxHVel = kJackalMaxHVel;
 		theEnemies[i].maxVVel = kJackalMaxVVel;
 		theEnemies[i].heightSmell = kJackalHeightSmell;
 		theEnemies[i].flapImpulse = kJackalFlapImpulse;
 		break;
+
+        default:
+        fprintf(stderr,
+                "Unhandled kind of enemy for assigning attributes.\n");
+        break;
 	}
 }
 
-/*-------------------------------------------------------  AssignNewAltitude */
+/*---------------------------------------------------  AssignNewAltitude */
 
 short AssignNewAltitude (void)
 {
 	short which, altitude = 0;
 
-	which = RandomInt(4);
+	which = RandomInt((short)4);
 	switch (which) {
 		case 0:
 		altitude = (65 << 4);
@@ -170,12 +177,16 @@ short AssignNewAltitude (void)
 		case 3:
 		altitude = (384 << 4);
 		break;
+
+        default:
+        fprintf(stderr, "Unhandled altitude.\n");
+        break;
 	}
 
 	return (altitude);
 }
 
-/*--------------------------------------------------------------  InitEnemy */
+/*-----------------------------------------------------------  InitEnemy */
 
 void InitEnemy(short i, Boolean reincarnated)
 {
@@ -192,61 +203,66 @@ void InitEnemy(short i, Boolean reincarnated)
 		theEnemies[i].hVel = 0;
 		theEnemies[i].vVel = 0;
 		theEnemies[i].pass = 0;
-		if ((levelOn % 5) == 4)			/* Egg Wave */
+		if ((levelOn % 5) == 4)	{		/* Egg Wave */
 			theEnemies[i].mode = kEggTimer;
-		else
+		} else {
 			theEnemies[i].mode = kIdle;
-		if (i < numOwls)
+        }
+		if (i < numOwls) {
 			theEnemies[i].kind = kOwl;
-		else if (i > (numOwls + 6))
+		} else if (i > (numOwls + 6)) {
 			theEnemies[i].kind = kJackal;
-		else
+		} else {
 			theEnemies[i].kind = kWolf;
+        }
 		theEnemies[i].facingRight = facing;
 		SetEnemyAttributes(i);
 
-		if (reincarnated)
-			theEnemies[i].frame = RandomInt(48) + 8 + (numOwls * 32);
-		else
-			theEnemies[i].frame = RandomInt(48) + 32 + (64 * i) + (numOwls * 32);
+		if (reincarnated) {
+			theEnemies[i].frame = (RandomInt(48) + 8 + (numOwls * 32));
+		} else {
+			theEnemies[i].frame = (RandomInt(48) + 32 + (64 * i) + (numOwls * 32));
+        }
 
-		if ((levelOn % 5) == 4)			/* Egg Wave */
+		if ((levelOn % 5) == 4)	{		/* Egg Wave */
 			theEnemies[i].kind--;
+        }
 
 		spawnedEnemies++;
 	}
 }
 
-/*---------------------------------------------------------  GenerateEnemies */
+/*-----------------------------------------------------  GenerateEnemies */
 
 void GenerateEnemies (void)
 {
 	short		i;
 
-	if ((levelOn % 5) == 4)			/* Egg Wave */
-	{
+	if ((levelOn % 5) == 4)	{		/* Egg Wave */
 		numEnemies = kMaxEnemies;
 		numEnemiesThisLevel = numEnemies;
 	} else {
-		numEnemies = ((levelOn / 5) + 2) * 2;
-		if (numEnemies > kMaxEnemies)
+		numEnemies = (((levelOn / 5) + 2) * 2);
+		if (numEnemies > kMaxEnemies) {
 			numEnemies = kMaxEnemies;
-		numEnemiesThisLevel = numEnemies * 2;
+        }
+		numEnemiesThisLevel = (numEnemies * 2);
 	}
 
 	deadEnemies = 0;
 
-	numOwls = 4 - ((levelOn + 2) / 5);
+	numOwls = (4 - ((levelOn + 2) / 5));
 	if (numOwls < 0)
 		numOwls = 0;
 
 	spawnedEnemies = 0;
 
-	for (i = 0; i < numEnemies; i++)
+	for (i = 0; i < numEnemies; i++) {
 		InitEnemy(i, FALSE);
+    }
 }
 
-/*---------------------------------------------------  CheckEnemyPlatformHit */
+/*-----------------------------------------------  CheckEnemyPlatformHit */
 
 void CheckEnemyPlatformHit (short h)
 {
@@ -353,7 +369,7 @@ void CheckEnemyPlatformHit (short h)
 						else
 							theEnemies[h].vVel = theEnemies[h].vVel >> 2;
 						if ((theEnemies[h].vVel < 8) && (theEnemies[h].vVel > -8) &&
-								(theEnemies[h].hVel == 0) && (theEnemies[h].mode == kFalling))
+                            (theEnemies[h].hVel == 0) && (theEnemies[h].mode == kFalling))
 						{
 							theEnemies[h].mode = kEggTimer;
 							theEnemies[h].frame = (numOwls * 96) + 128;
@@ -366,23 +382,20 @@ void CheckEnemyPlatformHit (short h)
 	}
 }
 
-/*-------------------------------------------------- CheckEnemyRoofCollision */
+/*---------------------------------------------- CheckEnemyRoofCollision */
 
 void CheckEnemyRoofCollision(short i)
 {
 	short		offset;
 
-	if (theEnemies[i].dest.top < (kRoofHeight - 2))
-	{
+	if (theEnemies[i].dest.top < (kRoofHeight - 2)) {
 		offset = kRoofHeight - theEnemies[i].dest.top;
 		theEnemies[i].dest.top += offset;
 		theEnemies[i].dest.bottom += offset;
 		theEnemies[i].v = (theEnemies[i].dest.top << 4);
 		doEnemyScrapeSound = TRUE;
 		theEnemies[i].vVel = -(theEnemies[i].vVel >> 2);
-	}
-	else if (theEnemies[i].dest.top > kLavaHeight)
-	{
+	} else if (theEnemies[i].dest.top > kLavaHeight) {
 		theEnemies[i].mode = kDeadAndGone;
 		deadEnemies++;
 
@@ -408,21 +421,22 @@ void HandleIdleEnemies (short i)
 	}
 }
 
-/*-----------------------------------------------------  HandleFlyingEnemies */
+/*-------------------------------------------------  HandleFlyingEnemies */
 
-void HandleFlyingEnemies (short i)
+void HandleFlyingEnemies(short i)
 {
 	short		dist;
 	Boolean		shouldFlap;
 
 	theEnemies[i].vVel += kGravity;
 
-	dist = thePlayer.dest.top - theEnemies[i].dest.top;
-	if (dist < 0)
+	dist = (thePlayer.dest.top - theEnemies[i].dest.top);
+	if (dist < 0) {
 		dist = -dist;
+    }
 
 	if ((dist < theEnemies[i].heightSmell) &&
-			((thePlayer.mode == kFlying) || (thePlayer.mode == kWalking)))
+        ((thePlayer.mode == kFlying) || (thePlayer.mode == kWalking)))
 	{							/* enemy will actively seek the player */
 		if (thePlayer.dest.left < theEnemies[i].dest.left) {
 			dist = theEnemies[i].dest.left - thePlayer.dest.left;
@@ -443,10 +457,11 @@ void HandleFlyingEnemies (short i)
 		else
 			shouldFlap = FALSE;
 	} else {
-		if ((theEnemies[i].v > theEnemies[i].targetAlt) && (evenFrame))
+		if ((theEnemies[i].v > theEnemies[i].targetAlt) && (evenFrame)) {
 			shouldFlap = TRUE;
-		else
+		} else {
 			shouldFlap = FALSE;
+        }
 	}
 
 	if (shouldFlap) {
@@ -456,69 +471,85 @@ void HandleFlyingEnemies (short i)
 
 	if (theEnemies[i].facingRight) {
 		theEnemies[i].hVel += kEnemyImpulse;
-		if (theEnemies[i].hVel > theEnemies[i].maxHVel)
+		if (theEnemies[i].hVel > theEnemies[i].maxHVel) {
 			theEnemies[i].hVel = theEnemies[i].maxHVel;
+        }
 
 		switch (theEnemies[i].kind) {
 			case kOwl:
-			if (shouldFlap)
+            if (shouldFlap) {
 				theEnemies[i].srcNum = 12;
-			else
+			} else {
 				theEnemies[i].srcNum = 13;
+            }
 			break;
 
 			case kWolf:
-			if (shouldFlap)
+            if (shouldFlap) {
 				theEnemies[i].srcNum = 16;
-			else
+			} else {
 				theEnemies[i].srcNum = 17;
+            }
 			break;
 
 			case kJackal:
-			if (shouldFlap)
+            if (shouldFlap) {
 				theEnemies[i].srcNum = 20;
-			else
+			} else {
 				theEnemies[i].srcNum = 21;
+            }
 			break;
+
+            default:
+            fprintf(stderr,
+                    "Unhandled kind of right-facing flying enemy.\n");
+            break;
 		}
-
-	} else {
+	} else { /* left: */
 		theEnemies[i].hVel -= kEnemyImpulse;
-		if (theEnemies[i].hVel < -theEnemies[i].maxHVel)
+		if (theEnemies[i].hVel < -theEnemies[i].maxHVel) {
 			theEnemies[i].hVel = -theEnemies[i].maxHVel;
+        }
 
-		switch (theEnemies[i].kind)
-		{
+		switch (theEnemies[i].kind) {
 			case kOwl:
-			if (shouldFlap)
+            if (shouldFlap) {
 				theEnemies[i].srcNum = 14;
-			else
+			} else {
 				theEnemies[i].srcNum = 15;
+            }
 			break;
 
 			case kWolf:
-			if (shouldFlap)
+            if (shouldFlap) {
 				theEnemies[i].srcNum = 18;
-			else
+			} else {
 				theEnemies[i].srcNum = 19;
+            }
 			break;
 
 			case kJackal:
-			if (shouldFlap)
+            if (shouldFlap) {
 				theEnemies[i].srcNum = 22;
-			else
+			} else {
 				theEnemies[i].srcNum = 23;
+            }
 			break;
+
+            default:
+            fprintf(stderr,
+                    "Unhandled kind of left-facing flying enemy.\n");
+            break;
 		}
 	}
 
 	theEnemies[i].h += theEnemies[i].hVel;
-	theEnemies[i].dest.left = theEnemies[i].h >> 4;
-	theEnemies[i].dest.right = theEnemies[i].dest.left + 64;
+	theEnemies[i].dest.left = (theEnemies[i].h >> 4);
+	theEnemies[i].dest.right = (theEnemies[i].dest.left + 64);
 
 	theEnemies[i].v += theEnemies[i].vVel;
-	theEnemies[i].dest.top = theEnemies[i].v >> 4;
-	theEnemies[i].dest.bottom = theEnemies[i].dest.top + 40;
+	theEnemies[i].dest.top = (theEnemies[i].v >> 4);
+	theEnemies[i].dest.bottom = (theEnemies[i].dest.top + 40);
 
 	if (theEnemies[i].dest.left > 640) {
 		OffsetRect(&theEnemies[i].dest, -640, 0);
@@ -530,32 +561,30 @@ void HandleFlyingEnemies (short i)
 			theEnemies[i].targetAlt = AssignNewAltitude();
 			theEnemies[i].pass = 0;
 		}
-	}
-	else if (theEnemies[i].dest.right < 0)
-	{
+	} else if (theEnemies[i].dest.right < 0) {
 		OffsetRect(&theEnemies[i].dest, 640, 0);
 		theEnemies[i].h = (theEnemies[i].dest.left << 4);
 		OffsetRect(&theEnemies[i].wasDest, 640, 0);
 		theEnemies[i].pass++;
-		if (theEnemies[i].pass > 2)
-		{
+		if (theEnemies[i].pass > 2) {
 			theEnemies[i].targetAlt = AssignNewAltitude();
 			theEnemies[i].pass = 0;
 		}
 	}
 
-	theEnemies[i].vVel -= theEnemies[i].vVel >> 4;	/* friction */
+	theEnemies[i].vVel -= (theEnemies[i].vVel >> 4);	/* friction */
 
-	if (theEnemies[i].vVel > theEnemies[i].maxVVel)
+	if (theEnemies[i].vVel > theEnemies[i].maxVVel) {
 		theEnemies[i].vVel = theEnemies[i].maxVVel;
-	else if (theEnemies[i].vVel < -theEnemies[i].maxVVel)
+	} else if (theEnemies[i].vVel < -theEnemies[i].maxVVel) {
 		theEnemies[i].vVel = -theEnemies[i].maxVVel;
+    }
 
 	CheckEnemyRoofCollision(i);
 	CheckEnemyPlatformHit(i);
 }
 
-/*------------------------------------------------------  HandleWalkingEnemy */
+/*--------------------------------------------------  HandleWalkingEnemy */
 
 void HandleWalkingEnemy (short i)
 {
@@ -564,35 +593,45 @@ void HandleWalkingEnemy (short i)
 		theEnemies[i].dest.right += 6;
 		switch (theEnemies[i].kind) {
 			case kOwl:
-			theEnemies[i].srcNum = 1 - theEnemies[i].srcNum;
+			theEnemies[i].srcNum = (1 - theEnemies[i].srcNum);
 			break;
 
 			case kWolf:
-			theEnemies[i].srcNum = 9 - theEnemies[i].srcNum;
+            theEnemies[i].srcNum = (9 - theEnemies[i].srcNum);
 			break;
 
 			case kJackal:
-			theEnemies[i].srcNum = 17 - theEnemies[i].srcNum;
+			theEnemies[i].srcNum = (17 - theEnemies[i].srcNum);
 			break;
+
+            default:
+            fprintf(stderr,
+                    "Unhandled kind of right-facing walking enemy.\n");
+            break;
 		}
-		theEnemies[i].hVel = 6 << 4;
-	} else {
+		theEnemies[i].hVel = (6 << 4);
+	} else { /* left: */
 		theEnemies[i].dest.left -= 6;
 		theEnemies[i].dest.right -= 6;
 		switch (theEnemies[i].kind) {
 			case kOwl:
-			theEnemies[i].srcNum = 5 - theEnemies[i].srcNum;
+			theEnemies[i].srcNum = (5 - theEnemies[i].srcNum);
 			break;
 
 			case kWolf:
-			theEnemies[i].srcNum = 13 - theEnemies[i].srcNum;
+			theEnemies[i].srcNum = (13 - theEnemies[i].srcNum);
 			break;
 
 			case kJackal:
-			theEnemies[i].srcNum = 21 - theEnemies[i].srcNum;
+			theEnemies[i].srcNum = (21 - theEnemies[i].srcNum);
 			break;
+
+            default:
+            fprintf(stderr,
+                    "Unhandled kind of left-facing walking enemy.\n");
+            break;
 		}
-		theEnemies[i].hVel = -6 << 4;
+		theEnemies[i].hVel = (-6 << 4);
 	}
 	theEnemies[i].frame++;
 	if (theEnemies[i].frame >= 8) {
@@ -600,38 +639,45 @@ void HandleWalkingEnemy (short i)
 		theEnemies[i].frame = 0;
 		switch (theEnemies[i].kind) {
 			case kOwl:
-			if (theEnemies[i].facingRight)
+            if (theEnemies[i].facingRight) {
 				theEnemies[i].srcNum = 12;
-			else
+			} else {
 				theEnemies[i].srcNum = 14;
+            }
 			break;
 
 			case kWolf:
-			if (theEnemies[i].facingRight)
+            if (theEnemies[i].facingRight) {
 				theEnemies[i].srcNum = 16;
-			else
+			} else {
 				theEnemies[i].srcNum = 18;
+            }
 			break;
 
 			case kJackal:
-			if (theEnemies[i].facingRight)
+            if (theEnemies[i].facingRight) {
 				theEnemies[i].srcNum = 20;
-			else
+			} else {
 				theEnemies[i].srcNum = 22;
+            }
 			break;
+
+            default:
+            fprintf(stderr, "Unhandled kind of walking enemy.\n");
+            break;
 		}
 
 		theEnemies[i].dest.left -= 8;
 		theEnemies[i].dest.right += 8;
-		theEnemies[i].dest.bottom = theEnemies[i].dest.top + 40;
-		theEnemies[i].h = theEnemies[i].dest.left * 16;
-		theEnemies[i].v = theEnemies[i].dest.top * 16;
+		theEnemies[i].dest.bottom = (theEnemies[i].dest.top + 40);
+		theEnemies[i].h = (theEnemies[i].dest.left * 16);
+		theEnemies[i].v = (theEnemies[i].dest.top * 16);
 	}
 }
 
-/*-----------------------------------------------------  HandleSpawningEnemy */
+/*-------------------------------------------------  HandleSpawningEnemy */
 
-void HandleSpawningEnemy (short i)
+void HandleSpawningEnemy(short i)
 {
 	theEnemies[i].frame++;
 	if (theEnemies[i].frame >= 48) {
@@ -640,32 +686,38 @@ void HandleSpawningEnemy (short i)
 
 		switch (theEnemies[i].kind) {
 			case kOwl:
-			if (theEnemies[i].facingRight)
+            if (theEnemies[i].facingRight) {
 				theEnemies[i].srcNum = 0;
-			else
+			} else {
 				theEnemies[i].srcNum = 2;
+            }
 			break;
 
 			case kWolf:
-			if (theEnemies[i].facingRight)
+            if (theEnemies[i].facingRight) {
 				theEnemies[i].srcNum = 4;
-			else
+			} else {
 				theEnemies[i].srcNum = 6;
+            }
 			break;
 
 			case kJackal:
-			if (theEnemies[i].facingRight)
+            if (theEnemies[i].facingRight) {
 				theEnemies[i].srcNum = 8;
-			else
+			} else {
 				theEnemies[i].srcNum = 10;
+            }
 			break;
+
+            default:
+            fprintf(stderr, "Unhandled kind of spawning enemy.\n");
+            break;
 		}
-	}
-	else
-		theEnemies[i].dest.top = theEnemies[i].dest.bottom - theEnemies[i].frame;
+	} else
+		theEnemies[i].dest.top = (theEnemies[i].dest.bottom - theEnemies[i].frame);
 }
 
-/*-----------------------------------------------------  HandleFallingEnemy */
+/*--------------------------------------------------  HandleFallingEnemy */
 
 void HandleFallingEnemy (short i)
 {
@@ -708,7 +760,7 @@ void HandleFallingEnemy (short i)
 	CheckEnemyPlatformHit(i);
 }
 
-/*----------------------------------------------------------  HandleEggEnemy */
+/*------------------------------------------------------  HandleEggEnemy */
 
 void HandleEggEnemy(short i)
 {
@@ -740,19 +792,17 @@ void HandleEggEnemy(short i)
 	}
 }
 
-/*-------------------------------------------------------------  MoveEnemies */
+/*---------------------------------------------------------  MoveEnemies */
 
-void MoveEnemies (void)
+void MoveEnemies(void)
 {
 	short		i;
 
 	doEnemyFlapSound = FALSE;
 	doEnemyScrapeSound = FALSE;
 
-	for (i = 0; i < numEnemies; i++)
-	{
-		switch (theEnemies[i].mode)
-		{
+	for (i = 0; i < numEnemies; i++) {
+		switch (theEnemies[i].mode) {
 			case kIdle:
 			HandleIdleEnemies(i);
 			break;
@@ -779,28 +829,35 @@ void MoveEnemies (void)
 
 			case kDeadAndGone:
 			break;
+
+            default:
+            fprintf(stderr, "Unhandled mode of enemy movement.\n");
+            break;
 		}
 	}
 
-	if (doEnemyFlapSound)
+	if (doEnemyFlapSound) {
 		PlayExternalSound(kFlap2Sound, kFlap2Priority);
-	if (doEnemyScrapeSound)
+    }
+	if (doEnemyScrapeSound) {
 		PlayExternalSound(kScrape2Sound, kScrape2Priority);
-	if ((deadEnemies >= numEnemiesThisLevel) && (countDownTimer == 0))
+    }
+	if ((deadEnemies >= numEnemiesThisLevel) && (countDownTimer == 0)) {
 		countDownTimer = 30;
+    }
 }
 
-/*--------------------------------------------------------  InitHandLocation */
+/*----------------------------------------------------  InitHandLocation */
 
-void InitHandLocation (void)
+void InitHandLocation(void)
 {
 	SetRect(&theHand.dest, 0, 0, 56, 57);
 	OffsetRect(&theHand.dest, 48, 460);
 }
 
-/*--------------------------------------------------------------  HandleHand */
+/*----------------------------------------------------------  HandleHand */
 
-void HandleHand (void)
+void HandleHand(void)
 {
 	Rect		whoCares;
 	short		hDiff, vDiff, pull, speed;
@@ -817,82 +874,80 @@ void HandleHand (void)
 
 		case kOutGrabeth:
 		case kClutching:
-		if (SectRect(&thePlayer.dest, &grabZone, &whoCares))
-		{
-			hDiff = theHand.dest.left - thePlayer.dest.left;
-			vDiff = theHand.dest.top - thePlayer.dest.top;
+		if (SectRect(&thePlayer.dest, &grabZone, &whoCares)) {
+			hDiff = (theHand.dest.left - thePlayer.dest.left);
+			vDiff = (theHand.dest.top - thePlayer.dest.top);
 
-			if (thePlayer.facingRight)
+			if (thePlayer.facingRight) {
 				hDiff -= 3;
-			else
+			} else {
 				hDiff -= 21;
+            }
 			vDiff -= 29;
 
-			speed = (levelOn >> 3) + 1;
-			if (hDiff < 0)
-			{
+			speed = ((levelOn >> 3) + 1);
+			if (hDiff < 0) {
 				theHand.dest.left += speed;
 				theHand.dest.right += speed;
-			}
-			else if (hDiff > 0)
-			{
+			} else if (hDiff > 0) {
 				theHand.dest.left -= speed;
 				theHand.dest.right -= speed;
 			}
-			if (vDiff < 0)
-			{
+			if (vDiff < 0) {
 				theHand.dest.top += speed;
 				theHand.dest.bottom += speed;
-			}
-			else if (vDiff > 0)
-			{
+			} else if (vDiff > 0) {
 				theHand.dest.top -= speed;
 				theHand.dest.bottom -= speed;
 			}
 
-			if (hDiff < 0)
+			if (hDiff < 0) {
 				hDiff = -hDiff;
-			if (vDiff < 0)
+            }
+			if (vDiff < 0) {
 				vDiff = -vDiff;
-			if ((hDiff < 8) && (vDiff < 8))
-			{
+            }
+			if ((hDiff < 8) && (vDiff < 8)) {
 				theHand.mode = kClutching;
 				thePlayer.clutched = TRUE;
-				thePlayer.hVel = thePlayer.hVel >> 3;
-				thePlayer.vVel = thePlayer.vVel >> 3;
+				thePlayer.hVel = (thePlayer.hVel >> 3);
+				thePlayer.vVel = (thePlayer.vVel >> 3);
 				pull = (levelOn << 2);
-				if (pull > 48)
+				if (pull > 48) {
 					pull = 48;
+                }
 				thePlayer.vVel += pull;
-				theHand.dest.top = thePlayer.dest.top + 29;
-				theHand.dest.bottom = theHand.dest.top + 57;
-				if (thePlayer.facingRight)
-					theHand.dest.left = thePlayer.dest.left + 3;
-				else
-					theHand.dest.left = thePlayer.dest.left + 21;
-				theHand.dest.right = theHand.dest.left + 58;
-			}
-			else
-			{
+				theHand.dest.top = (thePlayer.dest.top + 29);
+				theHand.dest.bottom = (theHand.dest.top + 57);
+				if (thePlayer.facingRight) {
+					theHand.dest.left = (thePlayer.dest.left + 3);
+				} else {
+					theHand.dest.left = (thePlayer.dest.left + 21);
+                }
+				theHand.dest.right = (theHand.dest.left + 58);
+			} else {
 				thePlayer.clutched = FALSE;
 				theHand.mode = kOutGrabeth;
 			}
-		}
-		else
-		{
+		} else {
 			theHand.dest.top++;
 			theHand.dest.bottom++;
-			if (theHand.dest.top > 460)
+			if (theHand.dest.top > 460) {
 				theHand.mode = kLurking;
-			else
+			} else {
 				theHand.mode = kOutGrabeth;
+            }
 			thePlayer.clutched = FALSE;
 		}
 		break;
+
+        default:
+        fprintf(stderr, "UnHANDled hand handler (ha ha, get it?).\n");
+        break;
 	}
 }
 
-/*--------------------------------------------------------------  InitEye */
+/*-------------------------------------------------------------  InitEye */
 
 void InitEye(void)
 {
@@ -906,7 +961,7 @@ void InitEye(void)
 	theEye.entering = FALSE;
 }
 
-/*--------------------------------------------------------------  KillOffEye */
+/*----------------------------------------------------------  KillOffEye */
 
 void KillOffEye(void)
 {
@@ -922,7 +977,7 @@ void KillOffEye(void)
 	}
 }
 
-/*--------------------------------------------------------------  HandleEye */
+/*-----------------------------------------------------------  HandleEye */
 
 void HandleEye (void)
 {
@@ -1021,9 +1076,9 @@ void HandleEye (void)
 			diffV = -diffV;
 
 		if ((diffH < 16) && (diffV < 16) && (!theEye.entering) &&
-				(!theEye.killed))			/* close enough to call it a kill */
+            (!theEye.killed))		/* close enough to call it a kill */
 		{
-			if (theEye.srcNum == 0)			/* if eye open, player is killed */
+			if (theEye.srcNum == 0)		/* if eye open, player is killed */
 			{
 				if (lightningCount == 0)
 				{
@@ -1039,7 +1094,7 @@ void HandleEye (void)
 				thePlayer.dest.bottom = thePlayer.dest.top + 37;
 				PlayExternalSound(kBoom2Sound, kBoom2Priority);
 			}
-			else							/* wow, player killed the eye */
+			else						/* wow, player killed the eye */
 			{
 				if (lightningCount == 0) {
 					lightH = (theEye.dest.left + 24);
@@ -1070,7 +1125,7 @@ void HandleEye (void)
 	}
 }
 
-/*---------------------------------------------------  ResolveEnemyPlayerHit */
+/*-----------------------------------------------  ResolveEnemyPlayerHit */
 /* FIXME: how this system works is not readily apparent to the player
  * who is only observing it from the context of gameplay. Add more visual
  * feedback to make it clearer how exactly the hit determination works */
@@ -1084,43 +1139,47 @@ void ResolveEnemyPlayerHit(short i)
 		theEnemies[i].mode = kDeadAndGone;
 		theScore += 500L;
 		UpdateScoreNumbers();
-		PlayExternalSound(kBonusSound, kBonusPriority);
+		PlayExternalSound((short)kBonusSound, (short)kBonusPriority);
 		InitEnemy(i, TRUE);
 	} else {
 		diff = ((theEnemies[i].dest.top + 25) - (thePlayer.dest.top + 19));
 
-		if (diff < -2)		/* player is bested */
-		{
+		if (diff < -2) {	/* player is bested */
+            printf("You were killed! You came '%i' units short.\n",
+                   -2 - diff);
 			if (lightningCount == 0) {
-				lightH = thePlayer.dest.left + 24;
-				lightV = thePlayer.dest.bottom - 24;
+				lightH = (thePlayer.dest.left + 24);
+				lightV = (thePlayer.dest.bottom - 24);
 				lightningCount = 6;
 			}
 
 			thePlayer.mode = kFalling;
-			if (thePlayer.facingRight)
+			if (thePlayer.facingRight) {
 				thePlayer.srcNum = 8;
-			else
+			} else {
 				thePlayer.srcNum = 9;
-			thePlayer.dest.bottom = thePlayer.dest.top + 37;
-			PlayExternalSound(kBoom2Sound, kBoom2Priority);
-		}
-		else if (diff > 2)	/* enemy killed */
-		{
-			if ((theEnemies[i].mode == kSpawning) && (theEnemies[i].frame < 16))
+            }
+			thePlayer.dest.bottom = (thePlayer.dest.top + 37);
+			PlayExternalSound((short)kBoom2Sound, (short)kBoom2Priority);
+		} else if (diff > 2) {	/* enemy killed */
+            printf("You killed an enemy!\n");
+			if ((theEnemies[i].mode == kSpawning) && (theEnemies[i].frame < 16)) {
 				return;
+            }
 
-			h = (theEnemies[i].dest.left + theEnemies[i].dest.right) >> 1;
-			if (theEnemies[i].mode == kSpawning)
-				v = theEnemies[i].dest.bottom - 2;
-			else
-				v = (theEnemies[i].dest.top + theEnemies[i].dest.bottom) >> 1;
-			theEnemies[i].dest.left = h - 12;
-			theEnemies[i].dest.right = h + 12;
-			if (theEnemies[i].mode == kSpawning)
+			h = ((theEnemies[i].dest.left + theEnemies[i].dest.right) >> 1);
+			if (theEnemies[i].mode == kSpawning) {
+				v = (theEnemies[i].dest.bottom - 2);
+			} else {
+				v = ((theEnemies[i].dest.top + theEnemies[i].dest.bottom) >> 1);
+            }
+			theEnemies[i].dest.left = (h - 12);
+			theEnemies[i].dest.right = (h + 12);
+			if (theEnemies[i].mode == kSpawning) {
 				theEnemies[i].dest.top = (v - 24);
-			else
+			} else {
 				theEnemies[i].dest.top = (v - 12);
+            }
 			theEnemies[i].dest.bottom = (theEnemies[i].dest.top + 24);
 			theEnemies[i].h = (theEnemies[i].dest.left << 4);
 			theEnemies[i].v = (theEnemies[i].dest.top << 4);
@@ -1141,16 +1200,19 @@ void ResolveEnemyPlayerHit(short i)
 				case kJackal:
 				theScore += 1500L;
 				break;
+
+                default:
+                fprintf(stderr, "Unhandled kind of enemy for scoring.\n");
+                break;
 			}
 			UpdateScoreNumbers();
-			PlayExternalSound(kBoom2Sound, kBoom2Priority);
-		}
-		else		/* neither player nor enemy killed */
-		{
-			if (theEnemies[i].hVel > 0)
+			PlayExternalSound((short)kBoom2Sound, (short)kBoom2Priority);
+		} else {		/* neither player nor enemy killed */
+			if (theEnemies[i].hVel > 0) {
 				theEnemies[i].facingRight = TRUE;
-			else
+			} else {
 				theEnemies[i].facingRight = FALSE;
+            }
 			PlayExternalSound(kScreechSound, kScreechPriority);
 		}
 
@@ -1163,7 +1225,7 @@ void ResolveEnemyPlayerHit(short i)
 	}
 }
 
-/*--------------------------------------------  CheckPlayerEnemyCollision */
+/*-------------------------------------------  CheckPlayerEnemyCollision */
 
 void CheckPlayerEnemyCollision(void)
 {

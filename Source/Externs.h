@@ -53,11 +53,15 @@ typedef struct OpaqueAreaID* AreaID;
 # pragma options align=mac68k
 #endif /* !__LP64__ */
 
+#ifndef ATTRIBUTE_NORETURN
+# define ATTRIBUTE_NORETURN __attribute__ ((__noreturn__))
+#endif /* ATTRIBUTE_NORETURN */
+
 /*
  * FIXME:
- * When compiling with Xcode 3.2.6 (gcc-4.2) on Snow Leopard, there are warnings
- * that the following headers indirectly included by Carbon/Carbon.h use
- * deprecated APIs:
+ * When compiling with Xcode 3.2.6 (gcc-4.2) on Snow Leopard, there are
+ * warnings that the following headers indirectly included by
+ * <Carbon/Carbon.h> use deprecated APIs:
  *
  * - CarbonCore/Files.h
  * - CarbonCore/MacMemory.h
@@ -68,8 +72,8 @@ typedef struct OpaqueAreaID* AreaID;
  * - HIToolbox/Menus.h
  * - QD/QuickdrawAPI.h
  *
- * TODO: either move to non-deprecated APIs, or restrict the maximum OS version
- * that this can be built on. In the meantime...
+ * TODO: either move to non-deprecated APIs, or restrict the maximum OS
+ * version that this can be built on. In the meantime...
  */
 /* these things are not normally available for 64-bit, so copy them here
  * manually */
@@ -84,7 +88,7 @@ struct HFileParam {
 	IOCompletionUPP ioCompletion; /* completion routine addr (0 for synch calls) */
 	volatile OSErr  ioResult;     /* result code */
 	StringPtr       ioNamePtr;    /* ptr to Vol:FileName string */
-	FSVolumeRefNum  ioVRefNum;    /* volume refnum (DrvNum for Eject and MountVol) */
+	FSVolumeRefNum  ioVRefNum; /* volume refnum (DrvNum for Eject and MountVol) */
 	FSIORefNum      ioFRefNum;
 	SInt8           ioFVersNum;
 	SInt8           filler1;
@@ -111,7 +115,7 @@ struct HIOParam {
 	IOCompletionUPP ioCompletion; /* completion routine addr (0 for synch calls) */
 	volatile OSErr  ioResult;     /* result code */
 	StringPtr       ioNamePtr;    /* ptr to Vol:FileName string */
-	short           ioVRefNum;    /* volume refnum (DrvNum for Eject and MountVol) */
+	short           ioVRefNum; /* volume refnum (DrvNum for Eject and MountVol) */
 	short           ioRefNum;
 	SInt8           ioVersNum;
 	SInt8           ioPermssn;
@@ -131,7 +135,7 @@ struct HVolumeParam {
 	IOCompletionUPP ioCompletion; /* completion routine addr (0 for synch calls) */
 	volatile OSErr  ioResult;     /* result code */
 	StringPtr       ioNamePtr;    /* ptr to Vol:FileName string */
-	short           ioVRefNum;    /* volume refnum (DrvNum for Eject and MountVol) */
+	short           ioVRefNum; /* volume refnum (DrvNum for Eject and MountVol) */
 	long            filler2;
 	short           ioVolIndex;
 	unsigned long   ioVCrDate;
@@ -159,179 +163,179 @@ struct HVolumeParam {
 };
 typedef struct HVolumeParam HVolumeParam;
 struct AccessParam {
-	QElemPtr            qLink;        /*queue link in header*/
-	short               qType;        /*type byte for safety check*/
-	short               ioTrap;       /*FS: the Trap*/
-	Ptr                 ioCmdAddr;    /*FS: address to dispatch to*/
-	IOCompletionUPP     ioCompletion; /*completion routine addr (0 for synch calls)*/
-	volatile OSErr      ioResult;     /*result code*/
-	StringPtr           ioNamePtr;    /*ptr to Vol:FileName string*/
-	short               ioVRefNum;    /*volume refnum (DrvNum for Eject and MountVol)*/
-	short               ioRefNum;     /* <- , ioRefNum ( use to be filler3 ) */
-	short               ioDenyModes;  /*access rights data*/
-	short               filler4;
-	SInt8               filler5;
-	SInt8               ioACUser;     /*access rights for directory only*/
-	long                filler6;
-	long                ioACOwnerID;  /*owner ID*/
-	long                ioACGroupID;  /*group ID*/
-	long                ioACAccess;   /*access rights*/
-	long                ioDirID;
+	QElemPtr        qLink;        /*queue link in header*/
+	short           qType;        /*type byte for safety check*/
+	short           ioTrap;       /*FS: the Trap*/
+	Ptr             ioCmdAddr;    /*FS: address to dispatch to*/
+	IOCompletionUPP ioCompletion; /*completion routine addr (0 for synch calls)*/
+	volatile OSErr  ioResult;     /*result code*/
+	StringPtr       ioNamePtr;    /*ptr to Vol:FileName string*/
+	short           ioVRefNum; /*volume refnum (DrvNum for Eject and MountVol)*/
+	short           ioRefNum;     /* <- , ioRefNum ( use to be filler3 ) */
+	short           ioDenyModes; /*access rights data*/
+	short           filler4;
+	SInt8           filler5;
+	SInt8           ioACUser;     /*access rights for directory only*/
+	long            filler6;
+	long            ioACOwnerID;  /*owner ID*/
+	long            ioACGroupID;  /*group ID*/
+	long            ioACAccess;   /*access rights*/
+	long            ioDirID;
 };
 typedef struct AccessParam AccessParam;
 struct ObjParam {
-	QElemPtr            qLink;                  /*queue link in header*/
-	short               qType;                  /*type byte for safety check*/
-	short               ioTrap;                 /*FS: the Trap*/
-	Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-	IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-	volatile OSErr      ioResult;               /*result code*/
-	StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-	short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-	short               filler7;
-	short               ioObjType;              /*function code*/
-	StringPtr           ioObjNamePtr;           /*ptr to returned creator/group name*/
-	long                ioObjID;                /*creator/group ID*/
+	QElemPtr        qLink;        /*queue link in header*/
+	short           qType;        /*type byte for safety check*/
+	short           ioTrap;       /*FS: the Trap*/
+	Ptr             ioCmdAddr;    /*FS: address to dispatch to*/
+	IOCompletionUPP ioCompletion; /*completion routine addr (0 for synch calls)*/
+	volatile OSErr  ioResult;     /*result code*/
+	StringPtr       ioNamePtr;    /*ptr to Vol:FileName string*/
+	short           ioVRefNum; /*volume refnum (DrvNum for Eject and MountVol)*/
+	short           filler7;
+	short           ioObjType;    /*function code*/
+	StringPtr       ioObjNamePtr; /*ptr to returned creator/group name*/
+	long            ioObjID;      /*creator/group ID*/
 };
 typedef struct ObjParam                 ObjParam;
 struct CopyParam {
-	QElemPtr            qLink;                  /*queue link in header*/
-	short               qType;                  /*type byte for safety check*/
-	short               ioTrap;                 /*FS: the Trap*/
-	Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-	IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-	volatile OSErr      ioResult;               /*result code*/
-	StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-	short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-	short               ioDstVRefNum;           /*destination vol identifier*/
-	short               filler8;
-	StringPtr           ioNewName;              /*ptr to destination pathname*/
-	StringPtr           ioCopyName;             /*ptr to optional name*/
-	long                ioNewDirID;             /*destination directory ID*/
-	long                filler14;
-	long                filler15;
-	long                ioDirID;
+	QElemPtr        qLink;        /*queue link in header*/
+	short           qType;        /*type byte for safety check*/
+	short           ioTrap;       /*FS: the Trap*/
+	Ptr             ioCmdAddr;    /*FS: address to dispatch to*/
+	IOCompletionUPP ioCompletion; /*completion routine addr (0 for synch calls)*/
+	volatile OSErr  ioResult;     /*result code*/
+	StringPtr       ioNamePtr;    /*ptr to Vol:FileName string*/
+	short           ioVRefNum; /*volume refnum (DrvNum for Eject and MountVol)*/
+	short           ioDstVRefNum; /*destination vol identifier*/
+	short           filler8;
+	StringPtr       ioNewName;    /*ptr to destination pathname*/
+	StringPtr       ioCopyName;   /*ptr to optional name*/
+	long            ioNewDirID;   /*destination directory ID*/
+	long            filler14;
+	long            filler15;
+	long            ioDirID;
 };
-typedef struct CopyParam                CopyParam;
+typedef struct CopyParam CopyParam;
 struct WDParam {
-	QElemPtr            qLink;                  /*queue link in header*/
-	short               qType;                  /*type byte for safety check*/
-	short               ioTrap;                 /*FS: the Trap*/
-	Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-	IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-	volatile OSErr      ioResult;               /*result code*/
-	StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-	short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-	short               ioWDCreated;
-	short               ioWDIndex;
-	long                ioWDProcID;
-	short               ioWDVRefNum;
-	short               filler10;
-	long                filler11;
-	long                filler12;
-	long                filler13;
-	long                ioWDDirID;
+	QElemPtr        qLink;        /*queue link in header*/
+	short           qType;        /*type byte for safety check*/
+	short           ioTrap;       /*FS: the Trap*/
+	Ptr             ioCmdAddr;    /*FS: address to dispatch to*/
+	IOCompletionUPP ioCompletion; /*completion routine addr (0 for synch calls)*/
+	volatile OSErr  ioResult;     /*result code*/
+	StringPtr       ioNamePtr;    /*ptr to Vol:FileName string*/
+	short           ioVRefNum; /*volume refnum (DrvNum for Eject and MountVol)*/
+	short           ioWDCreated;
+	short           ioWDIndex;
+	long            ioWDProcID;
+	short           ioWDVRefNum;
+	short           filler10;
+	long            filler11;
+	long            filler12;
+	long            filler13;
+	long            ioWDDirID;
 };
 typedef struct WDParam                  WDParam;
 struct FIDParam {
-	QElemPtr            qLink;                  /*queue link in header*/
-	short               qType;                  /*type byte for safety check*/
-	short               ioTrap;                 /*FS: the Trap*/
-	Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-	IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-	volatile OSErr      ioResult;               /*result code*/
-	StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-	short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-	long                filler14;
-	StringPtr           ioDestNamePtr;          /* dest file name */
-	long                filler15;
-	long                ioDestDirID;            /* dest file's directory id */
-	long                filler16;
-	long                filler17;
-	long                ioSrcDirID;             /* source file's directory id */
-	short               filler18;
-	long                ioFileID;               /* file ID */
+	QElemPtr        qLink;         /*queue link in header*/
+	short           qType;         /*type byte for safety check*/
+	short           ioTrap;        /*FS: the Trap*/
+	Ptr             ioCmdAddr;     /*FS: address to dispatch to*/
+	IOCompletionUPP ioCompletion;  /*completion routine addr (0 for synch calls)*/
+	volatile OSErr  ioResult;      /*result code*/
+	StringPtr       ioNamePtr;     /*ptr to Vol:FileName string*/
+	short           ioVRefNum; /*volume refnum (DrvNum for Eject and MountVol)*/
+	long            filler14;
+	StringPtr       ioDestNamePtr; /* dest file name */
+	long            filler15;
+	long            ioDestDirID;   /* dest file's directory id */
+	long            filler16;
+	long            filler17;
+	long            ioSrcDirID;    /* source file's directory id */
+	short           filler18;
+	long            ioFileID;      /* file ID */
 };
-typedef struct FIDParam                 FIDParam;
+typedef struct FIDParam FIDParam;
 struct ForeignPrivParam {
-	QElemPtr            qLink;                  /*queue link in header*/
-	short               qType;                  /*type byte for safety check*/
-	short               ioTrap;                 /*FS: the Trap*/
-	Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-	IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-	volatile OSErr      ioResult;               /*result code*/
-	StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-	short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-	long                ioFiller21;
-	long                ioFiller22;
-	Ptr                 ioForeignPrivBuffer;
-	long                ioForeignPrivActCount;
-	long                ioForeignPrivReqCount;
-	long                ioFiller23;
-	long                ioForeignPrivDirID;
-	long                ioForeignPrivInfo1;
-	long                ioForeignPrivInfo2;
-	long                ioForeignPrivInfo3;
-	long                ioForeignPrivInfo4;
+	QElemPtr        qLink;        /*queue link in header*/
+	short           qType;        /*type byte for safety check*/
+	short           ioTrap;       /*FS: the Trap*/
+	Ptr             ioCmdAddr;    /*FS: address to dispatch to*/
+	IOCompletionUPP ioCompletion; /*completion routine addr (0 for synch calls)*/
+	volatile OSErr  ioResult;     /*result code*/
+	StringPtr       ioNamePtr;    /*ptr to Vol:FileName string*/
+	short           ioVRefNum; /*volume refnum (DrvNum for Eject and MountVol)*/
+	long            ioFiller21;
+	long            ioFiller22;
+	Ptr             ioForeignPrivBuffer;
+	long            ioForeignPrivActCount;
+	long            ioForeignPrivReqCount;
+	long            ioFiller23;
+	long            ioForeignPrivDirID;
+	long            ioForeignPrivInfo1;
+	long            ioForeignPrivInfo2;
+	long            ioForeignPrivInfo3;
+	long            ioForeignPrivInfo4;
 };
 typedef struct ForeignPrivParam         ForeignPrivParam;
 struct HFileInfo {
-	QElemPtr            qLink;                  /*queue link in header*/
-	short               qType;                  /*type byte for safety check*/
-	short               ioTrap;                 /*FS: the Trap*/
-	Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-	IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-	volatile OSErr      ioResult;               /*result code*/
-	StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-	short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-	short               ioFRefNum;
-	SInt8               ioFVersNum;
-	SInt8               filler1;
-	short               ioFDirIndex;
-	SInt8               ioFlAttrib;
-	SInt8               ioACUser;
-	FInfo               ioFlFndrInfo;
-	long                ioDirID;
-	unsigned short      ioFlStBlk;
-	long                ioFlLgLen;
-	long                ioFlPyLen;
-	unsigned short      ioFlRStBlk;
-	long                ioFlRLgLen;
-	long                ioFlRPyLen;
-	unsigned long       ioFlCrDat;
-	unsigned long       ioFlMdDat;
-	unsigned long       ioFlBkDat;
-	FXInfo              ioFlXFndrInfo;
-	long                ioFlParID;
-	long                ioFlClpSiz;
+	QElemPtr        qLink;        /*queue link in header*/
+	short           qType;        /*type byte for safety check*/
+	short           ioTrap;       /*FS: the Trap*/
+	Ptr             ioCmdAddr;    /*FS: address to dispatch to*/
+	IOCompletionUPP ioCompletion; /*completion routine addr (0 for synch calls)*/
+	volatile OSErr  ioResult;     /*result code*/
+	StringPtr       ioNamePtr;    /*ptr to Vol:FileName string*/
+	short           ioVRefNum; /*volume refnum (DrvNum for Eject and MountVol)*/
+	short           ioFRefNum;
+	SInt8           ioFVersNum;
+	SInt8           filler1;
+	short           ioFDirIndex;
+	SInt8           ioFlAttrib;
+	SInt8           ioACUser;
+	FInfo           ioFlFndrInfo;
+	long            ioDirID;
+	unsigned short  ioFlStBlk;
+	long            ioFlLgLen;
+	long            ioFlPyLen;
+	unsigned short  ioFlRStBlk;
+	long            ioFlRLgLen;
+	long            ioFlRPyLen;
+	unsigned long   ioFlCrDat;
+	unsigned long   ioFlMdDat;
+	unsigned long   ioFlBkDat;
+	FXInfo          ioFlXFndrInfo;
+	long            ioFlParID;
+	long            ioFlClpSiz;
 };
 typedef struct HFileInfo                HFileInfo;
 struct DirInfo {
-	QElemPtr            qLink;                  /*queue link in header*/
-	short               qType;                  /*type byte for safety check*/
-	short               ioTrap;                 /*FS: the Trap*/
-	Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-	IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-	volatile OSErr      ioResult;               /*result code*/
-	StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-	short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-	short               ioFRefNum;
-	SInt8               ioFVersNum;
-	SInt8               filler1;
-	short               ioFDirIndex;
-	SInt8               ioFlAttrib;
-	SInt8               ioACUser;
-	DInfo               ioDrUsrWds;
-	long                ioDrDirID;
-	unsigned short      ioDrNmFls;
-	short               filler3[9];
-	unsigned long       ioDrCrDat;
-	unsigned long       ioDrMdDat;
-	unsigned long       ioDrBkDat;
-	DXInfo              ioDrFndrInfo;
-	long                ioDrParID;
+	QElemPtr        qLink;        /*queue link in header*/
+	short           qType;        /*type byte for safety check*/
+	short           ioTrap;       /*FS: the Trap*/
+	Ptr             ioCmdAddr;    /*FS: address to dispatch to*/
+	IOCompletionUPP ioCompletion; /*completion routine addr (0 for synch calls)*/
+	volatile OSErr  ioResult;     /*result code*/
+	StringPtr       ioNamePtr;    /*ptr to Vol:FileName string*/
+	short           ioVRefNum; /*volume refnum (DrvNum for Eject and MountVol)*/
+	short           ioFRefNum;
+	SInt8           ioFVersNum;
+	SInt8           filler1;
+	short           ioFDirIndex;
+	SInt8           ioFlAttrib;
+	SInt8           ioACUser;
+	DInfo           ioDrUsrWds;
+	long            ioDrDirID;
+	unsigned short  ioDrNmFls;
+	short           filler3[9];
+	unsigned long   ioDrCrDat;
+	unsigned long   ioDrMdDat;
+	unsigned long   ioDrBkDat;
+	DXInfo          ioDrFndrInfo;
+	long            ioDrParID;
 };
-typedef struct DirInfo                  DirInfo;
+typedef struct DirInfo DirInfo;
 union CInfoPBRec {
 	HFileInfo           hFileInfo;
 	DirInfo             dirInfo;
@@ -339,24 +343,24 @@ union CInfoPBRec {
 typedef union CInfoPBRec                CInfoPBRec;
 typedef CInfoPBRec *                    CInfoPBPtr;
 struct CSParam {
-	QElemPtr            qLink;                  /*queue link in header*/
-	short               qType;                  /*type byte for safety check*/
-	short               ioTrap;                 /*FS: the Trap*/
-	Ptr                 ioCmdAddr;              /*FS: address to dispatch to*/
-	IOCompletionUPP     ioCompletion;           /*completion routine addr (0 for synch calls)*/
-	volatile OSErr      ioResult;               /*result code*/
-	StringPtr           ioNamePtr;              /*ptr to Vol:FileName string*/
-	short               ioVRefNum;              /*volume refnum (DrvNum for Eject and MountVol)*/
-	FSSpecPtr           ioMatchPtr;             /* match array */
-	long                ioReqMatchCount;        /* maximum allowable matches */
-	long                ioActMatchCount;        /* actual match count */
-	long                ioSearchBits;           /* search criteria selector */
-	CInfoPBPtr          ioSearchInfo1;          /* search values and range lower bounds */
-	CInfoPBPtr          ioSearchInfo2;          /* search values and range upper bounds */
-	long                ioSearchTime;           /* length of time to run search */
-	CatPositionRec      ioCatPosition;          /* current position in the catalog */
-	Ptr                 ioOptBuffer;            /* optional performance enhancement buffer */
-	long                ioOptBufSize;           /* size of buffer pointed to by ioOptBuffer */
+	QElemPtr        qLink;           /*queue link in header*/
+	short           qType;           /*type byte for safety check*/
+	short           ioTrap;          /*FS: the Trap*/
+	Ptr             ioCmdAddr;       /*FS: address to dispatch to*/
+	IOCompletionUPP ioCompletion; /*completion routine addr (0 for synch calls)*/
+	volatile OSErr  ioResult;        /*result code*/
+	StringPtr       ioNamePtr;       /*ptr to Vol:FileName string*/
+	short           ioVRefNum; /*volume refnum (DrvNum for Eject and MountVol)*/
+	FSSpecPtr       ioMatchPtr;      /* match array */
+	long            ioReqMatchCount; /* maximum allowable matches */
+	long            ioActMatchCount; /* actual match count */
+	long            ioSearchBits;    /* search criteria selector */
+	CInfoPBPtr      ioSearchInfo1; /* search values and range lower bounds */
+	CInfoPBPtr      ioSearchInfo2; /* search values and range upper bounds */
+	long            ioSearchTime;    /* length of time to run search */
+	CatPositionRec  ioCatPosition;   /* current position in the catalog */
+	Ptr             ioOptBuffer; /* optional performance enhancement buffer */
+	long            ioOptBufSize; /* size of buffer pointed to by ioOptBuffer */
 };
 typedef struct CSParam CSParam;
 union HParamBlockRec {
@@ -467,11 +471,11 @@ typedef struct OpaqueMenuRef* MenuRef;
 typedef MenuRef MenuHandle;
 # endif  /* !OPAQUE_TOOLBOX_STRUCTS */
 #endif /* __LP64__ */
-/* do prototypes that are not normally available for 64-bit in a separate ifdef,
- * because prototypes are a __STDC__ thing: */
+/* do prototypes that are not normally available for 64-bit in a separate
+ * ifdef, because prototypes are a __STDC__ thing: */
 #if defined(__LP64__) && __LP64__ && defined(__STDC__) && (__STDC__)
-/* (the check against '__STDC__' should really be against the value that it has
- * when compiling for C99) */
+/* (the check against '__STDC__' should really be against the value that
+ * '__STDC_VERSION__' has when compiling for C99) */
 # if !defined(CopyBits)
 extern void CopyBits(const BitMap *srcBits, const BitMap *dstBits,
 					 const Rect *srcRect, const Rect *dstRect, short mode,
@@ -556,7 +560,7 @@ extern Boolean WaitNextEvent(EventMask eventMask, EventRecord *theEvent,
 							 UInt32 eventSleep, RgnHandle mouseRgn);
 #endif /* __LP64__ && __STDC__ */
 
-/*--------------------------------------------------------------  Defines */
+/*-------------------------------------------------------------  Defines */
 #define	kPutInFront			(WindowPtr)-1L
 #define	kNormalUpdates		TRUE
 
@@ -582,8 +586,8 @@ extern Boolean WaitNextEvent(EventMask eventMask, EventRecord *theEvent,
 #define	kEscKeyMap			50
 #define kSpaceBarMap		54
 
-/* defines ending in "Priority" get an extra tab so that they align separately
- * from the ones ending in "Sound": */
+/* defines ending in "Priority" get an extra tab so that they align
+ * separately from the ones ending in "Sound": */
 #define kBirdSound			1
 #define kBirdPriority			80
 #define kBonusSound			2
@@ -645,7 +649,7 @@ extern Boolean WaitNextEvent(EventMask eventMask, EventRecord *theEvent,
 #define iSoundItem			7
 
 
-/*--------------------------------------------------------------  Structs */
+/*-------------------------------------------------------------  Structs */
 
 /* playerType */
 typedef struct
@@ -703,7 +707,7 @@ typedef struct
 	Boolean	soundOff;
 } prefsInfo;
 
-/*--------------------------------------------------------------  Prototypes */
+/*----------------------------------------------------------  Prototypes */
 
 
 /* The following prototypes are for functions from Enemy.c */
@@ -761,7 +765,7 @@ void KillSound(void);
 
 /* The following prototypes are for functions from Utilities.c */
 short RandomInt(short);
-void RedAlert(StringPtr);
+void RedAlert(const StringPtr);
 void LoadGraphic(short);
 void CreateOffScreenPixMap(Rect *, GWorldPtr *);
 void CreateOffScreenBitMap(Rect *, GWorldPtr *);

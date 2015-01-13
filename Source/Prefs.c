@@ -59,7 +59,7 @@ Boolean CreatePrefsFolder(short *systemVolRef)
 # endif /* !PBDirCreate */
 	theErr = PBDirCreate((HParmBlkPtr)&fileParamBlock, FALSE);
 	if (theErr != noErr) {
-		RedAlert("\pPrefs Creation Error");
+		RedAlert((const StringPtr)"\pPrefs Creation Error");
 		return (FALSE);
 	}
 	return (TRUE);
@@ -78,34 +78,34 @@ Boolean WritePrefs (long *prefDirID, short *systemVolRef, prefsInfo *thePrefs)
 	theErr = FSMakeFSSpec(*systemVolRef, *prefDirID, fileName, &theSpecs);
 	if (theErr != noErr) {
 		if (theErr != fnfErr) {
-			RedAlert("\pPrefs FSMakeFSSpec() Error");
+			RedAlert((const StringPtr)"\pPrefs FSMakeFSSpec() Error");
 		}
 		/* ignore warning about multi-character constant, this is the proper
 		 * context to use them in: */
 		theErr = FSpCreate(&theSpecs, kPrefCreatorType, kPrefFileType,
 						   smSystemScript);
 		if (theErr != noErr) {
-			RedAlert("\pPrefs FSpCreate() Error");
+			RedAlert((const StringPtr)"\pPrefs FSpCreate() Error");
 		}
 	}
 	theErr = FSpOpenDF(&theSpecs, fsRdWrPerm, &fileRefNum);
 	if (theErr != noErr) {
-		RedAlert("\pPrefs FSpOpenDF() Error");
+		RedAlert((const StringPtr)"\pPrefs FSpOpenDF() Error");
 	}
 
 	byteCount = sizeof(*thePrefs);
 
 	theErr = FSWrite(fileRefNum, &byteCount, thePrefs);
 	if (theErr != noErr) {
-		RedAlert("\pPrefs FSWrite() Error");
+		RedAlert((const StringPtr)"\pPrefs FSWrite() Error");
 	}
 
 	theErr = FSClose(fileRefNum);
 	if (theErr != noErr) {
-		RedAlert("\pPrefs FSClose() Error");
+		RedAlert((const StringPtr)"\pPrefs FSClose() Error");
 	}
 
-	return(TRUE);
+	return (TRUE);
 }
 
 /*--------------------------------------------------------------  SavePrefs */
@@ -142,13 +142,13 @@ OSErr ReadPrefs(long *prefDirID, short *systemVolRef, prefsInfo *thePrefs)
 		if (theErr == fnfErr) {
 			return(theErr);
 		} else {
-			RedAlert("\pPrefs FSMakeFSSpec() Error");
+			RedAlert((const StringPtr)"\pPrefs FSMakeFSSpec() Error");
 		}
 	}
 
 	theErr = FSpOpenDF(&theSpecs, fsRdWrPerm, &fileRefNum);
 	if (theErr != noErr) {
-		RedAlert("\pPrefs FSpOpenDF() Error");
+		RedAlert((const StringPtr)"\pPrefs FSpOpenDF() Error");
 	}
 
 	byteCount = sizeof(*thePrefs);
@@ -158,14 +158,14 @@ OSErr ReadPrefs(long *prefDirID, short *systemVolRef, prefsInfo *thePrefs)
 		if (theErr == eofErr) {
 			theErr = FSClose(fileRefNum);
 		} else {
-			RedAlert("\pPrefs FSRead() Error");
+			RedAlert((const StringPtr)"\pPrefs FSRead() Error");
 		}
 		return(theErr);
 	}
 
 	theErr = FSClose(fileRefNum);
 	if (theErr != noErr) {
-		RedAlert("\pPrefs FSClose() Error");
+		RedAlert((const StringPtr)"\pPrefs FSClose() Error");
 	}
 
 	return(theErr);
@@ -210,7 +210,7 @@ Boolean LoadPrefs(prefsInfo *thePrefs, short versionNeed)
 	if (theErr == eofErr) {
 		noProblems = DeletePrefs(&prefDirID, &systemVolRef);
 		if (noProblems == FALSE) {
-			RedAlert("\pLoadPrefs(): Failed To Delete Bad Prefs");
+			RedAlert((const StringPtr)"\pLoadPrefs(): Failed To Delete Bad Prefs");
 		}
 		return (FALSE);
 	} else if (theErr != noErr) {
@@ -220,7 +220,7 @@ Boolean LoadPrefs(prefsInfo *thePrefs, short versionNeed)
 	if (thePrefs->prefVersion != versionNeed) {
 		noProblems = DeletePrefs(&prefDirID, &systemVolRef);
 		if (noProblems == FALSE) {
-			RedAlert("\pLoadPrefs(): Failed To Delete Bad Prefs");
+			RedAlert((const StringPtr)"\pLoadPrefs(): Failed To Delete Bad Prefs");
 		}
 		return (FALSE);
 	}

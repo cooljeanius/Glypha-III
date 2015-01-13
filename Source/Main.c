@@ -1,10 +1,10 @@
 
-/*============================================================================
- *----------------------------------------------------------------------------
+/*=========================================================================
+ *-------------------------------------------------------------------------
  *						 Glypha III 1.1.0 for MacOS X
  *						By John Calhoun & Mark Pazolli
- *----------------------------------------------------------------------------
- *============================================================================
+ *-------------------------------------------------------------------------
+ *=========================================================================
  */
 
 #ifndef __GLYPHA_III_EXTERNS_H__
@@ -39,17 +39,19 @@ pascal OSErr HandleAEPrintDoc(const AppleEvent *theAppleEvent,
 pascal OSErr HandleAEOpenDoc(const AppleEvent *theAppleEvent,
 							 AppleEvent *reply, long handlerRefCon);
 
-/*===================================================  AppleEvent Responders */
+/*===============================================  AppleEvent Responders */
 /*---------------------------------------------------  HandleAEOpenApp */
 pascal OSErr HandleAEOpenApp(const AppleEvent *theAppleEvent,
-							 AppleEvent* reply, long handlerRefCon) {
+							 AppleEvent* reply, long handlerRefCon)
+{
 #pragma unused (theAppleEvent, reply, handlerRefCon)
 	return noErr;
 }
 
-/*---------------------------------------------------------  HandleAEQuitApp */
+/*-----------------------------------------------------  HandleAEQuitApp */
 pascal OSErr HandleAEQuitApp(const AppleEvent *theAppleEvent,
-							 AppleEvent* reply, long handlerRefCon) {
+							 AppleEvent* reply, long handlerRefCon)
+{
 #pragma unused (theAppleEvent, reply, handlerRefCon)
 	playing = FALSE;
 	quitting = TRUE;
@@ -57,22 +59,24 @@ pascal OSErr HandleAEQuitApp(const AppleEvent *theAppleEvent,
 	return noErr;
 }
 
-/*--------------------------------------------------------  HandleAEPrintDoc */
+/*----------------------------------------------------  HandleAEPrintDoc */
 pascal OSErr HandleAEPrintDoc(const AppleEvent *theAppleEvent,
-							  AppleEvent* reply, long handlerRefCon) {
+							  AppleEvent* reply, long handlerRefCon)
+{
 #pragma unused (theAppleEvent, reply, handlerRefCon)
 	return noErr;
 }
 
-/*---------------------------------------------------------  HandleAEOpenDoc */
+/*-----------------------------------------------------  HandleAEOpenDoc */
 pascal OSErr HandleAEOpenDoc(const AppleEvent *theAppleEvent,
-							 AppleEvent* reply, long handlerRefCon) {
+							 AppleEvent* reply, long handlerRefCon)
+{
 #pragma unused (theAppleEvent, reply, handlerRefCon)
 	return noErr;
 }
 
-/*==============================================================  Functions */
-/*------------------------------------------------------------  ReadInPrefs */
+/*===========================================================  Functions */
+/*---------------------------------------------------------  ReadInPrefs */
 
 void ReadInPrefs(void)
 {
@@ -91,7 +95,7 @@ void ReadInPrefs(void)
 	printf("Done Reading In Your Preferences For Glypha.\n");
 }
 
-/*-----------------------------------------------------------  WriteOutPrefs */
+/*-------------------------------------------------------  WriteOutPrefs */
 
 void WriteOutPrefs(void)
 {

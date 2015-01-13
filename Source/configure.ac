@@ -81,14 +81,14 @@ AC_CHECK_LIB([stdc++],[main],[
   AC_CHECK_LIB([stdc++-static],[main],[
     ## reset early:
     LDFLAGS="${ARCHLESS_LDFLAGS}"
-    AX_CHECK_COMPILE_FLAG([-static],[
-      export STATIC_LDFLAGS="-static"
+    AX_CHECK_COMPILE_FLAG([${acl_cv_wl}-static],[
+      export STATIC_LDFLAGS="${acl_cv_wl}-static"
     ],[
-      AX_CHECK_COMPILE_FLAG([-static-libgcc],[
-        export STATIC_LDFLAGS="-static-libgcc"
+      AX_CHECK_COMPILE_FLAG([${acl_cv_wl}-static-libgcc],[
+        export STATIC_LDFLAGS="${acl_cv_wl}-static-libgcc"
       ],[
-        AX_CHECK_COMPILE_FLAG([-static-libstdc++],[
-          export STATIC_LDFLAGS="-static-libstdc++"
+        AX_CHECK_COMPILE_FLAG([${acl_cv_wl}-static-libstdc++],[
+          export STATIC_LDFLAGS="${acl_cv_wl}-static-libstdc++"
         ])dnl
       ])dnl
     ])dnl
@@ -107,59 +107,77 @@ AC_BAKEFILE_PRECOMP_HEADERS
 AC_BAKEFILE_CREATE_FILE_BK_MAKE_PCH
 AC_C_PROTOTYPES
 AC_HEADER_STDBOOL
+# save these:
+my_saved_CFLAGS="${CFLAGS}"
 AH_TEMPLATE([HAVE_CARBON_CARBON_H],
            [Define to 1 if you have the <Carbon/Carbon.h> header file.])dnl
 AH_TEMPLATE([HAVE_CARBON_H],
             [Define to 1 if you have the <Carbon.h> header file.])dnl
 AC_CHECK_HEADER([Carbon.h],[],[
   AC_CHECK_HEADER([Carbon/Carbon.h],[
-    AX_CHECK_COMPILE_FLAG([-framework Carbon],
-                          [export CFLAGS="${CFLAGS} -framework Carbon"
-                           export LDFLAGS="${LDFLAGS} -framework Carbon"],
-                          [AC_MSG_WARN([Carbon header is available framework-style, but flag for using Carbon framework fails to work])])
+    AX_CHECK_COMPILE_FLAG([${acl_cv_wl}-framework ${acl_cv_wl}Carbon],
+      [export CARBON_CFLAGS="${acl_cv_wl}-framework ${acl_cv_wl}Carbon"
+       export CFLAGS="${CFLAGS} ${CARBON_CFLAGS}"
+       export LDFLAGS="${LDFLAGS} -framework Carbon"],
+      [AC_MSG_WARN([Carbon header is available framework-style, but flag for using Carbon framework fails to work])])
   ],[
     ## needs to be an error because we assume we have the header later:
     AC_MSG_ERROR([cannot find main header for Carbon])
   ])dnl
 ])dnl
+AC_SUBST([CARBON_CFLAGS])dnl
 dnl# some Carbon stuff is actually under ApplicationServices:
 AC_CHECK_HEADER([ApplicationServices.h],[],[
   AC_CHECK_HEADER([ApplicationServices/ApplicationServices.h],[
-    AX_CHECK_COMPILE_FLAG([-framework ApplicationServices],
-          [export CFLAGS="${CFLAGS} -framework ApplicationServices"
-           export LDFLAGS="${LDFLAGS} -framework ApplicationServices"],
-          [AC_MSG_WARN([ApplicationServices header is available framework-style, but flag for using ApplicationServices framework fails to work])])
+    AX_CHECK_COMPILE_FLAG([${acl_cv_wl}-framework ${acl_cv_wl}ApplicationServices],
+      [export APP_SERVICES_CFLAGS="${acl_cv_wl}-framework ${acl_cv_wl}ApplicationServices"
+       export CFLAGS="${CFLAGS} ${APP_SERVICES_CFLAGS}"
+       export LDFLAGS="${LDFLAGS} -framework ApplicationServices"],
+      [AC_MSG_WARN([ApplicationServices header is available framework-style, but flag for using ApplicationServices framework fails to work])])
   ],[
     AC_MSG_WARN([cannot find main header for ApplicationServices])
   ])dnl
 ])dnl
+AC_SUBST([APP_SERVICES_CFLAGS])dnl
 dnl# likewise with CoreServices:
 AC_CHECK_HEADER([CoreServices.h],[],[
   AC_CHECK_HEADER([CoreServices/CoreServices.h],[
-    AX_CHECK_COMPILE_FLAG([-framework CoreServices],
-                  [export CFLAGS="${CFLAGS} -framework CoreServices"
-                   export LDFLAGS="${LDFLAGS} -framework CoreServices"],
-                  [AC_MSG_WARN([CoreServices header is available framework-style, but flag for using CoreServices framework fails to work])])
+    AX_CHECK_COMPILE_FLAG([${acl_cv_wl}-framework ${acl_cv_wl}CoreServices],
+      [export CORE_SERVICES_CFLAGS="${acl_cv_wl}-framework ${acl_cv_wl}CoreServices"
+       export CFLAGS="${CFLAGS} ${CORE_SERVICES_CFLAGS}"
+       export LDFLAGS="${LDFLAGS} -framework CoreServices"],
+      [AC_MSG_WARN([CoreServices header is available framework-style, but flag for using CoreServices framework fails to work])])
   ],[
     AC_MSG_WARN([cannot find main header for CoreServices])
   ])dnl
 ])dnl
+AC_SUBST([CORE_SERVICES_CFLAGS])dnl
+dnl# ...and, depending on system, AudioToolbox:
+AC_CHECK_HEADER([AudioToolbox.h],[],[
+  AC_CHECK_HEADER([AudioToolbox/AudioToolbox.h],[
+    AX_CHECK_COMPILE_FLAG([${acl_cv_wl}-framework ${acl_cv_wl}AudioToolbox],
+      [export AUDIO_TOOLBOX_CFLAGS="${acl_cv_wl}-framework ${acl_cv_wl}AudioToolbox"
+       export CFLAGS="${CFLAGS} ${AUDIO_TOOLBOX_CFLAGS}"
+       export LDFLAGS="${LDFLAGS} -framework AudioToolbox"],
+      [AC_MSG_WARN([AudioToolbox header is available framework-style, but flag for using AudioToolbox framework fails to work])])
+  ],[
+    AC_MSG_WARN([cannot find main header for AudioToolbox])
+  ])dnl
+])dnl
+AC_SUBST([AUDIO_TOOLBOX_CFLAGS])dnl
 AX_CHECK_COMPILE_FLAG([-Wdeprecated-declarations],
-                      [my_saved_CFLAGS="${CFLAGS}"
-                       CFLAGS="${CFLAGS} -Wdeprecated-declarations"])
-AC_CHECK_HEADERS([CarbonCore/Files.h CarbonCore/MacMemory.h \
-                  CarbonCore/OSUtils.h CarbonCore/TextUtils.h \
-                  CarbonSound/Sound.h HIToolbox/Events.h \
-                  HIToolbox/MacWindows.h HIToolbox/Menus.h \
-                  QD/QuickdrawAPI.h],[],[],[[
+                      [CFLAGS="${CFLAGS} -Wdeprecated-declarations"])
+AC_CHECK_HEADERS([AudioToolbox/AudioServices.h CarbonCore/Files.h \
+                  CarbonCore/MacMemory.h CarbonCore/OSUtils.h \
+                  CarbonCore/TextUtils.h CarbonSound/Sound.h \
+                  HIToolbox/Events.h HIToolbox/MacWindows.h \
+                  HIToolbox/Menus.h QD/QuickdrawAPI.h],[],[],[[
 /* taken from Externs.h */
 #if !defined(__MWERKS__) || defined(HAVE_CARBON_CARBON_H)# include <Carbon/Carbon.h>#else# if defined(__MWERKS__) || defined(HAVE_CARBON_H)#  include <Carbon.h># else#  error "cannot figure out how to include proper Carbon umbrella header."# endif /* __MWERKS__ || HAVE_CARBON_H */#endif /* !__MWERKS__ || HAVE_CARBON_CARBON_H */
 ]])dnl
 
-# only need to reset CFLAGS if we had added a flag to them above:
-if test "x${my_saved_CFLAGS}" != "x"; then
-  test -n "${my_saved_CFLAGS}" && CFLAGS="${my_saved_CFLAGS}"
-fi
+# always reset:
+CFLAGS="${my_saved_CFLAGS}"
 AC_CHECK_HEADERS([stdio.h])dnl
 
 # Checks for typedefs, structures, and compiler characteristics.
@@ -178,6 +196,20 @@ AX_GCC_ARCHFLAG
 AX_CHECK_COMPILE_FLAG([-fpascal-strings],
                       [export CFLAGS="${CFLAGS} -fpascal-strings"],
                       [AC_MSG_WARN([this project uses pascal strings but your compiler does not appear to support them])])dnl
+
+CFLAGS_SAVED_AGAIN="${CFLAGS}"
+## make sure bad warning flags are rejected:
+CFLAGS="${CFLAGS} -Werror"
+AX_CHECK_COMPILE_FLAG([-Wno-four-char-constants],
+                      [export APPLE_CFLAGS="-Wno-four-char-constants"
+                       export CFLAGS="${CFLAGS} ${APPLE_CFLAGS}"],
+                      [AX_CHECK_COMPILE_FLAG([-Wno-multichar],
+                            [export APPLE_CFLAGS="-Wno-multichar"
+                             export CFLAGS="${CFLAGS} ${APPLE_CFLAGS}"])dnl
+                      ])dnl
+AC_SUBST([APPLE_CFLAGS])dnl
+  ## reset to safe ones:
+CFLAGS="${CFLAGS_SAVED_AGAIN}"
 
 # Checks for library functions.
 AC_MSG_CHECKING([for some functions...])

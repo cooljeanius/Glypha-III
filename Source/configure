@@ -626,6 +626,7 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
+APPLE_CFLAGS
 PRTDIAG
 SED
 CWARNFLAGS
@@ -634,6 +635,10 @@ XTMALLOC_ZERO_CFLAGS
 XMALLOC_ZERO_CFLAGS
 MALLOC_ZERO_CFLAGS
 XORG_MALLOC_DEBUG_ENV
+AUDIO_TOOLBOX_CFLAGS
+CORE_SERVICES_CFLAGS
+APP_SERVICES_CFLAGS
+CARBON_CFLAGS
 BK_MAKE_PCH
 ICC_PCH_USE_SWITCH
 ICC_PCH_CREATE_SWITCH
@@ -6526,14 +6531,15 @@ if test "x$ac_cv_lib_stdcpp_static_main" = xyes; then :
 
     ## reset early:
     LDFLAGS="${ARCHLESS_LDFLAGS}"
-    { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts -static" >&5
-$as_echo_n "checking whether C compiler accepts -static... " >&6; }
-if ${ax_cv_check_cflags___static+:} false; then :
+    as_CACHEVAR=`$as_echo "ax_cv_check_cflags__${acl_cv_wl}-static" | $as_tr_sh`
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts ${acl_cv_wl}-static" >&5
+$as_echo_n "checking whether C compiler accepts ${acl_cv_wl}-static... " >&6; }
+if eval \${$as_CACHEVAR+:} false; then :
   $as_echo_n "(cached) " >&6
 else
 
   ax_check_save_flags=$CFLAGS
-  CFLAGS="$CFLAGS  -static"
+  CFLAGS="$CFLAGS  ${acl_cv_wl}-static"
   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -6546,29 +6552,31 @@ main ()
 }
 _ACEOF
 if ac_fn_c_try_compile "$LINENO"; then :
-  ax_cv_check_cflags___static=yes
+  eval "$as_CACHEVAR=yes"
 else
-  ax_cv_check_cflags___static=no
+  eval "$as_CACHEVAR=no"
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
   CFLAGS=$ax_check_save_flags
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cflags___static" >&5
-$as_echo "$ax_cv_check_cflags___static" >&6; }
-if test x"$ax_cv_check_cflags___static" = xyes; then :
+eval ac_res=\$$as_CACHEVAR
+	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
+$as_echo "$ac_res" >&6; }
+if test x"`eval 'as_val=${'$as_CACHEVAR'};$as_echo "$as_val"'`" = xyes; then :
 
-      export STATIC_LDFLAGS="-static"
+      export STATIC_LDFLAGS="${acl_cv_wl}-static"
 
 else
 
-      { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts -static-libgcc" >&5
-$as_echo_n "checking whether C compiler accepts -static-libgcc... " >&6; }
-if ${ax_cv_check_cflags___static_libgcc+:} false; then :
+      as_CACHEVAR=`$as_echo "ax_cv_check_cflags__${acl_cv_wl}-static-libgcc" | $as_tr_sh`
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts ${acl_cv_wl}-static-libgcc" >&5
+$as_echo_n "checking whether C compiler accepts ${acl_cv_wl}-static-libgcc... " >&6; }
+if eval \${$as_CACHEVAR+:} false; then :
   $as_echo_n "(cached) " >&6
 else
 
   ax_check_save_flags=$CFLAGS
-  CFLAGS="$CFLAGS  -static-libgcc"
+  CFLAGS="$CFLAGS  ${acl_cv_wl}-static-libgcc"
   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -6581,29 +6589,31 @@ main ()
 }
 _ACEOF
 if ac_fn_c_try_compile "$LINENO"; then :
-  ax_cv_check_cflags___static_libgcc=yes
+  eval "$as_CACHEVAR=yes"
 else
-  ax_cv_check_cflags___static_libgcc=no
+  eval "$as_CACHEVAR=no"
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
   CFLAGS=$ax_check_save_flags
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cflags___static_libgcc" >&5
-$as_echo "$ax_cv_check_cflags___static_libgcc" >&6; }
-if test x"$ax_cv_check_cflags___static_libgcc" = xyes; then :
+eval ac_res=\$$as_CACHEVAR
+	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
+$as_echo "$ac_res" >&6; }
+if test x"`eval 'as_val=${'$as_CACHEVAR'};$as_echo "$as_val"'`" = xyes; then :
 
-        export STATIC_LDFLAGS="-static-libgcc"
+        export STATIC_LDFLAGS="${acl_cv_wl}-static-libgcc"
 
 else
 
-        { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts -static-libstdc++" >&5
-$as_echo_n "checking whether C compiler accepts -static-libstdc++... " >&6; }
-if ${ax_cv_check_cflags___static_libstdcpp+:} false; then :
+        as_CACHEVAR=`$as_echo "ax_cv_check_cflags__${acl_cv_wl}-static-libstdc++" | $as_tr_sh`
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts ${acl_cv_wl}-static-libstdc++" >&5
+$as_echo_n "checking whether C compiler accepts ${acl_cv_wl}-static-libstdc++... " >&6; }
+if eval \${$as_CACHEVAR+:} false; then :
   $as_echo_n "(cached) " >&6
 else
 
   ax_check_save_flags=$CFLAGS
-  CFLAGS="$CFLAGS  -static-libstdc++"
+  CFLAGS="$CFLAGS  ${acl_cv_wl}-static-libstdc++"
   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -6616,18 +6626,19 @@ main ()
 }
 _ACEOF
 if ac_fn_c_try_compile "$LINENO"; then :
-  ax_cv_check_cflags___static_libstdcpp=yes
+  eval "$as_CACHEVAR=yes"
 else
-  ax_cv_check_cflags___static_libstdcpp=no
+  eval "$as_CACHEVAR=no"
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
   CFLAGS=$ax_check_save_flags
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cflags___static_libstdcpp" >&5
-$as_echo "$ax_cv_check_cflags___static_libstdcpp" >&6; }
-if test x"$ax_cv_check_cflags___static_libstdcpp" = xyes; then :
+eval ac_res=\$$as_CACHEVAR
+	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
+$as_echo "$ac_res" >&6; }
+if test x"`eval 'as_val=${'$as_CACHEVAR'};$as_echo "$as_val"'`" = xyes; then :
 
-          export STATIC_LDFLAGS="-static-libstdc++"
+          export STATIC_LDFLAGS="${acl_cv_wl}-static-libstdc++"
 
 else
   :
@@ -7298,6 +7309,8 @@ $as_echo "#define HAVE_STDBOOL_H 1" >>confdefs.h
 
 fi
 
+# save these:
+my_saved_CFLAGS="${CFLAGS}"
 ac_fn_c_check_header_mongrel "$LINENO" "Carbon.h" "ac_cv_header_Carbon_h" "$ac_includes_default"
 if test "x$ac_cv_header_Carbon_h" = xyes; then :
 
@@ -7306,14 +7319,15 @@ else
   ac_fn_c_check_header_mongrel "$LINENO" "Carbon/Carbon.h" "ac_cv_header_Carbon_Carbon_h" "$ac_includes_default"
 if test "x$ac_cv_header_Carbon_Carbon_h" = xyes; then :
 
-    { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts -framework Carbon" >&5
-$as_echo_n "checking whether C compiler accepts -framework Carbon... " >&6; }
-if ${ax_cv_check_cflags___framework_Carbon+:} false; then :
+    as_CACHEVAR=`$as_echo "ax_cv_check_cflags__${acl_cv_wl}-framework ${acl_cv_wl}Carbon" | $as_tr_sh`
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts ${acl_cv_wl}-framework ${acl_cv_wl}Carbon" >&5
+$as_echo_n "checking whether C compiler accepts ${acl_cv_wl}-framework ${acl_cv_wl}Carbon... " >&6; }
+if eval \${$as_CACHEVAR+:} false; then :
   $as_echo_n "(cached) " >&6
 else
 
   ax_check_save_flags=$CFLAGS
-  CFLAGS="$CFLAGS  -framework Carbon"
+  CFLAGS="$CFLAGS  ${acl_cv_wl}-framework ${acl_cv_wl}Carbon"
   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -7326,18 +7340,20 @@ main ()
 }
 _ACEOF
 if ac_fn_c_try_compile "$LINENO"; then :
-  ax_cv_check_cflags___framework_Carbon=yes
+  eval "$as_CACHEVAR=yes"
 else
-  ax_cv_check_cflags___framework_Carbon=no
+  eval "$as_CACHEVAR=no"
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
   CFLAGS=$ax_check_save_flags
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cflags___framework_Carbon" >&5
-$as_echo "$ax_cv_check_cflags___framework_Carbon" >&6; }
-if test x"$ax_cv_check_cflags___framework_Carbon" = xyes; then :
-  export CFLAGS="${CFLAGS} -framework Carbon"
-                           export LDFLAGS="${LDFLAGS} -framework Carbon"
+eval ac_res=\$$as_CACHEVAR
+	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
+$as_echo "$ac_res" >&6; }
+if test x"`eval 'as_val=${'$as_CACHEVAR'};$as_echo "$as_val"'`" = xyes; then :
+  export CARBON_CFLAGS="${acl_cv_wl}-framework ${acl_cv_wl}Carbon"
+       export CFLAGS="${CFLAGS} ${CARBON_CFLAGS}"
+       export LDFLAGS="${LDFLAGS} -framework Carbon"
 else
   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: Carbon header is available framework-style, but flag for using Carbon framework fails to work" >&5
 $as_echo "$as_me: WARNING: Carbon header is available framework-style, but flag for using Carbon framework fails to work" >&2;}
@@ -7362,14 +7378,15 @@ else
   ac_fn_c_check_header_mongrel "$LINENO" "ApplicationServices/ApplicationServices.h" "ac_cv_header_ApplicationServices_ApplicationServices_h" "$ac_includes_default"
 if test "x$ac_cv_header_ApplicationServices_ApplicationServices_h" = xyes; then :
 
-    { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts -framework ApplicationServices" >&5
-$as_echo_n "checking whether C compiler accepts -framework ApplicationServices... " >&6; }
-if ${ax_cv_check_cflags___framework_ApplicationServices+:} false; then :
+    as_CACHEVAR=`$as_echo "ax_cv_check_cflags__${acl_cv_wl}-framework ${acl_cv_wl}ApplicationServices" | $as_tr_sh`
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts ${acl_cv_wl}-framework ${acl_cv_wl}ApplicationServices" >&5
+$as_echo_n "checking whether C compiler accepts ${acl_cv_wl}-framework ${acl_cv_wl}ApplicationServices... " >&6; }
+if eval \${$as_CACHEVAR+:} false; then :
   $as_echo_n "(cached) " >&6
 else
 
   ax_check_save_flags=$CFLAGS
-  CFLAGS="$CFLAGS  -framework ApplicationServices"
+  CFLAGS="$CFLAGS  ${acl_cv_wl}-framework ${acl_cv_wl}ApplicationServices"
   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -7382,18 +7399,20 @@ main ()
 }
 _ACEOF
 if ac_fn_c_try_compile "$LINENO"; then :
-  ax_cv_check_cflags___framework_ApplicationServices=yes
+  eval "$as_CACHEVAR=yes"
 else
-  ax_cv_check_cflags___framework_ApplicationServices=no
+  eval "$as_CACHEVAR=no"
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
   CFLAGS=$ax_check_save_flags
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cflags___framework_ApplicationServices" >&5
-$as_echo "$ax_cv_check_cflags___framework_ApplicationServices" >&6; }
-if test x"$ax_cv_check_cflags___framework_ApplicationServices" = xyes; then :
-  export CFLAGS="${CFLAGS} -framework ApplicationServices"
-           export LDFLAGS="${LDFLAGS} -framework ApplicationServices"
+eval ac_res=\$$as_CACHEVAR
+	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
+$as_echo "$ac_res" >&6; }
+if test x"`eval 'as_val=${'$as_CACHEVAR'};$as_echo "$as_val"'`" = xyes; then :
+  export APP_SERVICES_CFLAGS="${acl_cv_wl}-framework ${acl_cv_wl}ApplicationServices"
+       export CFLAGS="${CFLAGS} ${APP_SERVICES_CFLAGS}"
+       export LDFLAGS="${LDFLAGS} -framework ApplicationServices"
 else
   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: ApplicationServices header is available framework-style, but flag for using ApplicationServices framework fails to work" >&5
 $as_echo "$as_me: WARNING: ApplicationServices header is available framework-style, but flag for using ApplicationServices framework fails to work" >&2;}
@@ -7418,14 +7437,15 @@ else
   ac_fn_c_check_header_mongrel "$LINENO" "CoreServices/CoreServices.h" "ac_cv_header_CoreServices_CoreServices_h" "$ac_includes_default"
 if test "x$ac_cv_header_CoreServices_CoreServices_h" = xyes; then :
 
-    { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts -framework CoreServices" >&5
-$as_echo_n "checking whether C compiler accepts -framework CoreServices... " >&6; }
-if ${ax_cv_check_cflags___framework_CoreServices+:} false; then :
+    as_CACHEVAR=`$as_echo "ax_cv_check_cflags__${acl_cv_wl}-framework ${acl_cv_wl}CoreServices" | $as_tr_sh`
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts ${acl_cv_wl}-framework ${acl_cv_wl}CoreServices" >&5
+$as_echo_n "checking whether C compiler accepts ${acl_cv_wl}-framework ${acl_cv_wl}CoreServices... " >&6; }
+if eval \${$as_CACHEVAR+:} false; then :
   $as_echo_n "(cached) " >&6
 else
 
   ax_check_save_flags=$CFLAGS
-  CFLAGS="$CFLAGS  -framework CoreServices"
+  CFLAGS="$CFLAGS  ${acl_cv_wl}-framework ${acl_cv_wl}CoreServices"
   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -7438,18 +7458,20 @@ main ()
 }
 _ACEOF
 if ac_fn_c_try_compile "$LINENO"; then :
-  ax_cv_check_cflags___framework_CoreServices=yes
+  eval "$as_CACHEVAR=yes"
 else
-  ax_cv_check_cflags___framework_CoreServices=no
+  eval "$as_CACHEVAR=no"
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
   CFLAGS=$ax_check_save_flags
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cflags___framework_CoreServices" >&5
-$as_echo "$ax_cv_check_cflags___framework_CoreServices" >&6; }
-if test x"$ax_cv_check_cflags___framework_CoreServices" = xyes; then :
-  export CFLAGS="${CFLAGS} -framework CoreServices"
-                   export LDFLAGS="${LDFLAGS} -framework CoreServices"
+eval ac_res=\$$as_CACHEVAR
+	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
+$as_echo "$ac_res" >&6; }
+if test x"`eval 'as_val=${'$as_CACHEVAR'};$as_echo "$as_val"'`" = xyes; then :
+  export CORE_SERVICES_CFLAGS="${acl_cv_wl}-framework ${acl_cv_wl}CoreServices"
+       export CFLAGS="${CFLAGS} ${CORE_SERVICES_CFLAGS}"
+       export LDFLAGS="${LDFLAGS} -framework CoreServices"
 else
   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: CoreServices header is available framework-style, but flag for using CoreServices framework fails to work" >&5
 $as_echo "$as_me: WARNING: CoreServices header is available framework-style, but flag for using CoreServices framework fails to work" >&2;}
@@ -7460,6 +7482,65 @@ else
 
     { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: cannot find main header for CoreServices" >&5
 $as_echo "$as_me: WARNING: cannot find main header for CoreServices" >&2;}
+
+fi
+
+
+fi
+
+ac_fn_c_check_header_mongrel "$LINENO" "AudioToolbox.h" "ac_cv_header_AudioToolbox_h" "$ac_includes_default"
+if test "x$ac_cv_header_AudioToolbox_h" = xyes; then :
+
+else
+
+  ac_fn_c_check_header_mongrel "$LINENO" "AudioToolbox/AudioToolbox.h" "ac_cv_header_AudioToolbox_AudioToolbox_h" "$ac_includes_default"
+if test "x$ac_cv_header_AudioToolbox_AudioToolbox_h" = xyes; then :
+
+    as_CACHEVAR=`$as_echo "ax_cv_check_cflags__${acl_cv_wl}-framework ${acl_cv_wl}AudioToolbox" | $as_tr_sh`
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts ${acl_cv_wl}-framework ${acl_cv_wl}AudioToolbox" >&5
+$as_echo_n "checking whether C compiler accepts ${acl_cv_wl}-framework ${acl_cv_wl}AudioToolbox... " >&6; }
+if eval \${$as_CACHEVAR+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+  ax_check_save_flags=$CFLAGS
+  CFLAGS="$CFLAGS  ${acl_cv_wl}-framework ${acl_cv_wl}AudioToolbox"
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_compile "$LINENO"; then :
+  eval "$as_CACHEVAR=yes"
+else
+  eval "$as_CACHEVAR=no"
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+  CFLAGS=$ax_check_save_flags
+fi
+eval ac_res=\$$as_CACHEVAR
+	       { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_res" >&5
+$as_echo "$ac_res" >&6; }
+if test x"`eval 'as_val=${'$as_CACHEVAR'};$as_echo "$as_val"'`" = xyes; then :
+  export AUDIO_TOOLBOX_CFLAGS="${acl_cv_wl}-framework ${acl_cv_wl}AudioToolbox"
+       export CFLAGS="${CFLAGS} ${AUDIO_TOOLBOX_CFLAGS}"
+       export LDFLAGS="${LDFLAGS} -framework AudioToolbox"
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: AudioToolbox header is available framework-style, but flag for using AudioToolbox framework fails to work" >&5
+$as_echo "$as_me: WARNING: AudioToolbox header is available framework-style, but flag for using AudioToolbox framework fails to work" >&2;}
+fi
+
+
+else
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: cannot find main header for AudioToolbox" >&5
+$as_echo "$as_me: WARNING: cannot find main header for AudioToolbox" >&2;}
 
 fi
 
@@ -7496,17 +7577,16 @@ fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cflags___Wdeprecated_declarations" >&5
 $as_echo "$ax_cv_check_cflags___Wdeprecated_declarations" >&6; }
 if test x"$ax_cv_check_cflags___Wdeprecated_declarations" = xyes; then :
-  my_saved_CFLAGS="${CFLAGS}"
-                       CFLAGS="${CFLAGS} -Wdeprecated-declarations"
+  CFLAGS="${CFLAGS} -Wdeprecated-declarations"
 else
   :
 fi
 
-for ac_header in CarbonCore/Files.h CarbonCore/MacMemory.h \
-                  CarbonCore/OSUtils.h CarbonCore/TextUtils.h \
-                  CarbonSound/Sound.h HIToolbox/Events.h \
-                  HIToolbox/MacWindows.h HIToolbox/Menus.h \
-                  QD/QuickdrawAPI.h
+for ac_header in AudioToolbox/AudioServices.h CarbonCore/Files.h \
+                  CarbonCore/MacMemory.h CarbonCore/OSUtils.h \
+                  CarbonCore/TextUtils.h CarbonSound/Sound.h \
+                  HIToolbox/Events.h HIToolbox/MacWindows.h \
+                  HIToolbox/Menus.h QD/QuickdrawAPI.h
 do :
   as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
 ac_fn_c_check_header_compile "$LINENO" "$ac_header" "$as_ac_Header" "
@@ -7523,10 +7603,8 @@ fi
 
 done
 
-# only need to reset CFLAGS if we had added a flag to them above:
-if test "x${my_saved_CFLAGS}" != "x"; then
-  test -n "${my_saved_CFLAGS}" && CFLAGS="${my_saved_CFLAGS}"
-fi
+# always reset:
+CFLAGS="${my_saved_CFLAGS}"
 for ac_header in stdio.h
 do :
   ac_fn_c_check_header_mongrel "$LINENO" "stdio.h" "ac_cv_header_stdio_h" "$ac_includes_default"
@@ -13866,6 +13944,82 @@ else
   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: this project uses pascal strings but your compiler does not appear to support them" >&5
 $as_echo "$as_me: WARNING: this project uses pascal strings but your compiler does not appear to support them" >&2;}
 fi
+
+CFLAGS_SAVED_AGAIN="${CFLAGS}"
+## make sure bad warning flags are rejected:
+CFLAGS="${CFLAGS} -Werror"
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts -Wno-four-char-constants" >&5
+$as_echo_n "checking whether C compiler accepts -Wno-four-char-constants... " >&6; }
+if ${ax_cv_check_cflags___Wno_four_char_constants+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+  ax_check_save_flags=$CFLAGS
+  CFLAGS="$CFLAGS  -Wno-four-char-constants"
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_compile "$LINENO"; then :
+  ax_cv_check_cflags___Wno_four_char_constants=yes
+else
+  ax_cv_check_cflags___Wno_four_char_constants=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+  CFLAGS=$ax_check_save_flags
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cflags___Wno_four_char_constants" >&5
+$as_echo "$ax_cv_check_cflags___Wno_four_char_constants" >&6; }
+if test x"$ax_cv_check_cflags___Wno_four_char_constants" = xyes; then :
+  export APPLE_CFLAGS="-Wno-four-char-constants"
+                       export CFLAGS="${CFLAGS} ${APPLE_CFLAGS}"
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C compiler accepts -Wno-multichar" >&5
+$as_echo_n "checking whether C compiler accepts -Wno-multichar... " >&6; }
+if ${ax_cv_check_cflags___Wno_multichar+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+  ax_check_save_flags=$CFLAGS
+  CFLAGS="$CFLAGS  -Wno-multichar"
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_compile "$LINENO"; then :
+  ax_cv_check_cflags___Wno_multichar=yes
+else
+  ax_cv_check_cflags___Wno_multichar=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+  CFLAGS=$ax_check_save_flags
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cflags___Wno_multichar" >&5
+$as_echo "$ax_cv_check_cflags___Wno_multichar" >&6; }
+if test x"$ax_cv_check_cflags___Wno_multichar" = xyes; then :
+  export APPLE_CFLAGS="-Wno-multichar"
+                             export CFLAGS="${CFLAGS} ${APPLE_CFLAGS}"
+else
+  :
+fi
+
+fi
+  ## reset to safe ones:
+CFLAGS="${CFLAGS_SAVED_AGAIN}"
 
 # Checks for library functions.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for some functions..." >&5

@@ -1,9 +1,9 @@
 
-/*============================================================================
- *----------------------------------------------------------------------------
+/*=========================================================================
+ *-------------------------------------------------------------------------
  *									Graphics.c
- *----------------------------------------------------------------------------
- *============================================================================
+ *-------------------------------------------------------------------------
+ *=========================================================================
  */
 
 #ifndef __GLYPHA_III_EXTERNS_H__
@@ -53,8 +53,8 @@ extern	short		livesLeft, levelOn, numEnemies;
 extern	Boolean		evenFrame;
 
 
-/*==============================================================  Functions */
-/*---------------------------------------------------------   DrawPlatforms */
+/*===========================================================  Functions */
+/*------------------------------------------------------   DrawPlatforms */
 
 void DrawPlatforms (short howMany)
 {
@@ -714,7 +714,7 @@ void DrawHand(void)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*--------------------------------------------------------------  DrawEye */
+/*-------------------------------------------------------------  DrawEye */
 
 void DrawEye(void)
 {
@@ -730,7 +730,7 @@ void DrawEye(void)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*-----------------------------------------------------------  CopyAllRects */
+/*--------------------------------------------------------  CopyAllRects */
 
 void CopyAllRects(void)
 {
@@ -819,9 +819,9 @@ void DrawPlayer(void)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*----------------------------------------------------  CheckEnemyWrapAround */
+/*------------------------------------------------  CheckEnemyWrapAround */
 
-void CheckEnemyWrapAround (short who)
+void CheckEnemyWrapAround(short who)
 {
 	Rect wrapRect, wasWrapRect, src;
 
@@ -886,16 +886,24 @@ void CheckEnemyWrapAround (short who)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*------------------------------------------------------------  DrawEnemies */
+/*---------------------------------------------------------  DrawEnemies */
 
 void DrawEnemies(void)
 {
 	Rect	src;
-	short	i;
+	short	i, prev_i;
+
+    prev_i = 0;
 
 	for ((i = 0); (i < numEnemies); i++) {
 		switch (theEnemies[i].mode) {
 			case kSpawning:
+                /* try to avoid log clutter by only printing if the number
+                 * changed: */
+                if (i != prev_i) {
+                    printf("Spawning enemy '%i'.\n", i);
+                }
+                prev_i = i;
 				src = enemyRects[theEnemies[i].srcNum];
 				src.bottom = (src.top + theEnemies[i].frame);
 				CopyMask(GetPortBitMapForCopyBits(enemyWalkSrcMap),
@@ -966,13 +974,16 @@ void DrawEnemies(void)
 				break;
 
 			default:
-				/* not sure if a 'break' should go here? */ ;
+                fprintf(stderr,
+                        "Unhandled enemy mode (for drawing): '%d'.\n",
+                        theEnemies[i].mode);
+				break;
 		}
 	}
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*--------------------------------------------------------------  DrawFrame */
+/*-----------------------------------------------------------  DrawFrame */
 
 void DrawFrame(void)
 {

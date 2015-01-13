@@ -82,7 +82,7 @@ void MenusReflectMode(void)
 
 /*-------------------------------------------------------------  DoAppleMenu */
 
-void DoAppleMenu (short theItem)
+void DoAppleMenu(short theItem)
 {
 	switch (theItem) {
 		case iAbout:
@@ -98,11 +98,12 @@ void DoAppleMenu (short theItem)
 
 		default:
 			/* Apple menu item handling routines previously kept here */
+            fprintf(stderr, "The Apple menu is no longer handled here.\n");
 			break;
 	}
 }
 
-/*--------------------------------------------------------------  DoGameMenu */
+/*----------------------------------------------------------  DoGameMenu */
 
 void DoGameMenu(short theItem)
 {
@@ -142,11 +143,12 @@ void DoGameMenu(short theItem)
 			break;
 
 		default:
-			/* not sure if a 'break' should go here? */ ;
+            fprintf(stderr, "Unhandled game menu item.\n");
+			break;
 	}
 }
 
-/*-----------------------------------------------------------  DoOptionsMenu */
+/*-------------------------------------------------------  DoOptionsMenu */
 
 void DoOptionsMenu (short theItem)
 {
@@ -201,13 +203,14 @@ void DoOptionsMenu (short theItem)
 			break;
 
 		default:
-			/* not sure if a 'break' should go here? */ ;
+            fprintf(stderr, "Unhandled options menu item.\n");
+			break;
 	}
 }
 
-/*------------------------------------------------------------  DoMenuChoice */
+/*--------------------------------------------------------  DoMenuChoice */
 
-void DoMenuChoice (long menuChoice)
+void DoMenuChoice(long menuChoice)
 {
 	short theMenu, theItem;
 
@@ -222,23 +225,21 @@ void DoMenuChoice (long menuChoice)
 		case kAppleMenuID:
 			DoAppleMenu(theItem);
 			break;
-
 		case kGameMenuID:
 			DoGameMenu(theItem);
 			break;
-
 		case kOptionsMenuID:
 			DoOptionsMenu(theItem);
 			break;
-
 		default:
-			/* not sure if a 'break' should go here? */ ;
+            fprintf(stderr, "Unhandled menu choice.\n");
+			break;
 	}
 
 	HiliteMenu(0);
 }
 
-/*--------------------------------------------------------  UpdateMainWindow */
+/*----------------------------------------------------  UpdateMainWindow */
 
 void UpdateMainWindow(void)
 {
@@ -315,11 +316,11 @@ void HandleMouseEvent(EventRecord *theEvent)
 			break;
 
 		default:
-			/* not sure if a 'break' should go here? */ ;
+			break;
 	}
 }
 
-/*----------------------------------------------------------  HandleKeyEvent */
+/*------------------------------------------------------  HandleKeyEvent */
 
 void HandleKeyEvent(EventRecord *theEvent)
 {
@@ -401,7 +402,7 @@ void HandleHighLevelEvent(EventRecord *theEvent)
 	AEProcessAppleEvent(theEvent);
 }
 
-/*-------------------------------------------------------------  HandleEvent */
+/*---------------------------------------------------------  HandleEvent */
 
 void HandleEvent(void)
 {
@@ -410,33 +411,38 @@ void HandleEvent(void)
 	long	eventSleep = 1L; /* renamed so it will NOT shadow unistd.h */
 	Boolean	itHappened;
 
-	itHappened = WaitNextEvent(everyEvent, &theEvent, (UInt32)eventSleep, 0L);
+	itHappened = WaitNextEvent((EventMask)everyEvent, &theEvent,
+                               (UInt32)eventSleep, 0L);
 
 	if (itHappened) {
 		switch (theEvent.what) {
 			case mouseDown:
+                printf("Mouse button clicked.\n");
 				HandleMouseEvent(&theEvent);
 				break;
-
+            case mouseUp:
+                printf("Mouse button released.\n");
+                break;
 			case keyDown:
 			case autoKey:
 				HandleKeyEvent(&theEvent);
 				break;
-
 			case updateEvt:
 				HandleUpdateEvent(&theEvent);
 				break;
-
 			case osEvt:
 				HandleOSEvent(&theEvent);
 				break;
-
 			case kHighLevelEvent:
 				HandleHighLevelEvent(&theEvent);
 				break;
-
+            case activateEvt:
+                printf("Window activated or deactivated.\n");
+                break;
 			default:
-				/* not sure if a 'break' should go here? */ ;
+                fprintf(stderr, "Unhandled event to handle: '%u'.\n",
+                        theEvent.what);
+				break;
 		}
 	} else if (openTheScores) {
 		openTheScores = FALSE;
@@ -444,7 +450,7 @@ void HandleEvent(void)
 	}
 }
 
-/*--------------------------------------------------------------  DoAbout */
+/*-------------------------------------------------------------  DoAbout */
 
 void DoAbout(void)
 {
@@ -476,7 +482,8 @@ void DoAbout(void)
 					windowDone = true;
 					break;
 				default:
-					/* not sure if a 'break' should go here? */ ;
+                    fprintf(stderr, "Unhandled event for 'about'.\n");
+					break;
 			}
 		}
 	} while (windowDone == false);
@@ -487,7 +494,7 @@ void DoAbout(void)
 	}
 }
 
-/*-----------------------------------------------------------  DoAboutSource */
+/*-------------------------------------------------------  DoAboutSource */
 
 void DoAboutSource(void)
 {
@@ -509,14 +516,15 @@ void DoAboutSource(void)
 				leaving = true;
 				break;
 			default:
-				/* not sure if a 'break' should go here? */ ;
+                fprintf(stderr, "Unhandled item.\n");
+				break;
 		}
 	}
 
 	DisposeDialog(theDial);
 }
 
-/*------------------------------------------------------------  DoScoreReset */
+/*--------------------------------------------------------  DoScoreReset */
 
 void DoScoreReset(void)
 {
@@ -536,7 +544,8 @@ void DoScoreReset(void)
 		switch (item) {
 			case 1:
 				for ((i = 0); (i < 10); i++) {
-					PasStringCopy("\pNemo", thePrefs.highNames[i]);
+					PasStringCopy((StringPtr)"\pNemo",
+                                  thePrefs.highNames[i]);
 					thePrefs.highScores[i] = 0L;
 					thePrefs.highLevel[i] = 0;
 					openTheScores = TRUE;
@@ -547,7 +556,8 @@ void DoScoreReset(void)
 				leaving = true;
 				break;
 			default:
-				/* not sure if a 'break' should go here? */ ;
+                fprintf(stderr, "Unhandled item.\n");
+				break;
 		}
 	}
 

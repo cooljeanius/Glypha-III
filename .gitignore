@@ -16,5 +16,7 @@ Source/confdefs*
 Source/conftest*
 *(Autosaved)*
 *.dSYM
+Source/Glypha
 Source/SysBeepTest
 a.out
+*/*deps/*.*o

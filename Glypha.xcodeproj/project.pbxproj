@@ -846,12 +846,16 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = "";
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Info-Glypha__Upgraded_.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.5;
+				"MACOSX_DEPLOYMENT_TARGET[sdk=macosx10.5][arch=i386]" = 10.4;
+				"MACOSX_DEPLOYMENT_TARGET[sdk=macosx10.6][arch=i386]" = 10.5;
 				OTHER_CFLAGS = (
-					"-g",
+					"-ggdb",
 					"-ftrapv",
 				);
 				OTHER_LDFLAGS = "";
@@ -860,6 +864,19 @@
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
+					"-Wformat=2",
+					"-Wpointer-arith",
+					"-Wmissing-declarations",
+					"-Wstrict-prototypes",
+					"-Wnested-externs",
+					"-Wbad-function-cast",
+					"-Wold-style-definition",
+					"-Wdeclaration-after-statement",
+					"-Wunused",
+					"-Wwrite-strings",
+					"-Wmissing-noreturn",
+					"-Wswitch-default",
+					"-Wswitch-enum",
 					"-Wno-four-char-constants",
 					"-Wno-unknown-pragmas",
 				);
@@ -986,6 +1003,10 @@
 				GENERATE_PROFILING_CODE = YES;
 				INSTALL_PATH = "~/Applications/Glypha";
 				LD_GENERATE_MAP_FILE = YES;
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.4;
+				"MACOSX_DEPLOYMENT_TARGET[arch=ppc64]" = 10.5;
+				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.3;
+				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				"SDKROOT[arch=ppc64]" = macosx10.5;

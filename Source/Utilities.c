@@ -1,9 +1,9 @@
 
-/*============================================================================
- *----------------------------------------------------------------------------
+/*=========================================================================
+ *-------------------------------------------------------------------------
  *									Utilities.c
- *----------------------------------------------------------------------------
- *============================================================================
+ *-------------------------------------------------------------------------
+ *=========================================================================
  */
 
 #ifndef __GLYPHA_III_EXTERNS_H__
@@ -19,8 +19,8 @@ extern Boolean pausing;
 long tickNext;
 
 
-/*==============================================================  Functions */
-/*--------------------------------------------------------------  RandomInt */
+/*===========================================================  Functions */
+/*-----------------------------------------------------------  RandomInt */
 
 short RandomInt(short range)
 {
@@ -35,15 +35,15 @@ short RandomInt(short range)
 	return ((short)rawResult);
 }
 
-/*--------------------------------------------------------------  RedAlert */
+/*------------------------------------------------------------  RedAlert */
 
-void RedAlert(StringPtr theStr)
+void ATTRIBUTE_NORETURN RedAlert(const StringPtr theStr)
 {
 #define kRedAlertID 128
 	short whoCares;
 
 	ParamText(theStr, "\p", "\p", "\p");
-	whoCares = Alert(kRedAlertID, 0L);
+	whoCares = Alert((SInt16)kRedAlertID, 0L);
 	/* dummy condition to use value stored to 'whoCares': */
 	if (whoCares == (DialogItemIndex)0) {
 		;
@@ -51,7 +51,7 @@ void RedAlert(StringPtr theStr)
 	ExitToShell();
 }
 
-/*-------------------------------------------------------------  LoadGraphic */
+/*---------------------------------------------------------  LoadGraphic */
 
 void LoadGraphic(short resID)
 {
@@ -61,9 +61,9 @@ void LoadGraphic(short resID)
 
 	thePicture = GetPicture(resID);
 	if ((thePicture == NULL) || (thePicture == 0L)) {
-		RedAlert("\pA Graphic Could NOT Be Loaded");
-		/* RedAlert() calls ExitToShell(), so we should be skipping out of here,
-		 * but clang's static analyzer does not seem to know that: */
+		RedAlert((const StringPtr)"\pA Graphic Could NOT Be Loaded");
+		/* RedAlert() calls ExitToShell(), so we should be skipping out of
+         * here, but clang's static analyzer does not seem to know that: */
 #if defined(__clang_analyzer__)
 		fprintf(stderr, "LoadGraphic(): Forcing exit due to failure\n");
 		exit(1);
@@ -96,7 +96,7 @@ void LoadGraphic(short resID)
 	ReleaseResource((Handle)thePicture);
 }
 
-/*----------------------------------------------------------  ZeroRectCorner */
+/*------------------------------------------------------  ZeroRectCorner */
 
 void ZeroRectCorner(Rect *theRect)		/* Offset rect to (0, 0) */
 {
@@ -106,14 +106,14 @@ void ZeroRectCorner(Rect *theRect)		/* Offset rect to (0, 0) */
 	theRect->top = 0;
 }
 
-/*-------------------------------------------------------------  LogNextTick */
+/*---------------------------------------------------------  LogNextTick */
 
 void LogNextTick(long howMany)
 {
 	tickNext = (long)(TickCount() + (UInt32)howMany);
 }
 
-/*---------------------------------------------------------  WaitForNextTick */
+/*-----------------------------------------------------  WaitForNextTick */
 
 void WaitForNextTick(void)
 {
@@ -121,27 +121,27 @@ void WaitForNextTick(void)
 		RunCurrentEventLoop((tickNext - (long)TickCount()) / 60.0);
 	}
 }
-/*---------------------------------------------------  CreateOffScreenPixMap */
+/*-----------------------------------------------  CreateOffScreenPixMap */
 
 void CreateOffScreenPixMap(Rect *theRect, GWorldPtr *offScreen)
 {
 	if (NewGWorld(offScreen, 0, theRect, 0, GetGDevice(), noNewDevice)) {
-		RedAlert("\pGWorld could not be successfully created.");
+		RedAlert((const StringPtr)"\pGWorld could not be successfully created.");
 	}
 	SetPort(*offScreen); /* HERE */
 }
 
-/*---------------------------------------------------  CreateOffScreenBitMap */
+/*-----------------------------------------------  CreateOffScreenBitMap */
 
-void CreateOffScreenBitMap (Rect *theRect, GWorldPtr *offScreen)
+void CreateOffScreenBitMap(Rect *theRect, GWorldPtr *offScreen)
 {
 	if (NewGWorld(offScreen, 0, theRect, 0, GetGDevice(), noNewDevice)) {
-		RedAlert("\pGWorld could not be successfully created.");
+		RedAlert((const StringPtr)"\pGWorld could not be successfully created.");
 	}
 	SetPort(*offScreen); /* HERE */
 }
 
-/*-------------------------------------------------------------  CenterAlert */
+/*---------------------------------------------------------  CenterAlert */
 
 void CenterAlert(short alertID)
 {
@@ -168,28 +168,28 @@ void CenterAlert(short alertID)
 		horiOff = (((theScreen.right - theScreen.left) - alertRect.right) / 2);
 		vertOff = (((theScreen.bottom - theScreen.top) - alertRect.bottom) / 3);
 
-		OffsetRect(&alertRect, horiOff, (vertOff + 20));
+		OffsetRect(&alertRect, horiOff, (short)(vertOff + 20));
 
 		(**alertHandle).boundsRect = alertRect;
 		HSetState((Handle)alertHandle, (SInt8)wasState);
 	}
 }
 
-/*--------------------------------------------------------------  RectWide */
+/*------------------------------------------------------------  RectWide */
 
 short RectWide(Rect *theRect)
 {
 	return (theRect->right - theRect->left);
 }
 
-/*--------------------------------------------------------------  RectTall */
+/*------------------------------------------------------------  RectTall */
 
 short RectTall(Rect *theRect)
 {
 	return (theRect->bottom - theRect->top);
 }
 
-/*--------------------------------------------------------  CenterRectInRect */
+/*----------------------------------------------------  CenterRectInRect */
 
 void CenterRectInRect(Rect *rectA, Rect *rectB)
 {
@@ -205,9 +205,9 @@ void CenterRectInRect(Rect *rectA, Rect *rectB)
 	rectA->bottom = (rectA->top + tallA);
 }
 
-/*-----------------------------------------------------------  PasStringCopy */
+/*-------------------------------------------------------  PasStringCopy */
 
-void PasStringCopy (StringPtr p1, StringPtr p2)
+void PasStringCopy(StringPtr p1, StringPtr p2)
 {
 	register short stringLength;
 
@@ -217,9 +217,9 @@ void PasStringCopy (StringPtr p1, StringPtr p2)
 	}
 }
 
-/*------------------------------------------------------------  CenterDialog */
+/*--------------------------------------------------------  CenterDialog */
 
-void CenterDialog (short dialogID)
+void CenterDialog(short dialogID)
 {
 	DialogTHndl	dlogHandle;
 	Rect		theScreen, dlogBounds;
@@ -241,17 +241,17 @@ void CenterDialog (short dialogID)
 		dlogBounds = (**dlogHandle).boundsRect;
 		OffsetRect(&dlogBounds, -dlogBounds.left, -dlogBounds.top);
 
-		hPos = ((theScreen.right - theScreen.left) - dlogBounds.right) / 2;
-		vPos = ((theScreen.bottom - theScreen.top) - dlogBounds.bottom) / 3;
+		hPos = (((theScreen.right - theScreen.left) - dlogBounds.right) / 2);
+		vPos = (((theScreen.bottom - theScreen.top) - dlogBounds.bottom) / 3);
 
-		OffsetRect(&dlogBounds, hPos, vPos + 20);
+		OffsetRect(&dlogBounds, hPos, (short)(vPos + 20));
 
 		(**dlogHandle).boundsRect = dlogBounds;
 		HSetState((Handle)dlogHandle, (SInt8)wasState);
 	}
 }
 
-/*-------------------------------------------------------  DrawDefaultButton */
+/*---------------------------------------------------  DrawDefaultButton */
 
 void DrawDefaultButton(DialogPtr theDialog)
 {
@@ -259,14 +259,15 @@ void DrawDefaultButton(DialogPtr theDialog)
 	Handle	itemHandle;
 	short	itemType;
 
-	GetDialogItem(theDialog, 1, &itemType, &itemHandle, &itemRect);
-	InsetRect(&itemRect, -4, -4);
-	PenSize(3, 3);
-	FrameRoundRect(&itemRect, 16, 16);
+	GetDialogItem(theDialog, (DialogItemIndex)1, &itemType, &itemHandle,
+                  &itemRect);
+	InsetRect(&itemRect, (short)-4, (short)-4);
+	PenSize((short)3, (short)3);
+	FrameRoundRect(&itemRect, (short)16, (short)16);
 	PenNormal();
 }
 
-/*--------------------------------------------------------  PasStringCopyNum */
+/*----------------------------------------------------  PasStringCopyNum */
 
 void PasStringCopyNum(StringPtr p1, StringPtr p2, short charsToCopy)
 {
@@ -276,9 +277,9 @@ void PasStringCopyNum(StringPtr p1, StringPtr p2, short charsToCopy)
 		charsToCopy = *p1; /* then reduce the number of chars to copy to this size */
 	}
 
-	/* 'StringPtr' is an alias for a "pointer to an unsigned char", so since we
-	 * are looking at what 'p2' is pointing to, just cast to 'unsigned char'
-	 * instead of 'StringPtr': */
+	/* 'StringPtr' is an alias for a "pointer to an unsigned char", so
+     * since we are looking at what 'p2' is pointing to, just cast to
+     * 'unsigned char' instead of 'StringPtr': */
 	*p2 = (unsigned char)charsToCopy;
 
 	*p2++; /* TODO: figure out why these are being incremented */
@@ -289,7 +290,7 @@ void PasStringCopyNum(StringPtr p1, StringPtr p2, short charsToCopy)
 	}
 }
 
-/*---------------------------------------------------------  GetDialogString */
+/*-----------------------------------------------------  GetDialogString */
 
 void GetDialogString(DialogPtr theDialog, short item, StringPtr theString)
 {
@@ -297,11 +298,12 @@ void GetDialogString(DialogPtr theDialog, short item, StringPtr theString)
 	Handle	itemHandle;
 	short	itemType;
 
-	GetDialogItem(theDialog, item, &itemType, &itemHandle, &itemRect);
+	GetDialogItem(theDialog, (DialogItemIndex)item, &itemType, &itemHandle,
+                  &itemRect);
 	GetDialogItemText(itemHandle, theString);
 }
 
-/*---------------------------------------------------------  SetDialogString */
+/*-----------------------------------------------------  SetDialogString */
 
 void SetDialogString(DialogPtr theDialog, short item, StringPtr theString)
 {
@@ -309,11 +311,12 @@ void SetDialogString(DialogPtr theDialog, short item, StringPtr theString)
 	Handle	itemHandle;
 	short	itemType;
 
-	GetDialogItem(theDialog, item, &itemType, &itemHandle, &itemRect);
+	GetDialogItem(theDialog, (DialogItemIndex)item, &itemType, &itemHandle,
+                  &itemRect);
 	SetDialogItemText(itemHandle, theString);
 }
 
-/*-------------------------------------------------------  SetDialogNumToStr */
+/*---------------------------------------------------  SetDialogNumToStr */
 
 void SetDialogNumToStr(DialogPtr theDialog, short item, long theNumber)
 {
@@ -323,11 +326,12 @@ void SetDialogNumToStr(DialogPtr theDialog, short item, long theNumber)
 	short	itemType;
 
 	NumToString(theNumber, theString);
-	GetDialogItem(theDialog, item, &itemType, &itemHandle, &itemRect);
+	GetDialogItem(theDialog, (DialogItemIndex)item, &itemType, &itemHandle,
+                  &itemRect);
 	SetDialogItemText(itemHandle, theString);
 }
 
-/*-----------------------------------------------------  GetDialogNumFromStr */
+/*-------------------------------------------------  GetDialogNumFromStr */
 
 void GetDialogNumFromStr(DialogPtr theDialog, short item, long *theNumber)
 {
@@ -336,12 +340,13 @@ void GetDialogNumFromStr(DialogPtr theDialog, short item, long *theNumber)
 	Handle	itemHandle;
 	short	itemType;
 
-	GetDialogItem(theDialog, item, &itemType, &itemHandle, &itemRect);
+	GetDialogItem(theDialog, (DialogItemIndex)item, &itemType, &itemHandle,
+                  &itemRect);
 	GetDialogItemText(itemHandle, theString);
 	StringToNum(theString, theNumber);
 }
 
-/*----------------------------------------------------------  DisableControl */
+/*------------------------------------------------------  DisableControl */
 
 void CustomDisableControl(DialogPtr theDialog, short whichItem)
 {
@@ -349,8 +354,9 @@ void CustomDisableControl(DialogPtr theDialog, short whichItem)
 	Handle	iHandle;
 	short	iType;
 
-	GetDialogItem(theDialog, whichItem, &iType, &iHandle, &iRect);
-	HiliteControl((ControlHandle)iHandle, kInactive);
+	GetDialogItem(theDialog, (DialogItemIndex)whichItem, &iType, &iHandle,
+                  &iRect);
+	HiliteControl((ControlHandle)iHandle, (ControlPartCode)kInactive);
 }
 
 /* EOF */

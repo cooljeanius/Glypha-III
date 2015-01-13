@@ -1,9 +1,9 @@
 
-/*============================================================================
- *----------------------------------------------------------------------------
+/*=========================================================================
+ *-------------------------------------------------------------------------
  *									Sound.c
- *----------------------------------------------------------------------------
- *============================================================================
+ *-------------------------------------------------------------------------
+ *=========================================================================
  */
 
 #ifndef __GLYPHA_III_EXTERNS_H__
@@ -35,8 +35,8 @@ short			externalPriority, externalPriority2;
 Boolean			channelOpen;
 
 
-/*==============================================================  Functions */
-/*-------------------------------------------------------------  PlaySound1 */
+/*===========================================================  Functions */
+/*----------------------------------------------------------  PlaySound1 */
 void PlaySound1(short soundID, short priority)
 {
 	SndCommand	theCommand;
@@ -47,7 +47,7 @@ void PlaySound1(short soundID, short priority)
 	theCommand.param2 = 0L;
 	theErr = SndDoImmediate(externalChannel, &theCommand);
 	if (theErr != noErr) {
-		RedAlert("\pPlaySound1(): Call To SndDoImmediate() Failed");
+		RedAlert((const StringPtr)"\pPlaySound1(): Call To SndDoImmediate() Failed");
 	}
 
 	theCommand.cmd = quietCmd;
@@ -55,7 +55,7 @@ void PlaySound1(short soundID, short priority)
 	theCommand.param2 = 0L;
 	theErr = SndDoImmediate(externalChannel, &theCommand);
 	if (theErr != noErr) {
-		RedAlert("\pPlaySound1(): Call To SndDoImmediate() Failed");
+		RedAlert((const StringPtr)"\pPlaySound1(): Call To SndDoImmediate() Failed");
 	}
 
 	externalPriority = priority;
@@ -65,7 +65,7 @@ void PlaySound1(short soundID, short priority)
 	theCommand.param2 = (long)(theSoundData[soundID]);
 	theErr = SndDoImmediate(externalChannel, &theCommand);
 	if (theErr != noErr) {
-		RedAlert("\pPlaySound1(): Call To SndDoImmediate() Failed");
+		RedAlert((const StringPtr)"\pPlaySound1(): Call To SndDoImmediate() Failed");
 	}
 
 	theCommand.cmd = callBackCmd;
@@ -73,11 +73,11 @@ void PlaySound1(short soundID, short priority)
 	theCommand.param2 = SetCurrentA5();
 	theErr = SndDoCommand(externalChannel, &theCommand, TRUE);
 	if (theErr != noErr) {
-		RedAlert("\pPlaySound1(): Call To SndDoCommand() Failed");
+		RedAlert((const StringPtr)"\pPlaySound1(): Call To SndDoCommand() Failed");
 	}
 }
 
-/*--------------------------------------------------------------  PlaySound2 */
+/*----------------------------------------------------------  PlaySound2 */
 void PlaySound2(short soundID, short priority)
 {
 	SndCommand	theCommand;
@@ -88,7 +88,7 @@ void PlaySound2(short soundID, short priority)
 	theCommand.param2 = 0L;
 	theErr = SndDoImmediate(externalChannel2, &theCommand);
 	if (theErr != noErr) {
-		RedAlert("\pPlaySound2(): Call To SndDoImmediate() Failed");
+		RedAlert((const StringPtr)"\pPlaySound2(): Call To SndDoImmediate() Failed");
 	}
 
 	theCommand.cmd = quietCmd;
@@ -96,7 +96,7 @@ void PlaySound2(short soundID, short priority)
 	theCommand.param2 = 0L;
 	theErr = SndDoImmediate(externalChannel2, &theCommand);
 	if (theErr != noErr) {
-		RedAlert("\pPlaySound2(): Call To SndDoImmediate() Failed");
+		RedAlert((const StringPtr)"\pPlaySound2(): Call To SndDoImmediate() Failed");
 	}
 
 	externalPriority2 = priority;
@@ -106,7 +106,7 @@ void PlaySound2(short soundID, short priority)
 	theCommand.param2 = (long)(theSoundData[soundID]);
 	theErr = SndDoImmediate(externalChannel2, &theCommand);
 	if (theErr != noErr) {
-		RedAlert("\pPlaySound2(): Call To SndDoImmediate() Failed");
+		RedAlert((const StringPtr)"\pPlaySound2(): Call To SndDoImmediate() Failed");
 	}
 
 	theCommand.cmd = callBackCmd;
@@ -115,11 +115,11 @@ void PlaySound2(short soundID, short priority)
 
 	theErr = SndDoCommand(externalChannel2, &theCommand, TRUE);
 	if (theErr != noErr) {
-		RedAlert("\pPlaySound2(): Call To SndDoCommand() Failed");
+		RedAlert((const StringPtr)"\pPlaySound2(): Call To SndDoCommand() Failed");
 	}
 }
 
-/*-------------------------------------------------------  PlayExternalSound */
+/*---------------------------------------------------  PlayExternalSound */
 void PlayExternalSound(short soundID, short priority)
 {
 	if ((soundID >= 0) && (soundID < kMaxSounds)) {
@@ -137,7 +137,7 @@ void PlayExternalSound(short soundID, short priority)
 	}
 }
 
-/*--------------------------------------------------------  ExternalCallBack */
+/*----------------------------------------------------  ExternalCallBack */
 pascal void ExternalCallBack(SndChannelPtr theChannel, SndCommand *theCommand)
 {
 #pragma unused (theChannel)
@@ -157,8 +157,9 @@ pascal void ExternalCallBack(SndChannelPtr theChannel, SndCommand *theCommand)
 	}
 }
 
-/*-------------------------------------------------------  ExternalCallBack2 */
-pascal void ExternalCallBack2(SndChannelPtr theChannel, SndCommand *theCommand)
+/*---------------------------------------------------  ExternalCallBack2 */
+pascal void ExternalCallBack2(SndChannelPtr theChannel,
+                              SndCommand *theCommand)
 {
 #pragma unused (theChannel)
 	long thisA5, gameA5;
@@ -177,7 +178,7 @@ pascal void ExternalCallBack2(SndChannelPtr theChannel, SndCommand *theCommand)
 	}
 }
 
-/*--------------------------------------------------------  LoadBufferSounds */
+/*----------------------------------------------------  LoadBufferSounds */
 OSErr LoadBufferSounds(void)
 {
 	Handle	theSound;
@@ -214,7 +215,7 @@ OSErr LoadBufferSounds(void)
 	return (theErr);
 }
 
-/*--------------------------------------------------------  DumpBufferSounds */
+/*----------------------------------------------------  DumpBufferSounds */
 OSErr DumpBufferSounds(void)
 {
 	OSErr	theErr;
@@ -232,7 +233,7 @@ OSErr DumpBufferSounds(void)
 	return (theErr);
 }
 
-/*--------------------------------------------------------  OpenSoundChannel */
+/*----------------------------------------------------  OpenSoundChannel */
 OSErr OpenSoundChannel(void)
 {
 	OSErr theErr;
@@ -265,7 +266,7 @@ OSErr OpenSoundChannel(void)
 	return (theErr);
 }
 
-/*-------------------------------------------------------  CloseSoundChannel */
+/*---------------------------------------------------  CloseSoundChannel */
 OSErr CloseSoundChannel(void)
 {
 	OSErr theErr;
@@ -305,11 +306,11 @@ void InitSound(void)
 
 	theErr = LoadBufferSounds();
 	if (theErr != noErr) {
-		RedAlert("\pInitSound(): Failed Loading Sounds");
+		RedAlert((const StringPtr)"\pInitSound(): Failed Loading Sounds");
 	}
 	theErr = OpenSoundChannel();
 	if (theErr != noErr) {
-		RedAlert("\pInitSound(): Failed To Open Sound Channels");
+		RedAlert((const StringPtr)"\pInitSound(): Failed To Open Sound Channels");
 	}
 	printf("Done Turning On Sound For Glypha.\n");
 }
@@ -321,11 +322,11 @@ void KillSound(void)
 
 	theErr = DumpBufferSounds();
 	if (theErr != noErr) {
-		RedAlert("\pKillSound(): Failed To Dump Buffer Sounds");
+		RedAlert((const StringPtr)"\pKillSound(): Failed To Dump Buffer Sounds");
 	}
 	theErr = CloseSoundChannel();
 	if (theErr != noErr) {
-		RedAlert("\pKillSound(): Failed To Close Sound Channel");
+		RedAlert((const StringPtr)"\pKillSound(): Failed To Close Sound Channel");
 	}
 }
 
@@ -336,8 +337,8 @@ void SysBeep(short duration)
 {
 	short counter = 0;
 	while (counter < duration) {
-		/* On OS X, using the ASCII bell character with printf() has the same
-		 * effect as playing the system warning sound: */
+		/* On OS X, using the ASCII bell character with printf() has the
+         * same effect as playing the system warning sound: */
 		printf("\a");
 		counter++;
 	}

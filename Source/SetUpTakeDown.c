@@ -1,9 +1,9 @@
 
-/*============================================================================
- *----------------------------------------------------------------------------
+/*=========================================================================
+ *-------------------------------------------------------------------------
  *								SetUpTakeDown.c
- *----------------------------------------------------------------------------
- *============================================================================
+ *-------------------------------------------------------------------------
+ *=========================================================================
  */
 
 #ifndef __GLYPHA_III_EXTERNS_H__
@@ -32,43 +32,43 @@
 
 short		wasDepth;
 
-extern	Rect		mainWindowRect, backSrcRect, workSrcRect, obSrcRect, playerSrcRect;
-extern	Rect		numberSrcRect, idleSrcRect, enemyWalkSrcRect, enemyFlySrcRect;
-extern	Rect		obeliskRects[4], playerRects[11], numbersSrc[11], numbersDest[11];
-extern	Rect		platformRects[6], touchDownRects[6], enemyRects[24], handSrcRect;
-extern	Rect		flameSrcRect, flameDestRects[2], flameRects[4], platformCopyRects[9];
-extern	Rect		enemyInitRects[5], eggSrcRect, platformSrcRect, helpSrcRect;
-extern	Rect		handRects[2], grabZone, eyeSrcRect, eyeRects[4];
-extern	GWorldPtr	backSrcMap, workSrcMap, obeliskSrcMap, playerSrcMap;
-extern	GWorldPtr	numberSrcMap, idleSrcMap, enemyWalkSrcMap, enemyFlySrcMap;
-extern	GWorldPtr	flameSrcMap, eggSrcMap, platformSrcMap, helpSrcMap, handSrcMap;
-extern	GWorldPtr	eyeSrcMap;
-extern	GWorldPtr		playerMaskMap, enemyWalkMaskMap, enemyFlyMaskMap, eggMaskMap;
-extern	GWorldPtr		handMaskMap, eyeMaskMap;
-extern	WindowPtr	mainWindow;
-extern	RgnHandle	playRgn;
-extern	MenuHandle	appleMenu, gameMenu, optionsMenu;
-extern	long		theScore, wasTensOfThousands;
-extern	short		numLedges, beginOnLevel, levelOn, livesLeft;
-extern	Boolean		quitting, playing, pausing, switchedOut, canPlay, whichList;
-extern	Boolean		helpOpen, scoresOpen, openTheScores;
+extern Rect mainWindowRect, backSrcRect, workSrcRect, obSrcRect, playerSrcRect;
+extern Rect numberSrcRect, idleSrcRect, enemyWalkSrcRect, enemyFlySrcRect;
+extern Rect obeliskRects[4], playerRects[11], numbersSrc[11], numbersDest[11];
+extern Rect platformRects[6], touchDownRects[6], enemyRects[24], handSrcRect;
+extern Rect flameSrcRect, flameDestRects[2], flameRects[4], platformCopyRects[9];
+extern Rect enemyInitRects[5], eggSrcRect, platformSrcRect, helpSrcRect;
+extern Rect handRects[2], grabZone, eyeSrcRect, eyeRects[4];
+extern GWorldPtr backSrcMap, workSrcMap, obeliskSrcMap, playerSrcMap;
+extern GWorldPtr numberSrcMap, idleSrcMap, enemyWalkSrcMap, enemyFlySrcMap;
+extern GWorldPtr flameSrcMap, eggSrcMap, platformSrcMap, helpSrcMap, handSrcMap;
+extern GWorldPtr eyeSrcMap;
+extern GWorldPtr playerMaskMap, enemyWalkMaskMap, enemyFlyMaskMap, eggMaskMap;
+extern GWorldPtr handMaskMap, eyeMaskMap;
+extern WindowPtr mainWindow;
+extern RgnHandle playRgn;
+extern MenuHandle appleMenu, gameMenu, optionsMenu;
+extern long theScore, wasTensOfThousands;
+extern short numLedges, beginOnLevel, levelOn, livesLeft;
+extern Boolean quitting, playing, pausing, switchedOut, canPlay, whichList;
+extern Boolean helpOpen, scoresOpen, openTheScores;
 
 
-/*==============================================================  Functions */
-/*---------------------------------------------------------  OpenMainWindow */
+/*===========================================================  Functions */
+/*------------------------------------------------------  OpenMainWindow */
 
 void OpenMainWindow(void)
 {
 	/* FIXME: allow dimensions of window to scale with resolution: */
-	SetRect(&mainWindowRect, 0, 0, 640, 460);
-	mainWindow = GetNewWindow(128, 0L, kPutInFront);
+	SetRect(&mainWindowRect, (short)0, (short)0, (short)640, (short)460);
+	mainWindow = GetNewWindow((short)128, 0L, kPutInFront);
 	SetPortWindowPort(mainWindow);
 	ForeColor(blackColor);
 	BackColor(whiteColor);
 	printf("Done Opening The Main Window For Glypha.\n");
 }
 
-/*-------------------------------------------------------------  InitMenubar */
+/*---------------------------------------------------------  InitMenubar */
 
 void InitMenubar(void)
 {
@@ -77,7 +77,7 @@ void InitMenubar(void)
 
 	appleMenu = GetMenu(128);
 	if (appleMenu == 0L) {
-		RedAlert("\pInitMenubar(): Could NOT Load Menus Error");
+		RedAlert((const StringPtr)"\pInitMenubar(): Could NOT Load Menus Error");
 	}
 	/* ignore warning about multi-character constant, this is the proper
 	 * context to use them in: */
@@ -86,13 +86,13 @@ void InitMenubar(void)
 
 	gameMenu = GetMenu(129);
 	if (gameMenu == 0L) {
-		RedAlert("\pCould NOT Load Menus Error");
+		RedAlert((const StringPtr)"\pCould NOT Load Menus Error");
 	}
 	InsertMenu(gameMenu, 0);
 
 	optionsMenu = GetMenu(130);
 	if (optionsMenu == 0L) {
-		RedAlert("\pCould NOT Load Menus Error");
+		RedAlert((const StringPtr)"\pCould NOT Load Menus Error");
 	}
 	InsertMenu(optionsMenu, 0);
 
@@ -108,7 +108,7 @@ void InitMenubar(void)
 	printf("Done Initializing The Menu Bar For Glypha.\n");
 }
 
-/*-----------------------------------------------------------  InitVariables */
+/*-------------------------------------------------------  InitVariables */
 
 void InitVariables(void)
 {
@@ -379,11 +379,11 @@ void InitVariables(void)
 	printf("Done Initializing The Variables That Glypha Uses.\n");
 } /* end of InitVariables() function */
 
-/*--------------------------------------------------------------  ShutItDown */
+/*----------------------------------------------------------  ShutItDown */
 
 void ShutItDown(void)
 {
-	/* do nothing? */ ;
+	return;
 }
 
 /* EOF */

@@ -13,6 +13,7 @@
 # PARTICULAR PURPOSE.
 
 @SET_MAKE@
+
 VPATH = @srcdir@
 am__is_gnu_make = test -n '$(MAKEFILE_LIST)' && test -n '$(MAKELEVEL)'
 am__make_running_with_option = \
@@ -79,6 +80,7 @@ build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
 check_PROGRAMS = SysBeepTest$(EXEEXT)
+bin_PROGRAMS = Glypha$(EXEEXT)
 subdir = .
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
@@ -100,6 +102,17 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
+am__installdirs = "$(DESTDIR)$(bindir)"
+PROGRAMS = $(bin_PROGRAMS)
+am_Glypha_OBJECTS = Glypha-Enemy.$(OBJEXT) Glypha-Graphics.$(OBJEXT) \
+	Glypha-Interface.$(OBJEXT) Glypha-Main.$(OBJEXT) \
+	Glypha-Play.$(OBJEXT) Glypha-Prefs.$(OBJEXT) \
+	Glypha-SetUpTakeDown.$(OBJEXT) Glypha-Sound.$(OBJEXT) \
+	Glypha-Utilities.$(OBJEXT)
+Glypha_OBJECTS = $(am_Glypha_OBJECTS)
+Glypha_LDADD = $(LDADD)
+Glypha_LINK = $(CCLD) $(Glypha_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
 am_SysBeepTest_OBJECTS = SysBeepTest.$(OBJEXT)
 SysBeepTest_OBJECTS = $(am_SysBeepTest_OBJECTS)
 SysBeepTest_LDADD = $(LDADD)
@@ -119,6 +132,10 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
+AM_V_lt = $(am__v_lt_@AM_V@)
+am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
+am__v_lt_0 = --silent
+am__v_lt_1 = 
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 AM_V_CC = $(am__v_CC_@AM_V@)
@@ -131,8 +148,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(SysBeepTest_SOURCES)
-DIST_SOURCES = $(SysBeepTest_SOURCES)
+SOURCES = $(Glypha_SOURCES) $(SysBeepTest_SOURCES)
+DIST_SOURCES = $(Glypha_SOURCES) $(SysBeepTest_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -184,6 +201,9 @@ distcleancheck_listfiles = find . -type f -print
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
+APPLE_CFLAGS = @APPLE_CFLAGS@
+APP_SERVICES_CFLAGS = @APP_SERVICES_CFLAGS@
+AUDIO_TOOLBOX_CFLAGS = @AUDIO_TOOLBOX_CFLAGS@
 AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
@@ -191,9 +211,11 @@ AWK = @AWK@
 BASE_CFLAGS = @BASE_CFLAGS@
 BK_MAKE_PCH = @BK_MAKE_PCH@
 BUILD_STRINGS = @BUILD_STRINGS@
+CARBON_CFLAGS = @CARBON_CFLAGS@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+CORE_SERVICES_CFLAGS = @CORE_SERVICES_CFLAGS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CWARNFLAGS = @CWARNFLAGS@
@@ -324,8 +346,16 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4 --install
 AUTOMAKE_OPTIONS = 1.11 foreign dejagnu
+BUILT_SOURCES = config.h
+AM_CFLAGS = $(CWARNFLAGS) $(APPLE_CFLAGS)
 SysBeepTest_SOURCES = SysBeepTest.c
-all: config.h
+Glypha_SOURCES = Enemy.c Graphics.c Interface.c Main.c Play.c Prefs.c \
+  SetUpTakeDown.c Sound.c Utilities.c
+
+Glypha_CFLAGS = $(CWARNFLAGS) -m32 -mmacosx-version-min=10.4
+Glypha_DEPENDENCIES = config.h Externs.h
+DISTCLEANFILES = *~ autoscan.log .DS_Store
+all: $(BUILT_SOURCES) config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
 .SUFFIXES:
@@ -379,9 +409,55 @@ $(srcdir)/config.h.in: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 
 distclean-hdr:
 	-rm -f config.h stamp-h1
+install-binPROGRAMS: $(bin_PROGRAMS)
+	@$(NORMAL_INSTALL)
+	@list='$(bin_PROGRAMS)'; test -n "$(bindir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(bindir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(bindir)" || exit 1; \
+	fi; \
+	for p in $$list; do echo "$$p $$p"; done | \
+	sed 's/$(EXEEXT)$$//' | \
+	while read p p1; do if test -f $$p \
+	  ; then echo "$$p"; echo "$$p"; else :; fi; \
+	done | \
+	sed -e 'p;s,.*/,,;n;h' \
+	    -e 's|.*|.|' \
+	    -e 'p;x;s,.*/,,;s/$(EXEEXT)$$//;$(transform);s/$$/$(EXEEXT)/' | \
+	sed 'N;N;N;s,\n, ,g' | \
+	$(AWK) 'BEGIN { files["."] = ""; dirs["."] = 1 } \
+	  { d=$$3; if (dirs[d] != 1) { print "d", d; dirs[d] = 1 } \
+	    if ($$2 == $$4) files[d] = files[d] " " $$1; \
+	    else { print "f", $$3 "/" $$4, $$1; } } \
+	  END { for (d in files) print "f", d, files[d] }' | \
+	while read type dir files; do \
+	    if test "$$dir" = .; then dir=; else dir=/$$dir; fi; \
+	    test -z "$$files" || { \
+	      echo " $(INSTALL_PROGRAM_ENV) $(INSTALL_PROGRAM) $$files '$(DESTDIR)$(bindir)$$dir'"; \
+	      $(INSTALL_PROGRAM_ENV) $(INSTALL_PROGRAM) $$files "$(DESTDIR)$(bindir)$$dir" || exit $$?; \
+	    } \
+	; done
+
+uninstall-binPROGRAMS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(bin_PROGRAMS)'; test -n "$(bindir)" || list=; \
+	files=`for p in $$list; do echo "$$p"; done | \
+	  sed -e 'h;s,^.*/,,;s/$(EXEEXT)$$//;$(transform)' \
+	      -e 's/$$/$(EXEEXT)/' \
+	`; \
+	test -n "$$list" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(bindir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(bindir)" && rm -f $$files
+
+clean-binPROGRAMS:
+	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
 
 clean-checkPROGRAMS:
 	-test -z "$(check_PROGRAMS)" || rm -f $(check_PROGRAMS)
+
+Glypha$(EXEEXT): $(Glypha_OBJECTS) $(Glypha_DEPENDENCIES) $(EXTRA_Glypha_DEPENDENCIES) 
+	@rm -f Glypha$(EXEEXT)
+	$(AM_V_CCLD)$(Glypha_LINK) $(Glypha_OBJECTS) $(Glypha_LDADD) $(LIBS)
 
 SysBeepTest$(EXEEXT): $(SysBeepTest_OBJECTS) $(SysBeepTest_DEPENDENCIES) $(EXTRA_SysBeepTest_DEPENDENCIES) 
 	@rm -f SysBeepTest$(EXEEXT)
@@ -393,6 +469,15 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Glypha-Enemy.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Glypha-Graphics.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Glypha-Interface.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Glypha-Main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Glypha-Play.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Glypha-Prefs.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Glypha-SetUpTakeDown.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Glypha-Sound.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Glypha-Utilities.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/SysBeepTest.Po@am__quote@
 
 .c.o:
@@ -408,6 +493,132 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+Glypha-Enemy.o: Enemy.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-Enemy.o -MD -MP -MF $(DEPDIR)/Glypha-Enemy.Tpo -c -o Glypha-Enemy.o `test -f 'Enemy.c' || echo '$(srcdir)/'`Enemy.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-Enemy.Tpo $(DEPDIR)/Glypha-Enemy.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Enemy.c' object='Glypha-Enemy.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-Enemy.o `test -f 'Enemy.c' || echo '$(srcdir)/'`Enemy.c
+
+Glypha-Enemy.obj: Enemy.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-Enemy.obj -MD -MP -MF $(DEPDIR)/Glypha-Enemy.Tpo -c -o Glypha-Enemy.obj `if test -f 'Enemy.c'; then $(CYGPATH_W) 'Enemy.c'; else $(CYGPATH_W) '$(srcdir)/Enemy.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-Enemy.Tpo $(DEPDIR)/Glypha-Enemy.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Enemy.c' object='Glypha-Enemy.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-Enemy.obj `if test -f 'Enemy.c'; then $(CYGPATH_W) 'Enemy.c'; else $(CYGPATH_W) '$(srcdir)/Enemy.c'; fi`
+
+Glypha-Graphics.o: Graphics.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-Graphics.o -MD -MP -MF $(DEPDIR)/Glypha-Graphics.Tpo -c -o Glypha-Graphics.o `test -f 'Graphics.c' || echo '$(srcdir)/'`Graphics.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-Graphics.Tpo $(DEPDIR)/Glypha-Graphics.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Graphics.c' object='Glypha-Graphics.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-Graphics.o `test -f 'Graphics.c' || echo '$(srcdir)/'`Graphics.c
+
+Glypha-Graphics.obj: Graphics.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-Graphics.obj -MD -MP -MF $(DEPDIR)/Glypha-Graphics.Tpo -c -o Glypha-Graphics.obj `if test -f 'Graphics.c'; then $(CYGPATH_W) 'Graphics.c'; else $(CYGPATH_W) '$(srcdir)/Graphics.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-Graphics.Tpo $(DEPDIR)/Glypha-Graphics.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Graphics.c' object='Glypha-Graphics.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-Graphics.obj `if test -f 'Graphics.c'; then $(CYGPATH_W) 'Graphics.c'; else $(CYGPATH_W) '$(srcdir)/Graphics.c'; fi`
+
+Glypha-Interface.o: Interface.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-Interface.o -MD -MP -MF $(DEPDIR)/Glypha-Interface.Tpo -c -o Glypha-Interface.o `test -f 'Interface.c' || echo '$(srcdir)/'`Interface.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-Interface.Tpo $(DEPDIR)/Glypha-Interface.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Interface.c' object='Glypha-Interface.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-Interface.o `test -f 'Interface.c' || echo '$(srcdir)/'`Interface.c
+
+Glypha-Interface.obj: Interface.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-Interface.obj -MD -MP -MF $(DEPDIR)/Glypha-Interface.Tpo -c -o Glypha-Interface.obj `if test -f 'Interface.c'; then $(CYGPATH_W) 'Interface.c'; else $(CYGPATH_W) '$(srcdir)/Interface.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-Interface.Tpo $(DEPDIR)/Glypha-Interface.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Interface.c' object='Glypha-Interface.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-Interface.obj `if test -f 'Interface.c'; then $(CYGPATH_W) 'Interface.c'; else $(CYGPATH_W) '$(srcdir)/Interface.c'; fi`
+
+Glypha-Main.o: Main.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-Main.o -MD -MP -MF $(DEPDIR)/Glypha-Main.Tpo -c -o Glypha-Main.o `test -f 'Main.c' || echo '$(srcdir)/'`Main.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-Main.Tpo $(DEPDIR)/Glypha-Main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Main.c' object='Glypha-Main.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-Main.o `test -f 'Main.c' || echo '$(srcdir)/'`Main.c
+
+Glypha-Main.obj: Main.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-Main.obj -MD -MP -MF $(DEPDIR)/Glypha-Main.Tpo -c -o Glypha-Main.obj `if test -f 'Main.c'; then $(CYGPATH_W) 'Main.c'; else $(CYGPATH_W) '$(srcdir)/Main.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-Main.Tpo $(DEPDIR)/Glypha-Main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Main.c' object='Glypha-Main.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-Main.obj `if test -f 'Main.c'; then $(CYGPATH_W) 'Main.c'; else $(CYGPATH_W) '$(srcdir)/Main.c'; fi`
+
+Glypha-Play.o: Play.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-Play.o -MD -MP -MF $(DEPDIR)/Glypha-Play.Tpo -c -o Glypha-Play.o `test -f 'Play.c' || echo '$(srcdir)/'`Play.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-Play.Tpo $(DEPDIR)/Glypha-Play.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Play.c' object='Glypha-Play.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-Play.o `test -f 'Play.c' || echo '$(srcdir)/'`Play.c
+
+Glypha-Play.obj: Play.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-Play.obj -MD -MP -MF $(DEPDIR)/Glypha-Play.Tpo -c -o Glypha-Play.obj `if test -f 'Play.c'; then $(CYGPATH_W) 'Play.c'; else $(CYGPATH_W) '$(srcdir)/Play.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-Play.Tpo $(DEPDIR)/Glypha-Play.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Play.c' object='Glypha-Play.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-Play.obj `if test -f 'Play.c'; then $(CYGPATH_W) 'Play.c'; else $(CYGPATH_W) '$(srcdir)/Play.c'; fi`
+
+Glypha-Prefs.o: Prefs.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-Prefs.o -MD -MP -MF $(DEPDIR)/Glypha-Prefs.Tpo -c -o Glypha-Prefs.o `test -f 'Prefs.c' || echo '$(srcdir)/'`Prefs.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-Prefs.Tpo $(DEPDIR)/Glypha-Prefs.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Prefs.c' object='Glypha-Prefs.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-Prefs.o `test -f 'Prefs.c' || echo '$(srcdir)/'`Prefs.c
+
+Glypha-Prefs.obj: Prefs.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-Prefs.obj -MD -MP -MF $(DEPDIR)/Glypha-Prefs.Tpo -c -o Glypha-Prefs.obj `if test -f 'Prefs.c'; then $(CYGPATH_W) 'Prefs.c'; else $(CYGPATH_W) '$(srcdir)/Prefs.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-Prefs.Tpo $(DEPDIR)/Glypha-Prefs.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Prefs.c' object='Glypha-Prefs.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-Prefs.obj `if test -f 'Prefs.c'; then $(CYGPATH_W) 'Prefs.c'; else $(CYGPATH_W) '$(srcdir)/Prefs.c'; fi`
+
+Glypha-SetUpTakeDown.o: SetUpTakeDown.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-SetUpTakeDown.o -MD -MP -MF $(DEPDIR)/Glypha-SetUpTakeDown.Tpo -c -o Glypha-SetUpTakeDown.o `test -f 'SetUpTakeDown.c' || echo '$(srcdir)/'`SetUpTakeDown.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-SetUpTakeDown.Tpo $(DEPDIR)/Glypha-SetUpTakeDown.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='SetUpTakeDown.c' object='Glypha-SetUpTakeDown.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-SetUpTakeDown.o `test -f 'SetUpTakeDown.c' || echo '$(srcdir)/'`SetUpTakeDown.c
+
+Glypha-SetUpTakeDown.obj: SetUpTakeDown.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-SetUpTakeDown.obj -MD -MP -MF $(DEPDIR)/Glypha-SetUpTakeDown.Tpo -c -o Glypha-SetUpTakeDown.obj `if test -f 'SetUpTakeDown.c'; then $(CYGPATH_W) 'SetUpTakeDown.c'; else $(CYGPATH_W) '$(srcdir)/SetUpTakeDown.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-SetUpTakeDown.Tpo $(DEPDIR)/Glypha-SetUpTakeDown.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='SetUpTakeDown.c' object='Glypha-SetUpTakeDown.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-SetUpTakeDown.obj `if test -f 'SetUpTakeDown.c'; then $(CYGPATH_W) 'SetUpTakeDown.c'; else $(CYGPATH_W) '$(srcdir)/SetUpTakeDown.c'; fi`
+
+Glypha-Sound.o: Sound.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-Sound.o -MD -MP -MF $(DEPDIR)/Glypha-Sound.Tpo -c -o Glypha-Sound.o `test -f 'Sound.c' || echo '$(srcdir)/'`Sound.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-Sound.Tpo $(DEPDIR)/Glypha-Sound.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Sound.c' object='Glypha-Sound.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-Sound.o `test -f 'Sound.c' || echo '$(srcdir)/'`Sound.c
+
+Glypha-Sound.obj: Sound.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-Sound.obj -MD -MP -MF $(DEPDIR)/Glypha-Sound.Tpo -c -o Glypha-Sound.obj `if test -f 'Sound.c'; then $(CYGPATH_W) 'Sound.c'; else $(CYGPATH_W) '$(srcdir)/Sound.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-Sound.Tpo $(DEPDIR)/Glypha-Sound.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Sound.c' object='Glypha-Sound.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-Sound.obj `if test -f 'Sound.c'; then $(CYGPATH_W) 'Sound.c'; else $(CYGPATH_W) '$(srcdir)/Sound.c'; fi`
+
+Glypha-Utilities.o: Utilities.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-Utilities.o -MD -MP -MF $(DEPDIR)/Glypha-Utilities.Tpo -c -o Glypha-Utilities.o `test -f 'Utilities.c' || echo '$(srcdir)/'`Utilities.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-Utilities.Tpo $(DEPDIR)/Glypha-Utilities.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Utilities.c' object='Glypha-Utilities.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-Utilities.o `test -f 'Utilities.c' || echo '$(srcdir)/'`Utilities.c
+
+Glypha-Utilities.obj: Utilities.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -MT Glypha-Utilities.obj -MD -MP -MF $(DEPDIR)/Glypha-Utilities.Tpo -c -o Glypha-Utilities.obj `if test -f 'Utilities.c'; then $(CYGPATH_W) 'Utilities.c'; else $(CYGPATH_W) '$(srcdir)/Utilities.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/Glypha-Utilities.Tpo $(DEPDIR)/Glypha-Utilities.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='Utilities.c' object='Glypha-Utilities.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(Glypha_CFLAGS) $(CFLAGS) -c -o Glypha-Utilities.obj `if test -f 'Utilities.c'; then $(CYGPATH_W) 'Utilities.c'; else $(CYGPATH_W) '$(srcdir)/Utilities.c'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -676,10 +887,15 @@ distcleancheck: distclean
 check-am: all-am
 	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS)
 	$(MAKE) $(AM_MAKEFLAGS) check-DEJAGNU
-check: check-am
-all-am: Makefile config.h
+check: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) check-am
+all-am: Makefile $(PROGRAMS) config.h
 installdirs:
-install: install-am
+	for dir in "$(DESTDIR)$(bindir)"; do \
+	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
+	done
+install: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) install-am
 install-exec: install-exec-am
 install-data: install-data-am
 uninstall: uninstall-am
@@ -705,20 +921,23 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 clean: clean-am
 
-clean-am: clean-checkPROGRAMS clean-generic mostlyclean-am
+clean-am: clean-binPROGRAMS clean-checkPROGRAMS clean-generic \
+	clean-local mostlyclean-am
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-DEJAGNU distclean-compile \
-	distclean-generic distclean-hdr distclean-tags
+	distclean-generic distclean-hdr distclean-local distclean-tags
 
 dvi: dvi-am
 
@@ -738,7 +957,7 @@ install-dvi: install-dvi-am
 
 install-dvi-am:
 
-install-exec-am:
+install-exec-am: install-binPROGRAMS
 
 install-html: install-html-am
 
@@ -779,31 +998,39 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am:
+uninstall-am: uninstall-binPROGRAMS
 
-.MAKE: all check-am install-am install-strip
+.MAKE: all check check-am install install-am install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am am--refresh check check-DEJAGNU \
-	check-am clean clean-checkPROGRAMS clean-cscope clean-generic \
-	cscope cscopelist-am ctags ctags-am dist dist-all dist-bzip2 \
-	dist-gzip dist-lzip dist-shar dist-tarZ dist-xz dist-zip \
-	distcheck distclean distclean-DEJAGNU distclean-compile \
-	distclean-generic distclean-hdr distclean-tags distcleancheck \
+	check-am clean clean-binPROGRAMS clean-checkPROGRAMS \
+	clean-cscope clean-generic clean-local cscope cscopelist-am \
+	ctags ctags-am dist dist-all dist-bzip2 dist-gzip dist-lzip \
+	dist-shar dist-tarZ dist-xz dist-zip distcheck distclean \
+	distclean-DEJAGNU distclean-compile distclean-generic \
+	distclean-hdr distclean-local distclean-tags distcleancheck \
 	distdir distuninstallcheck dvi dvi-am html html-am info \
-	info-am install install-am install-data install-data-am \
-	install-dvi install-dvi-am install-exec install-exec-am \
-	install-html install-html-am install-info install-info-am \
-	install-man install-pdf install-pdf-am install-ps \
-	install-ps-am install-strip installcheck installcheck-am \
-	installdirs maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-compile mostlyclean-generic pdf pdf-am \
-	ps ps-am tags tags-am uninstall uninstall-am
+	info-am install install-am install-binPROGRAMS install-data \
+	install-data-am install-dvi install-dvi-am install-exec \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-man install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic pdf pdf-am ps ps-am tags tags-am uninstall \
+	uninstall-am uninstall-binPROGRAMS
 
 
 all: xcode
 
 xcode: ../@PACKAGE_NAME@.xcodeproj
 	cd .. && @XCODEBUILD@
+
+clean-local:
+	-rm -rf *.dSYM || rmdir *.dSYM
+
+distclean-local:
+	-rm -rf autom4te.cache || rmdir autom4te.cache
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

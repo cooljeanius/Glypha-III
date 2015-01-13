@@ -1,6 +1,16 @@
 Before next commit:
-- fix line endings
-- some of the configure script stuff is unfinished
+- ensure line endings are okay
 
 Some time:
 - work more on 64-bit stuff
+- check up on the sufficiency of the configure script
+- move all switch statements to use enums (instead of defines) where
+  possible
+- some graphics fail to draw; investigate why
+- something happened to the text color for the high scores; they are now
+  practically illegible against their background
+- add better visual feedback for the hit detection
+- silence certain warnings
+- re-implement deprecated APIs to be non-deprecated
+- handle window re-sizing
+- handle window activation and de-activation
