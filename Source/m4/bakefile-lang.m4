@@ -27,6 +27,7 @@ dnl#  $Id: bakefile-lang.m4 1278 2008-11-17 22:26:10Z vadz $
 dnl#
 dnl#  Compiler detection macros by David Elliott and Vadim Zeitlin
 dnl#
+# serial 1
 
 
 dnl#=======================================================================

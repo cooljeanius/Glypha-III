@@ -3,6 +3,9 @@
 /* Define if building universal (internal helper macro) */
 #undef AC_APPLE_UNIVERSAL_BUILD
 
+/* Define to 1 if you have the <AudioToolbox/AudioServices.h> header file. */
+#undef HAVE_AUDIOTOOLBOX_AUDIOSERVICES_H
+
 /* Define to 1 if you have the <CarbonCore/Files.h> header file. */
 #undef HAVE_CARBONCORE_FILES_H
 
