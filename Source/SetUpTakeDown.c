@@ -30,7 +30,10 @@
 #define kEyePictID				147
 #define kEyeMaskID				148
 
-short		wasDepth;
+#ifdef __clang__
+extern short wasDepth;
+#endif /* __clang__ */
+short wasDepth = 0;
 
 extern Rect mainWindowRect, backSrcRect, workSrcRect, obSrcRect, playerSrcRect;
 extern Rect numberSrcRect, idleSrcRect, enemyWalkSrcRect, enemyFlySrcRect;

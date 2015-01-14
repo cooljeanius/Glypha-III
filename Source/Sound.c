@@ -27,7 +27,16 @@ OSErr DumpBufferSounds(void);
 OSErr OpenSoundChannel(void);
 OSErr CloseSoundChannel(void);
 
-
+#ifdef __clang__
+extern SndCallBackUPP externalCallBackUPP;
+extern SndCallBackUPP externalCallBackUPP2;
+extern SndChannelPtr externalChannel;
+extern SndChannelPtr externalChannel2;
+extern Ptr theSoundData[kMaxSounds];
+extern short externalPriority;
+extern short externalPriority2;
+extern Boolean channelOpen;
+#endif /* __clang__ */
 SndCallBackUPP	externalCallBackUPP, externalCallBackUPP2;
 SndChannelPtr	externalChannel, externalChannel2;
 Ptr				theSoundData[kMaxSounds];

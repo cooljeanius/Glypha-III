@@ -1,9 +1,9 @@
 
-/*============================================================================
- *----------------------------------------------------------------------------
+/*=========================================================================
+ *-------------------------------------------------------------------------
  *									Prefs.c
- *----------------------------------------------------------------------------
- *============================================================================
+ *-------------------------------------------------------------------------
+ *=========================================================================
  */
 
 #ifndef __GLYPHA_III_EXTERNS_H__
@@ -13,7 +13,9 @@
 #define	kPrefCreatorType	'zade'
 #define	kPrefFileType		'pref'
 #define	kPrefFileName		"\pGlypha Preferences"
-#define	kDefaultPrefFName	"\pPreferences"
+#ifndef kDefaultPrefFName
+# define kDefaultPrefFName	"\pPreferences"
+#endif /* !kDefaultPrefFName */
 #define kPrefsStringsID		160
 #define	kPrefsFNameIndex	1
 
@@ -23,8 +25,8 @@ Boolean WritePrefs(long *, short *, prefsInfo *);
 OSErr ReadPrefs(long *, short *, prefsInfo *);
 Boolean DeletePrefs(long *, short *);
 
-/*==============================================================  Functions */
-/*----------------------------------------------------------  GetPrefsFPath */
+/*===========================================================  Functions */
+/*-------------------------------------------------------  GetPrefsFPath */
 
 Boolean GetPrefsFPath(long *prefDirID, short *systemVolRef)
 {
@@ -39,7 +41,7 @@ Boolean GetPrefsFPath(long *prefDirID, short *systemVolRef)
 	return (TRUE);
 }
 
-/*-------------------------------------------------------  CreatePrefsFolder */
+/*---------------------------------------------------  CreatePrefsFolder */
 
 Boolean CreatePrefsFolder(short *systemVolRef)
 {
@@ -65,9 +67,9 @@ Boolean CreatePrefsFolder(short *systemVolRef)
 	return (TRUE);
 }
 
-/*--------------------------------------------------------------  WritePrefs */
+/*----------------------------------------------------------  WritePrefs */
 
-Boolean WritePrefs (long *prefDirID, short *systemVolRef, prefsInfo *thePrefs)
+Boolean WritePrefs(long *prefDirID, short *systemVolRef, prefsInfo *thePrefs)
 {
 	OSErr	theErr;
 	short	fileRefNum;
@@ -227,5 +229,9 @@ Boolean LoadPrefs(prefsInfo *thePrefs, short versionNeed)
 
 	return (TRUE);
 }
+
+#ifdef kDefaultPrefFName
+# undef kDefaultPrefFName
+#endif /* kDefaultPrefFName */
 
 /* EOF */

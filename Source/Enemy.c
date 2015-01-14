@@ -42,7 +42,15 @@ void HandleFallingEnemy(short);
 void HandleEggEnemy(short);
 void ResolveEnemyPlayerHit(short);
 
-
+#ifdef __clang__
+extern handInfo theHand;
+extern eyeInfo theEye;
+extern Rect grabZone;
+extern short deadEnemies;
+extern short spawnedEnemies;
+extern short numEnemiesThisLevel;
+extern short numOwls;
+#endif /* __clang__ */
 handInfo	theHand;
 eyeInfo		theEye;
 Rect		grabZone;
@@ -264,7 +272,7 @@ void GenerateEnemies (void)
 
 /*-----------------------------------------------  CheckEnemyPlatformHit */
 
-void CheckEnemyPlatformHit (short h)
+void CheckEnemyPlatformHit(short h)
 {
 	Rect	hRect, vRect, whoCares;
 	short	i, offset;
@@ -277,29 +285,29 @@ void CheckEnemyPlatformHit (short h)
 			hRect.bottom = theEnemies[h].wasDest.bottom;
 
 			if (SectRect(&hRect, &platformRects[i], &whoCares)) {
-				if (theEnemies[h].h > theEnemies[h].wasH)	/* moving to right */
-				{
-					offset = theEnemies[h].dest.right - platformRects[i].left;
+				if (theEnemies[h].h > theEnemies[h].wasH) {	/* moving to right */
+					offset = (theEnemies[h].dest.right - platformRects[i].left);
 					theEnemies[h].dest.left -= offset;
 					theEnemies[h].dest.right -= offset;
-					theEnemies[h].h = (theEnemies[h].dest.left << 4);
+					theEnemies[h].h = (short)(theEnemies[h].dest.left << 4);
 					theEnemies[h].wasH = theEnemies[h].h;
-					if (theEnemies[h].hVel > 0)
+					if (theEnemies[h].hVel > 0) {
 						theEnemies[h].hVel = -(theEnemies[h].hVel >> 1);
-					else
-						theEnemies[h].hVel = theEnemies[h].hVel >> 1;
+					} else {
+						theEnemies[h].hVel = (short)(theEnemies[h].hVel >> 1);
+                    }
 				}
-				if (theEnemies[h].h < theEnemies[h].wasH)	/* moving to left */
-				{
+				if (theEnemies[h].h < theEnemies[h].wasH) { /* moving to left */
 					offset = platformRects[i].right - theEnemies[h].dest.left;
 					theEnemies[h].dest.left += offset;
 					theEnemies[h].dest.right += offset;
-					theEnemies[h].h = (theEnemies[h].dest.left << 4);
+					theEnemies[h].h = (short)(theEnemies[h].dest.left << 4);
 					theEnemies[h].wasH = theEnemies[h].h;
-					if (theEnemies[h].hVel < 0)
+					if (theEnemies[h].hVel < 0) {
 						theEnemies[h].hVel = -(theEnemies[h].hVel >> 1);
-					else
-						theEnemies[h].hVel = theEnemies[h].hVel >> 1;
+					} else {
+						theEnemies[h].hVel = (theEnemies[h].hVel >> 1);
+                    }
 				}
 				doEnemyScrapeSound = TRUE;
 				theEnemies[h].facingRight = !theEnemies[h].facingRight;
@@ -310,64 +318,62 @@ void CheckEnemyPlatformHit (short h)
 				vRect.bottom = theEnemies[h].dest.bottom;
 
 				if (SectRect(&vRect, &platformRects[i], &whoCares)) {
-					if (theEnemies[h].mode == kFalling)
-					{
+					if (theEnemies[h].mode == kFalling) {
 						theEnemies[i].hVel -= (theEnemies[i].hVel >> 3);
-						if ((theEnemies[i].hVel < 8) && (theEnemies[i].hVel > -8))
-						{
-							if (theEnemies[i].hVel > 0)
+						if ((theEnemies[i].hVel < 8) && (theEnemies[i].hVel > -8)) {
+							if (theEnemies[i].hVel > 0) {
 								theEnemies[i].hVel--;
-							else if (theEnemies[i].hVel < 0)
+							} else if (theEnemies[i].hVel < 0) {
 								theEnemies[i].hVel++;
+                            }
 						}
 					}
 
-					if (theEnemies[h].v > theEnemies[h].wasV) /* heading down */
-					{
+					if (theEnemies[h].v > theEnemies[h].wasV) { /* heading down */
 						offset = theEnemies[h].dest.bottom - platformRects[i].top;
 						theEnemies[h].dest.top -= offset;
 						theEnemies[h].dest.bottom -= offset;
-						theEnemies[h].v = (theEnemies[h].dest.top << 4);
+						theEnemies[h].v = (short)(theEnemies[h].dest.top << 4);
 						theEnemies[h].wasV = theEnemies[h].v;
-						if (theEnemies[h].vVel > kDontFlapVel)
+						if (theEnemies[h].vVel > kDontFlapVel) {
 							doEnemyScrapeSound = TRUE;
-						if (theEnemies[h].vVel > 0)
+                        }
+						if (theEnemies[h].vVel > 0) {
 							theEnemies[h].vVel = -(theEnemies[h].vVel >> 1);
-						else
-							theEnemies[h].vVel = theEnemies[h].vVel >> 1;
+						} else {
+							theEnemies[h].vVel = (theEnemies[h].vVel >> 1);
+                        }
 						if ((theEnemies[h].vVel < 8) && (theEnemies[h].vVel > -8) &&
-								(theEnemies[h].hVel == 0) && (theEnemies[h].mode == kFalling))
+                            (theEnemies[h].hVel == 0) && (theEnemies[h].mode == kFalling))
 						{
 							if (((theEnemies[h].dest.right - 8) > platformRects[i].right) &&
-									(theEnemies[h].hVel == 0))
-							{				/* if enemy has come to rest half off the edge... */
+                                (theEnemies[h].hVel == 0))
+							{   /* if enemy has come to rest half off the edge... */
 								theEnemies[h].hVel = 32;
 							}
 							else if (((theEnemies[h].dest.left + 8) < platformRects[i].left) &&
 									(theEnemies[h].hVel == 0))
 							{
 								theEnemies[h].hVel = -32;
-							}
-							else
-							{
+							} else {
 								theEnemies[h].mode = kEggTimer;
-								theEnemies[h].frame = (numOwls * 96) + 128;
+								theEnemies[h].frame = ((numOwls * 96) + 128);
 								theEnemies[h].vVel = 0;
 							}
 						}
 					}
-					if (theEnemies[h].v < theEnemies[h].wasV) /* heading up */
-					{
+					if (theEnemies[h].v < theEnemies[h].wasV) { /* heading up */
 						offset = theEnemies[h].dest.top - platformRects[i].bottom;
 						theEnemies[h].dest.top -= offset;
 						theEnemies[h].dest.bottom -= offset;
-						theEnemies[h].v = (theEnemies[h].dest.top << 4);
+						theEnemies[h].v = (short)(theEnemies[h].dest.top << 4);
 						theEnemies[h].wasV = theEnemies[h].v;
 						doEnemyScrapeSound = TRUE;
-						if (theEnemies[h].vVel < 0)
+						if (theEnemies[h].vVel < 0) {
 							theEnemies[h].vVel = -(theEnemies[h].vVel >> 2);
-						else
-							theEnemies[h].vVel = theEnemies[h].vVel >> 2;
+						} else {
+							theEnemies[h].vVel = (theEnemies[h].vVel >> 2);
+                        }
 						if ((theEnemies[h].vVel < 8) && (theEnemies[h].vVel > -8) &&
                             (theEnemies[h].hVel == 0) && (theEnemies[h].mode == kFalling))
 						{
@@ -392,7 +398,7 @@ void CheckEnemyRoofCollision(short i)
 		offset = kRoofHeight - theEnemies[i].dest.top;
 		theEnemies[i].dest.top += offset;
 		theEnemies[i].dest.bottom += offset;
-		theEnemies[i].v = (theEnemies[i].dest.top << 4);
+		theEnemies[i].v = (short)(theEnemies[i].dest.top << 4);
 		doEnemyScrapeSound = TRUE;
 		theEnemies[i].vVel = -(theEnemies[i].vVel >> 2);
 	} else if (theEnemies[i].dest.top > kLavaHeight) {
@@ -553,7 +559,7 @@ void HandleFlyingEnemies(short i)
 
 	if (theEnemies[i].dest.left > 640) {
 		OffsetRect(&theEnemies[i].dest, -640, 0);
-		theEnemies[i].h = (theEnemies[i].dest.left << 4);
+		theEnemies[i].h = (short)(theEnemies[i].dest.left << 4);
 		OffsetRect(&theEnemies[i].wasDest, -640, 0);
 		theEnemies[i].pass++;
 		if (theEnemies[i].pass > 2)		/* after two screen passes... */
@@ -563,7 +569,7 @@ void HandleFlyingEnemies(short i)
 		}
 	} else if (theEnemies[i].dest.right < 0) {
 		OffsetRect(&theEnemies[i].dest, 640, 0);
-		theEnemies[i].h = (theEnemies[i].dest.left << 4);
+		theEnemies[i].h = (short)(theEnemies[i].dest.left << 4);
 		OffsetRect(&theEnemies[i].wasDest, 640, 0);
 		theEnemies[i].pass++;
 		if (theEnemies[i].pass > 2) {
@@ -743,16 +749,16 @@ void HandleFallingEnemy (short i)
 	theEnemies[i].dest.right = theEnemies[i].dest.left + 24;
 
 	theEnemies[i].v += theEnemies[i].vVel;
-	theEnemies[i].dest.top = theEnemies[i].v >> 4;
-	theEnemies[i].dest.bottom = theEnemies[i].dest.top + 24;
+	theEnemies[i].dest.top = (theEnemies[i].v >> 4);
+	theEnemies[i].dest.bottom = (theEnemies[i].dest.top + 24);
 
 	if (theEnemies[i].dest.left > 640) {
 		OffsetRect(&theEnemies[i].dest, -640, 0);
-		theEnemies[i].h = (theEnemies[i].dest.left << 4);
+		theEnemies[i].h = (short)(theEnemies[i].dest.left << 4);
 		OffsetRect(&theEnemies[i].wasDest, -640, 0);
 	} else if (theEnemies[i].dest.right < 0) {
 		OffsetRect(&theEnemies[i].dest, 640, 0);
-		theEnemies[i].h = (theEnemies[i].dest.left << 4);
+		theEnemies[i].h = (short)(theEnemies[i].dest.left << 4);
 		OffsetRect(&theEnemies[i].wasDest, 640, 0);
 	}
 
@@ -768,25 +774,25 @@ void HandleEggEnemy(short i)
 
 	theEnemies[i].frame--;
 	if (theEnemies[i].frame < 24) {
-		theEnemies[i].dest.top = theEnemies[i].dest.bottom - theEnemies[i].frame;
-		if (theEnemies[i].frame == 0)		/* a sphinx is born! */
-		{
+		theEnemies[i].dest.top = (theEnemies[i].dest.bottom - theEnemies[i].frame);
+		if (theEnemies[i].frame == 0) {		/* a sphinx is born! */
 			theEnemies[i].frame = 0;
 			PlayExternalSound(kSpawnSound, kSpawnPriority);
 			center = ((theEnemies[i].dest.left + theEnemies[i].dest.right) >> 1);
-			theEnemies[i].dest.left = center - 24;
-			theEnemies[i].dest.right = center + 24;
+			theEnemies[i].dest.left = (short)(center - 24);
+			theEnemies[i].dest.right = (short)(center + 24);
 			theEnemies[i].wasDest = theEnemies[i].dest;
-			theEnemies[i].h = (theEnemies[i].dest.left << 4);
-			theEnemies[i].v = (theEnemies[i].dest.top << 4);
+			theEnemies[i].h = (short)(theEnemies[i].dest.left << 4);
+			theEnemies[i].v = (short)(theEnemies[i].dest.top << 4);
 			theEnemies[i].wasH = theEnemies[i].h;
 			theEnemies[i].wasV = theEnemies[i].v;
 			theEnemies[i].hVel = 0;
 			theEnemies[i].vVel = 0;
 			theEnemies[i].mode = kSpawning;
 			theEnemies[i].kind++;
-			if (theEnemies[i].kind > kJackal)
+			if (theEnemies[i].kind > kJackal) {
 				theEnemies[i].kind = kJackal;
+            }
 			SetEnemyAttributes(i);
 		}
 	}
@@ -912,7 +918,7 @@ void HandleHand(void)
 				thePlayer.clutched = TRUE;
 				thePlayer.hVel = (thePlayer.hVel >> 3);
 				thePlayer.vVel = (thePlayer.vVel >> 3);
-				pull = (levelOn << 2);
+				pull = (short)(levelOn << 2);
 				if (pull > 48) {
 					pull = 48;
                 }
@@ -1181,8 +1187,8 @@ void ResolveEnemyPlayerHit(short i)
 				theEnemies[i].dest.top = (v - 12);
             }
 			theEnemies[i].dest.bottom = (theEnemies[i].dest.top + 24);
-			theEnemies[i].h = (theEnemies[i].dest.left << 4);
-			theEnemies[i].v = (theEnemies[i].dest.top << 4);
+			theEnemies[i].h = (short)(theEnemies[i].dest.left << 4);
+			theEnemies[i].v = (short)(theEnemies[i].dest.top << 4);
 			theEnemies[i].mode = kFalling;
 			theEnemies[i].wasDest = theEnemies[i].dest;
 			theEnemies[i].wasH = theEnemies[i].h;

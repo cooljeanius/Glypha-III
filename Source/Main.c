@@ -25,7 +25,9 @@ void ReadInPrefs(void);
 void WriteOutPrefs(void);
 /* main() does not need a prototype */
 
-
+#ifdef __clang__
+extern prefsInfo thePrefs;
+#endif /* __clang__ */
 prefsInfo thePrefs;
 
 extern Boolean quitting, playing, pausing, evenFrame;

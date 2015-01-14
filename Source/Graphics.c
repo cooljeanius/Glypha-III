@@ -10,8 +10,12 @@
 # include "Externs.h"
 #endif /* __GLYPHA_III_EXTERNS_H__ */
 
-#define kUpperEyeHeight		100
-#define kLowerEyeHeight		200
+#ifndef kUpperEyeHeight
+# define kUpperEyeHeight	100
+#endif /* !kUpperEyeHeight */
+#ifndef kLowerEyeHeight
+# define kLowerEyeHeight	200
+#endif /* !kLowerEyeHeight */
 #define kNumLightningPts	8
 #define kMaxNumUpdateRects	32
 
@@ -997,5 +1001,11 @@ void DrawFrame(void)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
+#ifdef kUpperEyeHeight
+# undef kUpperEyeHeight
+#endif /* kUpperEyeHeight */
+#ifdef kLowerEyeHeight
+# undef kLowerEyeHeight
+#endif /* kLowerEyeHeight */
 
 /* EOF */

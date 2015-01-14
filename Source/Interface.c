@@ -1,9 +1,9 @@
 
-/*============================================================================
- *----------------------------------------------------------------------------
+/*=========================================================================
+ *-------------------------------------------------------------------------
  *									Interface.c
- *----------------------------------------------------------------------------
- *============================================================================
+ *-------------------------------------------------------------------------
+ *=========================================================================
  */
 
 #ifndef __GLYPHA_III_EXTERNS_H__
@@ -39,6 +39,17 @@ void DoScoreReset(void);
 
 extern void CheckHighScore(void);
 
+#ifdef __clang__
+extern Rect mainWindowRect;
+extern WindowPtr mainWindow;
+extern MenuHandle appleMenu;
+extern MenuHandle gameMenu;
+extern MenuHandle optionsMenu;
+extern Boolean switchedOut;
+extern Boolean quitting;
+extern Boolean canPlay;
+extern Boolean openTheScores;
+#endif /* __clang__ */
 Rect		mainWindowRect;
 WindowPtr	mainWindow;
 MenuHandle	appleMenu, gameMenu, optionsMenu;

@@ -41,7 +41,9 @@ void FinishLightning(void);
 void HandleCountDownTimer(void);
 void CheckHighScore(void);
 
-
+#ifdef __clang__
+extern playerType thePlayer;
+#endif /* __clang__ */
 playerType	thePlayer;
 enemyType	theEnemies[kMaxEnemies];
 KeyMap		theKeys;
@@ -322,7 +324,7 @@ void GetPlayerInput (void)
 					if (thePlayer.clutched) {
 						thePlayer.dest.left += 18;
 						thePlayer.dest.right += 18;
-						thePlayer.h = (thePlayer.dest.left << 4);
+						thePlayer.h = (short)(thePlayer.dest.left << 4);
 						thePlayer.wasH = thePlayer.h;
 						thePlayer.wasDest = thePlayer.dest;
 					}
@@ -346,7 +348,7 @@ void GetPlayerInput (void)
 					if (thePlayer.clutched) {
 						thePlayer.dest.left -= 18;
 						thePlayer.dest.right -= 18;
-						thePlayer.h = (thePlayer.dest.left << 4);
+						thePlayer.h = (short)(thePlayer.dest.left << 4);
 						thePlayer.wasH = thePlayer.h;
 						thePlayer.wasDest = thePlayer.dest;
 					}

@@ -663,6 +663,7 @@ typedef struct
 	Boolean	facingRight, flapping;
 	Boolean	walking, wrapping;
 	Boolean	clutched;
+    char    padding; /* 1 byte */
 } playerType;
 
 /* enemyType */
@@ -678,6 +679,7 @@ typedef struct
 	short	flapImpulse, pass;
 	short	maxHVel, maxVVel;
 	Boolean	facingRight;
+    char    padding; /* 1 byte */
 } enemyType;
 
 /* handInfo */
@@ -705,6 +707,7 @@ typedef struct
 	long	highScores[10];
 	short	highLevel[10];
 	Boolean	soundOff;
+    char    padding; /* 1 byte */
 } prefsInfo;
 
 /*----------------------------------------------------------  Prototypes */

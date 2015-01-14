@@ -13,10 +13,15 @@
 extern WindowPtr mainWindow;
 extern Boolean pausing;
 
-#define kActive		0
+#ifndef kActive
+# define kActive	0
+#endif /* !kActive */
 #define kInactive	255
 
-long tickNext;
+#ifdef __clang__
+extern long tickNext;
+#endif /* __clang__ */
+long tickNext = 0L;
 
 
 /*===========================================================  Functions */
@@ -282,8 +287,12 @@ void PasStringCopyNum(StringPtr p1, StringPtr p2, short charsToCopy)
      * 'unsigned char' instead of 'StringPtr': */
 	*p2 = (unsigned char)charsToCopy;
 
-	*p2++; /* TODO: figure out why these are being incremented */
-	*p1++; /* (because I am getting a warning about the value being computed not being used...) */
+	if (*p2++) {
+        ; /* (dummy) */
+    }
+	if (*p1++) {
+        ; /* (dummy) */
+    }
 
 	for ((i = 0); (i < charsToCopy); i++) {
 		*p2++ = *p1++;
@@ -358,5 +367,9 @@ void CustomDisableControl(DialogPtr theDialog, short whichItem)
                   &iRect);
 	HiliteControl((ControlHandle)iHandle, (ControlPartCode)kInactive);
 }
+
+#ifdef kActive
+# undef kActive
+#endif /* kActive */
 
 /* EOF */
