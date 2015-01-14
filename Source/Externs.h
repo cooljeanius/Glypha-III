@@ -621,32 +621,42 @@ extern Boolean WaitNextEvent(EventMask eventMask, EventRecord *theEvent,
 #define kRoofHeight			2
 #define kGravity			4
 
-#define kIdle				-1	/* enemy & player mode */
-#define kFlying				0	/* enemy & player mode */
-#define kWalking			1	/* enemy & player mode */
-#define kSinking			2	/* player mode */
-#define kSpawning			3	/* enemy mode */
-#define kFalling			4	/* enemy mode & player mode */
-#define kEggTimer			5	/* enemy mode */
-#define kDeadAndGone		6	/* enemy mode */
-#define kBones				7	/* player mode */
-#define kLurking			10	/* hand mode */
-#define kOutGrabeth			11	/* hand mode */
-#define kClutching			12	/* hand mode */
-#define kWaiting			15	/* eye mode */
-#define kStalking			16	/* eye mode */
+enum entityModes {
+    kIdle = -1, /* enemy & player mode */
+    kFlying = 0, /* enemy & player mode */
+    kWalking = 1, /* enemy & player mode */
+    kSinking = 2, /* player mode */
+    kSpawning = 3, /* enemy mode */
+    kFalling = 4, /* enemy mode & player mode */
+    kEggTimer = 5, /* enemy mode */
+    kDeadAndGone = 6, /* enemy mode */
+    kBones = 7, /* player mode */
+    kLurking = 10, /* hand mode */
+    kOutGrabeth = 11, /* hand mode */
+    kClutching = 12, /* hand mode */
+    kWaiting = 15, /* eye mode */
+    kStalking = 16 /* eye mode */
+};
+typedef enum entityModes entityModesType;
 
 
 #define kInitNumLives		5
 #define kMaxEnemies			8
 #define kDontFlapVel		8
 
-#define kOwl				0
-#define kWolf				1
-#define kJackal				2
+enum enemiesEnum {
+    kOwl = 0,
+    kWolf = 1,
+    kJackal = 2
+};
+typedef enum enemiesEnum enemiesEnumType;
 
-#define iQuit				5
-#define iSoundItem			7
+enum AppleMenuItemsEnum {
+    iAbout = 1,
+    iQuit = 5,
+    iSoundItem = 7
+};
+typedef enum AppleMenuItemsEnum AppleMenuItemsEnumType;
 
 
 /*-------------------------------------------------------------  Structs */
@@ -673,8 +683,10 @@ typedef struct
 	short	h, v;
 	short	wasH, wasV;
 	short	hVel, vVel;
-	short	srcNum, mode;
-	short	kind, frame;
+	short	srcNum;
+    entityModesType mode;
+	enemiesEnumType	kind;
+    short   frame;
 	short	heightSmell, targetAlt;
 	short	flapImpulse, pass;
 	short	maxHVel, maxVVel;

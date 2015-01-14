@@ -810,35 +810,35 @@ void MoveEnemies(void)
 	for (i = 0; i < numEnemies; i++) {
 		switch (theEnemies[i].mode) {
 			case kIdle:
-			HandleIdleEnemies(i);
-			break;
-
+                HandleIdleEnemies(i);
+                break;
 			case kFlying:
-			HandleFlyingEnemies(i);
-			break;
-
+                HandleFlyingEnemies(i);
+                break;
 			case kWalking:
-			HandleWalkingEnemy(i);
-			break;
-
+                HandleWalkingEnemy(i);
+                break;
 			case kSpawning:
-			HandleSpawningEnemy(i);
-			break;
-
+                HandleSpawningEnemy(i);
+                break;
 			case kFalling:
-			HandleFallingEnemy(i);
-			break;
-
+                HandleFallingEnemy(i);
+                break;
 			case kEggTimer:
-			HandleEggEnemy(i);
-			break;
-
+                HandleEggEnemy(i);
+                break;
 			case kDeadAndGone:
-			break;
-
+                break;
+            case kSinking: /* Fall through: */
+            case kBones: /* Fall through: */
+            case kLurking: /* Fall through: */
+            case kOutGrabeth: /* Fall through: */
+            case kClutching: /* Fall through: */
+            case kWaiting: /* Fall through: */
+            case kStalking: /* Fall through: */
             default:
-            fprintf(stderr, "Unhandled mode of enemy movement.\n");
-            break;
+                fprintf(stderr, "Unhandled mode of enemy movement.\n");
+                break;
 		}
 	}
 

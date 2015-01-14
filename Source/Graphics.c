@@ -128,7 +128,7 @@ void DrawPlatforms (short howMany)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*--------------------------------------------------------------  ScrollHelp */
+/*----------------------------------------------------------  ScrollHelp */
 
 void ScrollHelp (short scrollDown)
 {
@@ -148,7 +148,7 @@ void ScrollHelp (short scrollDown)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*--------------------------------------------------------------  OpenHelp */
+/*------------------------------------------------------------  OpenHelp */
 
 void OpenHelp (void)
 {
@@ -184,7 +184,7 @@ void OpenHelp (void)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*--------------------------------------------------------------  CloseWall */
+/*-----------------------------------------------------------  CloseWall */
 
 void CloseWall(void)
 {
@@ -207,7 +207,7 @@ void CloseWall(void)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*----------------------------------------------------------  OpenHighScores */
+/*------------------------------------------------------  OpenHighScores */
 
 void OpenHighScores(void)
 {
@@ -298,7 +298,7 @@ void OpenHighScores(void)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*------------------------------------------------------  UpdateLivesNumbers */
+/*--------------------------------------------------  UpdateLivesNumbers */
 
 void UpdateLivesNumbers(void)
 {
@@ -326,7 +326,7 @@ void UpdateLivesNumbers(void)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*------------------------------------------------------  UpdateScoreNumbers */
+/*--------------------------------------------------  UpdateScoreNumbers */
 
 void UpdateScoreNumbers(void)
 {
@@ -374,10 +374,11 @@ void UpdateScoreNumbers(void)
 			GetPortBitMapForCopyBits(GetWindowPort(mainWindow)),
 			&numbersDest[4], &numbersDest[4], srcCopy, 0L);
 
-	digit = theScore / 100L;
-	digit = digit % 10L;
-	if ((digit == 0) && (theScore < 1000L))
+	digit = (theScore / 100L);
+	digit = (digit % 10L);
+	if ((digit == 0) && (theScore < 1000L)) {
 		digit = 10;
+    }
 	CopyBits(GetPortBitMapForCopyBits(numberSrcMap),
 			GetPortBitMapForCopyBits(backSrcMap),
 			&numbersSrc[digit], &numbersDest[5], srcCopy, 0L);
@@ -385,10 +386,11 @@ void UpdateScoreNumbers(void)
 			GetPortBitMapForCopyBits(GetWindowPort(mainWindow)),
 			&numbersDest[5], &numbersDest[5], srcCopy, 0L);
 
-	digit = theScore / 10L;
-	digit = digit % 10L;
-	if ((digit == 0) && (theScore < 100L))
+	digit = (theScore / 10L);
+	digit = (digit % 10L);
+	if ((digit == 0) && (theScore < 100L)) {
 		digit = 10;
+    }
 	CopyBits(GetPortBitMapForCopyBits(numberSrcMap),
 			GetPortBitMapForCopyBits(backSrcMap),
 			&numbersSrc[digit], &numbersDest[6], srcCopy, 0L);
@@ -396,7 +398,7 @@ void UpdateScoreNumbers(void)
 			GetPortBitMapForCopyBits(GetWindowPort(mainWindow)),
 			&numbersDest[6], &numbersDest[6], srcCopy, 0L);
 
-	digit = theScore % 10L;
+	digit = (theScore % 10L);
 	CopyBits(GetPortBitMapForCopyBits(numberSrcMap),
 			GetPortBitMapForCopyBits(backSrcMap),
 			&numbersSrc[digit], &numbersDest[7], srcCopy, 0L);
@@ -406,16 +408,17 @@ void UpdateScoreNumbers(void)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*------------------------------------------------------  UpdateLevelNumbers */
+/*--------------------------------------------------  UpdateLevelNumbers */
 
 void UpdateLevelNumbers(void)
 {
 	short digit;
 
-	digit = (levelOn + 1) / 100;
-	digit = digit % 10L;
-	if ((digit == 0) && ((levelOn + 1) < 1000))
+	digit = ((levelOn + 1) / 100);
+	digit = (digit % 10L);
+	if ((digit == 0) && ((levelOn + 1) < 1000)) {
 		digit = 10;
+    }
 	CopyBits(GetPortBitMapForCopyBits(numberSrcMap),
 			GetPortBitMapForCopyBits(backSrcMap),
 			&numbersSrc[digit], &numbersDest[8], srcCopy, 0L);
@@ -423,10 +426,11 @@ void UpdateLevelNumbers(void)
 			GetPortBitMapForCopyBits(GetWindowPort(mainWindow)),
 			&numbersDest[8], &numbersDest[8], srcCopy, 0L);
 
-	digit = (levelOn + 1) / 10;
-	digit = digit % 10L;
-	if ((digit == 0) && ((levelOn + 1) < 100))
+	digit = ((levelOn + 1) / 10);
+	digit = (digit % 10L);
+	if ((digit == 0) && ((levelOn + 1) < 100)) {
 		digit = 10;
+    }
 	CopyBits(GetPortBitMapForCopyBits(numberSrcMap),
 			GetPortBitMapForCopyBits(backSrcMap),
 			&numbersSrc[digit], &numbersDest[9], srcCopy, 0L);
@@ -444,7 +448,7 @@ void UpdateLevelNumbers(void)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*-------------------------------------------------------  GenerateLightning */
+/*---------------------------------------------------  GenerateLightning */
 
 void GenerateLightning(short h, short v)
 {
@@ -456,10 +460,10 @@ void GenerateLightning(short h, short v)
 
 	short i, leftDeltaH, rightDeltaH, leftDeltaV, rightDeltaV, range;
 
-	leftDeltaH = (h - kLeftObeliskH);	/* determine the h and v distances between... */
+	leftDeltaH = (h - kLeftObeliskH); /* determine the h and v distances between... */
 	rightDeltaH = (h - kRightObeliskH);	/* obelisks and the target point */
-	leftDeltaV = v - kLeftObeliskV;
-	rightDeltaV = v - kRightObeliskV;
+	leftDeltaV = (v - kLeftObeliskV);
+	rightDeltaV = (v - kRightObeliskV);
 
 	for (i = 0; i < kNumLightningPts; i++)		/* calculate an even spread of points between... */
 	{											/* obelisk tips and the target point */
@@ -469,16 +473,15 @@ void GenerateLightning(short h, short v)
 		rightLightningPts[i].v = (rightDeltaV * i) / (kNumLightningPts - 1) + kRightObeliskV;
 	}
 
-	range = kWander * 2 + 1;					/* randomly scatter the points vertically... */
-	for (i = 1; i < kNumLightningPts - 1; i++)	/* but NOT the 1st or last points */
-	{
-		leftLightningPts[i].v += RandomInt(range) - kWander;
-		rightLightningPts[i].v += RandomInt(range) - kWander;
+	range = (kWander * 2 + 1); /* randomly scatter the points vertically... */
+	for (i = 1; i < kNumLightningPts - 1; i++) { /* but NOT the 1st or last points */
+		leftLightningPts[i].v += (RandomInt(range) - kWander);
+		rightLightningPts[i].v += (RandomInt(range) - kWander);
 	}
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*-----------------------------------------------------------  FlashObelisks */
+/*-------------------------------------------------------  FlashObelisks */
 
 void FlashObelisks(Boolean flashThem)
 {
@@ -504,7 +507,7 @@ void FlashObelisks(Boolean flashThem)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*---------------------------------------------------------  StrikeLightning */
+/*-----------------------------------------------------  StrikeLightning */
 
 void StrikeLightning (void)
 {
@@ -532,7 +535,7 @@ void StrikeLightning (void)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*-------------------------------------------------------  DumpBackToWorkMap */
+/*---------------------------------------------------  DumpBackToWorkMap */
 
 void DumpBackToWorkMap(void)
 {
@@ -542,7 +545,7 @@ void DumpBackToWorkMap(void)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*-------------------------------------------------------  DumpMainToWorkMap */
+/*---------------------------------------------------  DumpMainToWorkMap */
 
 void DumpMainToWorkMap(void)
 {
@@ -552,7 +555,7 @@ void DumpMainToWorkMap(void)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*----------------------------------------------------------  QuickUnionRect */
+/*------------------------------------------------------  QuickUnionRect */
 
 void QuickUnionRect(Rect *rect1, Rect *rect2, Rect *whole)
 {
@@ -573,7 +576,7 @@ void QuickUnionRect(Rect *rect1, Rect *rect2, Rect *whole)
 	}
 }
 
-/*--------------------------------------------------------  AddToUpdateRects */
+/*----------------------------------------------------  AddToUpdateRects */
 
 void AddToUpdateRects(Rect *theRect)
 {
@@ -581,27 +584,31 @@ void AddToUpdateRects(Rect *theRect)
 		if (numUpdateRects1 < (kMaxNumUpdateRects - 1)) {
 			updateRects1[numUpdateRects1] = *theRect;
 			numUpdateRects1++;
-			if (updateRects1[numUpdateRects1].left < 0)
+			if (updateRects1[numUpdateRects1].left < 0) {
 				updateRects1[numUpdateRects1].left = 0;
-			else if (updateRects1[numUpdateRects1].right > 640)
+			} else if (updateRects1[numUpdateRects1].right > 640) {
 				updateRects1[numUpdateRects1].right = 640;
-			if (updateRects1[numUpdateRects1].top < 0)
+            }
+			if (updateRects1[numUpdateRects1].top < 0) {
 				updateRects1[numUpdateRects1].top = 0;
-			else if (updateRects1[numUpdateRects1].bottom > 480)
+			} else if (updateRects1[numUpdateRects1].bottom > 480) {
 				updateRects1[numUpdateRects1].bottom = 480;
+            }
 		}
 	} else {
 		if (numUpdateRects2 < (kMaxNumUpdateRects - 1)) {
 			updateRects2[numUpdateRects2] = *theRect;
 			numUpdateRects2++;
-			if (updateRects2[numUpdateRects2].left < 0)
+			if (updateRects2[numUpdateRects2].left < 0) {
 				updateRects2[numUpdateRects2].left = 0;
-			else if (updateRects2[numUpdateRects2].right > 640)
+			} else if (updateRects2[numUpdateRects2].right > 640) {
 				updateRects2[numUpdateRects2].right = 640;
-			if (updateRects2[numUpdateRects2].top < 0)
+            }
+			if (updateRects2[numUpdateRects2].top < 0) {
 				updateRects2[numUpdateRects2].top = 0;
-			else if (updateRects2[numUpdateRects2].bottom > 480)
+			} else if (updateRects2[numUpdateRects2].bottom > 480) {
 				updateRects2[numUpdateRects2].bottom = 480;
+            }
 		}
 	}
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
@@ -919,7 +926,6 @@ void DrawEnemies(void)
 				theEnemies[i].wasH = theEnemies[i].h;
 				theEnemies[i].wasV = theEnemies[i].v;
 				break;
-
 			case kFlying:
 				CopyMask(GetPortBitMapForCopyBits(enemyFlySrcMap),
 						 GetPortBitMapForCopyBits(enemyFlyMaskMap),
@@ -933,7 +939,6 @@ void DrawEnemies(void)
 				theEnemies[i].wasH = theEnemies[i].h;
 				theEnemies[i].wasV = theEnemies[i].v;
 				break;
-
 			case kWalking:
 				CopyMask(GetPortBitMapForCopyBits(enemyWalkSrcMap),
 						 GetPortBitMapForCopyBits(enemyWalkMaskMap),
@@ -946,7 +951,6 @@ void DrawEnemies(void)
 				theEnemies[i].wasH = theEnemies[i].h;
 				theEnemies[i].wasV = theEnemies[i].v;
 				break;
-
 			case kFalling:
 				CopyMask(GetPortBitMapForCopyBits(eggSrcMap),
 						 GetPortBitMapForCopyBits(eggMaskMap),
@@ -958,7 +962,6 @@ void DrawEnemies(void)
 				theEnemies[i].wasH = theEnemies[i].h;
 				theEnemies[i].wasV = theEnemies[i].v;
 				break;
-
 			case kEggTimer:
 				if (theEnemies[i].frame < 24) {
 					src = eggSrcRect;
@@ -976,7 +979,15 @@ void DrawEnemies(void)
 				theEnemies[i].wasH = theEnemies[i].h;
 				theEnemies[i].wasV = theEnemies[i].v;
 				break;
-
+            case kIdle: /* Fall through: */
+            case kSinking: /* Fall through: */
+            case kDeadAndGone: /* Fall through: */
+            case kBones: /* Fall through: */
+            case kLurking: /* Fall through: */
+            case kOutGrabeth: /* Fall through: */
+            case kClutching: /* Fall through: */
+            case kWaiting: /* Fall through: */
+            case kStalking: /* Fall through: */
 			default:
                 fprintf(stderr,
                         "Unhandled enemy mode (for drawing): '%d'.\n",

@@ -10,23 +10,33 @@
 # include "Externs.h"
 #endif /* __GLYPHA_III_EXTERNS_H__ */
 
-#define kAppleMenuID	128
-#define iAbout			1
-#define kGameMenuID		129
-#define iNewGame		1
-#define iPauseGame		2
-#define iEndGame		3
-#define kOptionsMenuID	130
-#define iScoreReset		4
-#define iHelp			1
-#define iHighScores		3
-#define iAboutSource	6
+enum menuIDsEnum {
+    kAppleMenuID = 128,
+    kGameMenuID = 129,
+    kOptionsMenuID = 130
+};
+typedef enum menuIDsEnum menuIDsEnumType;
+enum gameMenuItemsEnum {
+    iNewGame = 1,
+    iPauseGame = 2,
+    iEndGame = 3,
+    iQuitGame = 5
+};
+typedef enum gameMenuItemsEnum gameMenuItemsEnumType;
+enum optionsMenuItemsEnum {
+    iHelp = 1,
+    iHighScores = 3,
+    iScoreReset = 4,
+    iAboutSource = 6,
+    iSoundItemOption = 7
+};
+typedef enum optionsMenuItemsEnum optionsMenuItemsEnumType;
 #define kAboutPictID	132
 
 
-void DoAppleMenu(short);
-void DoGameMenu(short);
-void DoOptionsMenu(short);
+void DoAppleMenu(AppleMenuItemsEnumType);
+void DoGameMenu(gameMenuItemsEnumType);
+void DoOptionsMenu(optionsMenuItemsEnumType);
 void UpdateMainWindow(void);
 void HandleMouseEvent(EventRecord *);
 void HandleKeyEvent(EventRecord *);
@@ -61,8 +71,8 @@ extern	GWorldPtr	backSrcMap, workSrcMap;
 extern	Boolean		pausing, playing, helpOpen, scoresOpen;
 
 
-/*==============================================================  Functions */
-/*-------------------------------------------------------  MenusReflectMode */
+/*===========================================================  Functions */
+/*----------------------------------------------------  MenusReflectMode */
 
 void MenusReflectMode(void)
 {
@@ -91,9 +101,9 @@ void MenusReflectMode(void)
 	}
 }
 
-/*-------------------------------------------------------------  DoAppleMenu */
+/*---------------------------------------------------------  DoAppleMenu */
 
-void DoAppleMenu(short theItem)
+void DoAppleMenu(AppleMenuItemsEnumType theItem)
 {
 	switch (theItem) {
 		case iAbout:
@@ -106,7 +116,13 @@ void DoAppleMenu(short theItem)
 			}
 			DoAbout();
 			break;
-
+        case iQuit:
+			quitting = TRUE;
+			break;
+        case iSoundItem:
+			thePrefs.soundOff = !thePrefs.soundOff;
+			CheckMenuItem(optionsMenu, iSoundItem, thePrefs.soundOff);
+			break;
 		default:
 			/* Apple menu item handling routines previously kept here */
             fprintf(stderr, "The Apple menu is no longer handled here.\n");
@@ -116,7 +132,7 @@ void DoAppleMenu(short theItem)
 
 /*----------------------------------------------------------  DoGameMenu */
 
-void DoGameMenu(short theItem)
+void DoGameMenu(gameMenuItemsEnumType theItem)
 {
 	switch (theItem) {
 		case iNewGame:
@@ -130,14 +146,12 @@ void DoGameMenu(short theItem)
 			InitNewGame();
 			MenusReflectMode();
 			break;
-
 		case iPauseGame:
 			if (pausing) {
 				pausing = FALSE;
 				DrawFrame();
 			}
 			break;
-
 		case iEndGame:
 			pausing = FALSE;
 			playing = FALSE;
@@ -148,11 +162,9 @@ void DoGameMenu(short theItem)
 			MenusReflectMode();
 			FlushEvents(everyEvent, 0);
 			break;
-
-		case iQuit:
+		case iQuitGame:
 			quitting = TRUE;
 			break;
-
 		default:
             fprintf(stderr, "Unhandled game menu item.\n");
 			break;
@@ -161,7 +173,7 @@ void DoGameMenu(short theItem)
 
 /*-------------------------------------------------------  DoOptionsMenu */
 
-void DoOptionsMenu (short theItem)
+void DoOptionsMenu(optionsMenuItemsEnumType theItem)
 {
 	switch (theItem) {
 		case iScoreReset:
@@ -174,7 +186,6 @@ void DoOptionsMenu (short theItem)
 			}
 			DoScoreReset();
 			break;
-
 		case iHelp:
 			if (helpOpen) {
 				CloseWall();
@@ -189,7 +200,6 @@ void DoOptionsMenu (short theItem)
 			}
 			CheckMenuItem(optionsMenu, iHelp, helpOpen);
 			break;
-
 		case iHighScores:
 			if (scoresOpen) {
 				CloseWall();
@@ -204,15 +214,13 @@ void DoOptionsMenu (short theItem)
 			}
 			CheckMenuItem(optionsMenu, iHighScores, scoresOpen);
 			break;
-
 		case iAboutSource:
 			DoAboutSource();
 			break;
-		case iSoundItem:
+		case iSoundItemOption:
 			thePrefs.soundOff = !thePrefs.soundOff;
 			CheckMenuItem(optionsMenu, iSoundItem, thePrefs.soundOff);
 			break;
-
 		default:
             fprintf(stderr, "Unhandled options menu item.\n");
 			break;
@@ -223,24 +231,25 @@ void DoOptionsMenu (short theItem)
 
 void DoMenuChoice(long menuChoice)
 {
-	short theMenu, theItem;
+	menuIDsEnumType theMenu;
+    short theItem;
 
 	if (menuChoice == 0) {
 		return;
 	}
 
-	theMenu = HiWord(menuChoice);
+	theMenu = (menuIDsEnumType)HiWord(menuChoice);
 	theItem = LoWord(menuChoice);
 
 	switch (theMenu) {
 		case kAppleMenuID:
-			DoAppleMenu(theItem);
+			DoAppleMenu((AppleMenuItemsEnumType)theItem);
 			break;
 		case kGameMenuID:
-			DoGameMenu(theItem);
+			DoGameMenu((gameMenuItemsEnumType)theItem);
 			break;
 		case kOptionsMenuID:
-			DoOptionsMenu(theItem);
+			DoOptionsMenu((optionsMenuItemsEnumType)theItem);
 			break;
 		default:
             fprintf(stderr, "Unhandled menu choice.\n");

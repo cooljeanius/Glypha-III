@@ -98,7 +98,7 @@ void InitNewGame(void)
 	ResetPlayer(TRUE);
 }
 
-/*--------------------------------------------------------------  SetUpLevel */
+/*----------------------------------------------------------  SetUpLevel */
 
 void SetUpLevel(void)
 {
@@ -113,23 +113,18 @@ void SetUpLevel(void)
 		case 0:
 			numLedges = 5;
 			break;
-
 		case 1:
 			numLedges = 6;
 			break;
-
 		case 2:
 			numLedges = 5;
 			break;
-
 		case 3:
 			numLedges = 3;
 			break;
-
 		case 4:
 			numLedges = 6;
 			break;
-
 		default:
 			/* treat case 0 as the default: */
 			numLedges = 5;
@@ -590,7 +585,7 @@ void HandlePlayerBones (void)
 	}
 }
 
-/*--------------------------------------------------------------  MovePlayer */
+/*----------------------------------------------------------  MovePlayer */
 
 void MovePlayer (void)
 {
@@ -950,7 +945,7 @@ void PlayGame(void)
 								break;
 
 							default:
-								/* not sure if a 'break' should go here? */ ;
+								break;
 						} /* end switch (thePart) */
 						break;
 					case kHighLevelEvent:
@@ -970,12 +965,12 @@ void PlayGame(void)
 								break;
 
 							default:
-								/* not sure if a 'break' should go here? */ ;
+								break;
 						} /* end switch (theEvent.message) */
 						break;
 
 					default:
-						/* not sure if a 'break' should go here? */ ;
+						break;
 				} /* end switch (theEvent.what) */
 			} /* end if (WaitNextEvent) */
 		} while ((long)TickCount() < waitUntil);
