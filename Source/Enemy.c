@@ -80,20 +80,18 @@ Boolean SetEnemyInitialLocation(Rect *theRect)
 	switch (where) {
 		case 0:
 		case 2:
-		facing = TRUE;
-		break;
-
+            facing = TRUE;
+            break;
 		case 3:
-		if (RandomInt((short)2) == 0) {
-			facing = TRUE;
-		} else {
-			facing = FALSE;
-		}
-		break;
-
+            if (RandomInt((short)2) == 0) {
+                facing = TRUE;
+            } else {
+                facing = FALSE;
+            }
+            break;
 		default:
-		facing = FALSE;
-		break;
+            facing = FALSE;
+            break;
 	}
 
 	if ((levelOn % 5) == 4)	{		/* Egg Wave */
@@ -171,24 +169,20 @@ short AssignNewAltitude (void)
 	which = RandomInt((short)4);
 	switch (which) {
 		case 0:
-		altitude = (65 << 4);
-		break;
-
+            altitude = (65 << 4);
+            break;
 		case 1:
-		altitude = (150 << 4);
-		break;
-
+            altitude = (150 << 4);
+            break;
 		case 2:
-		altitude = (245 << 4);
-		break;
-
+            altitude = (245 << 4);
+            break;
 		case 3:
-		altitude = (384 << 4);
-		break;
-
+            altitude = (384 << 4);
+            break;
         default:
-        fprintf(stderr, "Unhandled altitude.\n");
-        break;
+            fprintf(stderr, "Unhandled altitude.\n");
+            break;
 	}
 
 	return (altitude);
@@ -829,13 +823,27 @@ void MoveEnemies(void)
                 break;
 			case kDeadAndGone:
                 break;
-            case kSinking: /* Fall through: */
-            case kBones: /* Fall through: */
-            case kLurking: /* Fall through: */
-            case kOutGrabeth: /* Fall through: */
-            case kClutching: /* Fall through: */
-            case kWaiting: /* Fall through: */
-            case kStalking: /* Fall through: */
+            case kSinking:
+                fprintf(stderr, "Only players can sink.\n");
+                break;
+            case kBones:
+                fprintf(stderr, "Only players generate bones.\n");
+                break;
+            case kLurking:
+                fprintf(stderr, "Only the hand can lurk.\n");
+                break;
+            case kOutGrabeth:
+                fprintf(stderr, "Only the hand can grab.\n");
+                break;
+            case kClutching:
+                fprintf(stderr, "Only the hand can clutch.\n");
+                break;
+            case kWaiting:
+                fprintf(stderr, "Only the eye can wait.\n");
+                break;
+            case kStalking:
+                fprintf(stderr, "Only the eye can stalk.\n");
+                break;
             default:
                 fprintf(stderr, "Unhandled mode of enemy movement.\n");
                 break;

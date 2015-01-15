@@ -902,7 +902,7 @@ void CheckEnemyWrapAround(short who)
 void DrawEnemies(void)
 {
 	Rect	src;
-	short	i, prev_i;
+	volatile short	i, prev_i;
 
     prev_i = 0;
 
@@ -913,6 +913,10 @@ void DrawEnemies(void)
                  * changed: */
                 if (i != prev_i) {
                     printf("Spawning enemy '%i'.\n", i);
+                } else {
+                    /* just temporary to see how many repeated messages we
+                     * cut down on by using a conditional like this: */
+                    printf("%i", prev_i);
                 }
                 prev_i = i;
 				src = enemyRects[theEnemies[i].srcNum];
@@ -963,6 +967,12 @@ void DrawEnemies(void)
 				theEnemies[i].wasV = theEnemies[i].v;
 				break;
 			case kEggTimer:
+                if (i != prev_i) {
+                    printf("Enemy '%i' is in an egg.\n", i);
+                } else {
+                    ;
+                }
+                prev_i = i;
 				if (theEnemies[i].frame < 24) {
 					src = eggSrcRect;
 					src.bottom = (src.top + theEnemies[i].frame);
@@ -979,15 +989,41 @@ void DrawEnemies(void)
 				theEnemies[i].wasH = theEnemies[i].h;
 				theEnemies[i].wasV = theEnemies[i].v;
 				break;
-            case kIdle: /* Fall through: */
-            case kSinking: /* Fall through: */
-            case kDeadAndGone: /* Fall through: */
-            case kBones: /* Fall through: */
-            case kLurking: /* Fall through: */
-            case kOutGrabeth: /* Fall through: */
-            case kClutching: /* Fall through: */
-            case kWaiting: /* Fall through: */
-            case kStalking: /* Fall through: */
+            case kSinking:
+                fprintf(stderr, "Only players can sink.\n");
+                break;
+            case kBones:
+                fprintf(stderr, "Only players generate bones.\n");
+                break;
+            case kLurking:
+                fprintf(stderr, "Only the hand can lurk.\n");
+                break;
+            case kOutGrabeth:
+                fprintf(stderr, "Only the hand can grab.\n");
+                break;
+            case kClutching:
+                fprintf(stderr, "Only the hand can clutch.\n");
+                break;
+            case kWaiting:
+                fprintf(stderr, "Only the eye can wait.\n");
+                break;
+            case kStalking:
+                fprintf(stderr, "Only the eye can stalk.\n");
+                break;
+            case kIdle:
+                fprintf(stderr,
+                        "FIXME: add an idle animation for enemy '%i'.\n",
+                        i);
+				break;
+            case kDeadAndGone:
+                if (i != prev_i) {
+                    printf("Nothing to do when enemy '%i' is dead and gone.\n",
+                           i);
+                } else {
+                    ;
+                }
+                prev_i = i;
+                break;
 			default:
                 fprintf(stderr,
                         "Unhandled enemy mode (for drawing): '%d'.\n",

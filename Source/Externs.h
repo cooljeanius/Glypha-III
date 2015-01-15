@@ -630,7 +630,7 @@ enum entityModes {
     kFalling = 4, /* enemy mode & player mode */
     kEggTimer = 5, /* enemy mode */
     kDeadAndGone = 6, /* enemy mode */
-    kBones = 7, /* player mode */
+    kBones = 7, /* player mode (should also be an enemy one) */
     kLurking = 10, /* hand mode */
     kOutGrabeth = 11, /* hand mode */
     kClutching = 12, /* hand mode */

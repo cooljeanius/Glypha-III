@@ -87,9 +87,9 @@ void ReadInPrefs(void)
 	if (!LoadPrefs(&thePrefs, kPrefsVersion)) {
 		thePrefs.prefVersion = kPrefsVersion;
 		thePrefs.filler = 0;
-		PasStringCopy("\pYour Name", thePrefs.highName);
+		PasStringCopy((StringPtr)"\pYour Name", thePrefs.highName);
 		for ((i = 0); (i < 10); i++) {
-			PasStringCopy("\pNemo", thePrefs.highNames[i]);
+			PasStringCopy((StringPtr)"\pNemo", thePrefs.highNames[i]);
 			thePrefs.highScores[i] = 0L;
 			thePrefs.highLevel[i] = 0;
 		}

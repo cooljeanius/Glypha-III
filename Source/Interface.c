@@ -111,8 +111,9 @@ void DoAppleMenu(AppleMenuItemsEnumType theItem)
 				CloseWall();
 				scoresOpen = FALSE;
 				helpOpen = FALSE;
-				CheckMenuItem(optionsMenu, iHelp, helpOpen);
-				CheckMenuItem(optionsMenu, iHighScores, scoresOpen);
+				CheckMenuItem(optionsMenu, (MenuItemIndex)iHelp, helpOpen);
+				CheckMenuItem(optionsMenu, (MenuItemIndex)iHighScores,
+                              scoresOpen);
 			}
 			DoAbout();
 			break;
@@ -121,7 +122,8 @@ void DoAppleMenu(AppleMenuItemsEnumType theItem)
 			break;
         case iSoundItem:
 			thePrefs.soundOff = !thePrefs.soundOff;
-			CheckMenuItem(optionsMenu, iSoundItem, thePrefs.soundOff);
+			CheckMenuItem(optionsMenu, (MenuItemIndex)iSoundItem,
+                          thePrefs.soundOff);
 			break;
 		default:
 			/* Apple menu item handling routines previously kept here */
@@ -140,8 +142,9 @@ void DoGameMenu(gameMenuItemsEnumType theItem)
 				CloseWall();
 				scoresOpen = FALSE;
 				helpOpen = FALSE;
-				CheckMenuItem(optionsMenu, iHelp, helpOpen);
-				CheckMenuItem(optionsMenu, iHighScores, scoresOpen);
+				CheckMenuItem(optionsMenu, (MenuItemIndex)iHelp, helpOpen);
+				CheckMenuItem(optionsMenu, (MenuItemIndex)iHighScores,
+                              scoresOpen);
 			}
 			InitNewGame();
 			MenusReflectMode();
@@ -181,8 +184,9 @@ void DoOptionsMenu(optionsMenuItemsEnumType theItem)
 				CloseWall();
 				scoresOpen = FALSE;
 				helpOpen = FALSE;
-				CheckMenuItem(optionsMenu, iHelp, helpOpen);
-				CheckMenuItem(optionsMenu, iHighScores, scoresOpen);
+				CheckMenuItem(optionsMenu, (MenuItemIndex)iHelp, helpOpen);
+				CheckMenuItem(optionsMenu, (MenuItemIndex)iHighScores,
+                              scoresOpen);
 			}
 			DoScoreReset();
 			break;
@@ -194,11 +198,12 @@ void DoOptionsMenu(optionsMenuItemsEnumType theItem)
 				if (scoresOpen) {
 					CloseWall();
 					scoresOpen = FALSE;
-					CheckMenuItem(optionsMenu, iHighScores, scoresOpen);
+					CheckMenuItem(optionsMenu, (MenuItemIndex)iHighScores,
+                                  scoresOpen);
 				}
 				OpenHelp();
 			}
-			CheckMenuItem(optionsMenu, iHelp, helpOpen);
+			CheckMenuItem(optionsMenu, (MenuItemIndex)iHelp, helpOpen);
 			break;
 		case iHighScores:
 			if (scoresOpen) {
@@ -219,7 +224,8 @@ void DoOptionsMenu(optionsMenuItemsEnumType theItem)
 			break;
 		case iSoundItemOption:
 			thePrefs.soundOff = !thePrefs.soundOff;
-			CheckMenuItem(optionsMenu, iSoundItem, thePrefs.soundOff);
+			CheckMenuItem(optionsMenu, (MenuItemIndex)iSoundItem,
+                          thePrefs.soundOff);
 			break;
 		default:
             fprintf(stderr, "Unhandled options menu item.\n");

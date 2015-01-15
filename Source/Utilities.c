@@ -54,6 +54,10 @@ void ATTRIBUTE_NORETURN RedAlert(const StringPtr theStr)
 		;
 	}
 	ExitToShell();
+#ifndef __clang__
+    /*NOTREACHED*/
+    exit(0);
+#endif /* !__clang__ */
 }
 
 /*---------------------------------------------------------  LoadGraphic */
