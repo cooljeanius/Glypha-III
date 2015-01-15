@@ -32,8 +32,8 @@ Boolean GetPrefsFPath(long *prefDirID, short *systemVolRef)
 {
 	OSErr theErr;
 
-	theErr = FindFolder(kOnSystemDisk, kPreferencesFolderType, kCreateFolder,
-						systemVolRef, (SInt32 *)prefDirID);
+	theErr = FindFolder(kOnSystemDisk, kPreferencesFolderType,
+                        kCreateFolder, systemVolRef, (SInt32 *)prefDirID);
 	if (theErr != noErr) {
 		return (FALSE);
 	}
@@ -82,8 +82,8 @@ Boolean WritePrefs(long *prefDirID, short *systemVolRef, prefsInfo *thePrefs)
 		if (theErr != fnfErr) {
 			RedAlert((const StringPtr)"\pPrefs FSMakeFSSpec() Error");
 		}
-		/* ignore warning about multi-character constant, this is the proper
-		 * context to use them in: */
+        /* ignore warning about multi-character constant, this is the
+         * proper context in which to use them: */
 		theErr = FSpCreate(&theSpecs, kPrefCreatorType, kPrefFileType,
 						   smSystemScript);
 		if (theErr != noErr) {
@@ -110,7 +110,7 @@ Boolean WritePrefs(long *prefDirID, short *systemVolRef, prefsInfo *thePrefs)
 	return (TRUE);
 }
 
-/*--------------------------------------------------------------  SavePrefs */
+/*-----------------------------------------------------------  SavePrefs */
 
 Boolean SavePrefs (prefsInfo *thePrefs, short versionNow)
 {
@@ -129,7 +129,7 @@ Boolean SavePrefs (prefsInfo *thePrefs, short versionNow)
 	return (TRUE);
 }
 
-/*--------------------------------------------------------------  ReadPrefs */
+/*-----------------------------------------------------------  ReadPrefs */
 
 OSErr ReadPrefs(long *prefDirID, short *systemVolRef, prefsInfo *thePrefs)
 {
@@ -173,7 +173,7 @@ OSErr ReadPrefs(long *prefDirID, short *systemVolRef, prefsInfo *thePrefs)
 	return(theErr);
 }
 
-/*------------------------------------------------------------  DeletePrefs */
+/*---------------------------------------------------------  DeletePrefs */
 
 Boolean DeletePrefs(long *dirID, short *volRef)
 {
@@ -195,7 +195,7 @@ Boolean DeletePrefs(long *dirID, short *volRef)
 	return (TRUE);
 }
 
-/*--------------------------------------------------------------  LoadPrefs */
+/*-----------------------------------------------------------  LoadPrefs */
 
 Boolean LoadPrefs(prefsInfo *thePrefs, short versionNeed)
 {

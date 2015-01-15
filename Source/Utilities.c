@@ -127,7 +127,7 @@ void LogNextTick(long howMany)
 void WaitForNextTick(void)
 {
 	if (tickNext > (long)TickCount()) {
-		RunCurrentEventLoop((tickNext - (long)TickCount()) / 60.0);
+		RunCurrentEventLoop((tickNext - (long)TickCount()) / 60.0f);
 	}
 }
 /*-----------------------------------------------  CreateOffScreenPixMap */

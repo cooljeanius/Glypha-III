@@ -63,8 +63,8 @@ extern	Boolean		quitting, openTheScores;
 extern	WindowPtr	mainWindow;
 
 
-/*==============================================================  Functions */
-/*------------------------------------------------------------  InitNewGame */
+/*===========================================================  Functions */
+/*---------------------------------------------------------  InitNewGame */
 
 void InitNewGame(void)
 {
@@ -179,7 +179,7 @@ void SetUpLevel(void)
 	UpdateLevelNumbers();
 }
 
-/*-------------------------------------------------------------  ResetPlayer */
+/*---------------------------------------------------------  ResetPlayer */
 
 void ResetPlayer(Boolean initialPlace)
 {
@@ -248,7 +248,7 @@ void ResetPlayer(Boolean initialPlace)
 	}
 }
 
-/*--------------------------------------------------------------  OffAMortal */
+/*----------------------------------------------------------  OffAMortal */
 
 void OffAMortal(void)
 {
@@ -262,7 +262,7 @@ void OffAMortal(void)
 	}
 }
 
-/*------------------------------------------------------------  DoCommandKey */
+/*--------------------------------------------------------  DoCommandKey */
 
 void DoCommandKey(void)
 {
@@ -279,7 +279,7 @@ void DoCommandKey(void)
 	}
 }
 
-/*----------------------------------------------------------  GetPlayerInput */
+/*------------------------------------------------------  GetPlayerInput */
 
 void GetPlayerInput (void)
 {
@@ -359,7 +359,7 @@ void GetPlayerInput (void)
 	}
 }
 
-/*--------------------------------------------------------  HandlePlayerIdle */
+/*----------------------------------------------------  HandlePlayerIdle */
 
 void HandlePlayerIdle(void)
 {
@@ -371,7 +371,7 @@ void HandlePlayerIdle(void)
 	SetAndCheckPlayerDest();
 }
 
-/*------------------------------------------------------  HandlePlayerFlying */
+/*--------------------------------------------------  HandlePlayerFlying */
 
 void HandlePlayerFlying (void)
 {
@@ -442,7 +442,7 @@ void HandlePlayerFlying (void)
 	CheckTouchDownCollision();
 }
 
-/*-----------------------------------------------------  HandlePlayerWalking */
+/*-------------------------------------------------  HandlePlayerWalking */
 
 void HandlePlayerWalking (void)
 {
@@ -523,7 +523,7 @@ void HandlePlayerWalking (void)
 	CheckPlayerEnemyCollision();
 }
 
-/*-----------------------------------------------------  HandlePlayerSinking */
+/*-------------------------------------------------  HandlePlayerSinking */
 
 void HandlePlayerSinking(void)
 {
@@ -538,7 +538,7 @@ void HandlePlayerSinking(void)
 	SetAndCheckPlayerDest();
 }
 
-/*-----------------------------------------------------  HandlePlayerFalling */
+/*-------------------------------------------------  HandlePlayerFalling */
 
 void HandlePlayerFalling(void)
 {
@@ -571,7 +571,7 @@ void HandlePlayerFalling(void)
 	CheckPlatformCollision();
 }
 
-/*-------------------------------------------------------  HandlePlayerBones */
+/*---------------------------------------------------  HandlePlayerBones */
 
 void HandlePlayerBones (void)
 {
@@ -593,35 +593,29 @@ void MovePlayer (void)
 		case kIdle:
 			HandlePlayerIdle();
 			break;
-
 		case kFlying:
 			HandlePlayerFlying();
 			break;
-
 		case kWalking:
 			HandlePlayerWalking();
 			break;
-
 		case kSinking:
 			HandlePlayerSinking();
 			break;
-
 		case kFalling:
 			HandlePlayerFalling();
 			break;
-
 		case kBones:
 			HandlePlayerBones();
 			break;
-
 		default:
-			/* assume player is idle by default */
+			/* assume player is idle by default: */
 			HandlePlayerIdle();
 			break;
 	}
 }
 
-/*-------------------------------------------------  CheckTouchDownCollision */
+/*---------------------------------------------  CheckTouchDownCollision */
 
 void CheckTouchDownCollision(void)
 {
@@ -668,7 +662,7 @@ void CheckTouchDownCollision(void)
 	}
 }
 
-/*--------------------------------------------------  CheckPlatformCollision */
+/*----------------------------------------------  CheckPlatformCollision */
 
 void CheckPlatformCollision(void)
 {
@@ -769,7 +763,7 @@ void CheckPlatformCollision(void)
 	}
 }
 
-/*---------------------------------------------------  KeepPlayerOnPlatform */
+/*------------------------------------------------  KeepPlayerOnPlatform */
 
 void KeepPlayerOnPlatform(void)
 {
@@ -790,7 +784,7 @@ void KeepPlayerOnPlatform(void)
 	}
 }
 
-/*--------------------------------------------------  CheckLavaRoofCollision */
+/*----------------------------------------------  CheckLavaRoofCollision */
 
 void CheckLavaRoofCollision(void)
 {
@@ -812,7 +806,7 @@ void CheckLavaRoofCollision(void)
 	}
 }
 
-/*---------------------------------------------------  SetAndCheckPlayerDest */
+/*-----------------------------------------------  SetAndCheckPlayerDest */
 
 void SetAndCheckPlayerDest(void)
 {
@@ -837,7 +831,7 @@ void SetAndCheckPlayerDest(void)
 	}
 }
 
-/*---------------------------------------------------------  HandleLightning */
+/*-----------------------------------------------------  HandleLightning */
 
 void HandleLightning(void)
 {
@@ -850,7 +844,7 @@ void HandleLightning(void)
 	}
 }
 
-/*--------------------------------------------------------  FinishLightning */
+/*-----------------------------------------------------  FinishLightning */
 
 void FinishLightning (void)
 {
@@ -864,7 +858,7 @@ void FinishLightning (void)
 	}
 }
 
-/*----------------------------------------------------  HandleCountDownTimer */
+/*------------------------------------------------  HandleCountDownTimer */
 
 void HandleCountDownTimer(void)
 {
@@ -992,7 +986,7 @@ void PlayGame(void)
 	FlushEvents(everyEvent, 0);
 }
 
-/*----------------------------------------------------------  CheckHighScore */
+/*------------------------------------------------------  CheckHighScore */
 
 void CheckHighScore(void)
 {

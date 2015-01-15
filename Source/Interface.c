@@ -275,7 +275,7 @@ void UpdateMainWindow(void)
 			 srcCopy, 0L);
 }
 
-/*--------------------------------------------------------  HandleMouseEvent */
+/*----------------------------------------------------  HandleMouseEvent */
 
 void HandleMouseEvent(EventRecord *theEvent)
 {
@@ -395,7 +395,7 @@ void HandleKeyEvent(EventRecord *theEvent)
 	}
 }
 
-/*-------------------------------------------------------  HandleUpdateEvent */
+/*---------------------------------------------------  HandleUpdateEvent */
 
 void HandleUpdateEvent (EventRecord *theEvent)
 {
@@ -408,7 +408,7 @@ void HandleUpdateEvent (EventRecord *theEvent)
 	}
 }
 
-/*-----------------------------------------------------------  HandleOSEvent */
+/*-------------------------------------------------------  HandleOSEvent */
 
 void HandleOSEvent (EventRecord *theEvent)
 {
@@ -421,7 +421,7 @@ void HandleOSEvent (EventRecord *theEvent)
 	}
 }
 
-/*----------------------------------------------------  HandleHighLevelEvent */
+/*------------------------------------------------  HandleHighLevelEvent */
 
 void HandleHighLevelEvent(EventRecord *theEvent)
 {

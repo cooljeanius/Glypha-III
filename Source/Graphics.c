@@ -614,7 +614,7 @@ void AddToUpdateRects(Rect *theRect)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*---------------------------------------------------  CheckPlayerWrapAround */
+/*-----------------------------------------------  CheckPlayerWrapAround */
 
 void CheckPlayerWrapAround(void)
 {
@@ -680,7 +680,7 @@ void CheckPlayerWrapAround(void)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*-------------------------------------------------------------  DrawTorches */
+/*---------------------------------------------------------  DrawTorches */
 
 void DrawTorches(void)
 {
@@ -701,7 +701,7 @@ void DrawTorches(void)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*--------------------------------------------------------------  DrawHand */
+/*------------------------------------------------------------  DrawHand */
 
 void DrawHand(void)
 {
@@ -793,7 +793,7 @@ void CopyAllRects(void)
 	QDFlushPortBuffer(GetWindowPort(mainWindow), nil);
 }
 
-/*--------------------------------------------------------------  DrawPlayer */
+/*----------------------------------------------------------  DrawPlayer */
 
 void DrawPlayer(void)
 {
@@ -914,9 +914,7 @@ void DrawEnemies(void)
                 if (i != prev_i) {
                     printf("Spawning enemy '%i'.\n", i);
                 } else {
-                    /* just temporary to see how many repeated messages we
-                     * cut down on by using a conditional like this: */
-                    printf("%i", prev_i);
+                    ;
                 }
                 prev_i = i;
 				src = enemyRects[theEnemies[i].srcNum];

@@ -323,7 +323,7 @@ void InitVariables(void)
 	SetRect(&playerRects[10], 0, 0, 48, 22);	/* pile of bones */
 	OffsetRect(&playerRects[10], 0, 414);
 
-	MoveTo(0, 0);	/* generate clipping region that excludes the obelisks */
+	MoveTo(0, 0); /* generate clipping region that excludes the obelisks */
 	playRgn = NewRgn();
 	OpenRgn();
 	LineTo(0, 450);

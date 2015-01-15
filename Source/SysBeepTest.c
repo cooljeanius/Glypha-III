@@ -13,13 +13,14 @@ void SysBeep(short duration)
 {
 	short counter = 0;
 	while (counter < duration) {
-		/* On OS X, using the ASCII bell character with printf() has the same
-		 * effect as playing the system warning sound: */
+        /* On OS X, using the ASCII bell character with printf() has the
+         * same effect as playing the system warning sound: */
 		printf("\a");
 		counter++;
 	}
-	/* FIXME: here we are using the "duration" parameter to vary the number of
-	 * beeps; this does not match the original behavior of SysBeep() though */
+    /* FIXME: here we are using the "duration" parameter to vary the number
+     * of beeps; this does not match the original behavior of SysBeep()
+     * though... */
 }
 #endif /* __LP64__ */
 

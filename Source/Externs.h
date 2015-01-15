@@ -53,6 +53,7 @@ typedef struct OpaqueAreaID* AreaID;
 # pragma options align=mac68k
 #endif /* !__LP64__ */
 
+/* TIL that <sys/cdefs.h> already has something similar to this: */
 #ifndef ATTRIBUTE_NORETURN
 # define ATTRIBUTE_NORETURN __attribute__ ((__noreturn__))
 #endif /* ATTRIBUTE_NORETURN */

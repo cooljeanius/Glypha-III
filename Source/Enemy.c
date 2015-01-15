@@ -404,7 +404,7 @@ void CheckEnemyRoofCollision(short i)
 	}
 }
 
-/*-------------------------------------------------------- HandleIdleEnemies */
+/*---------------------------------------------------- HandleIdleEnemies */
 
 void HandleIdleEnemies (short i)
 {
@@ -1018,32 +1018,26 @@ void HandleEye (void)
 			diffV = theEye.dest.bottom - thePlayer.dest.bottom;
 		}
 
-		if (diffH > 0)
-		{
+		if (diffH > 0) {
 			if (diffH < speed)
 				theEye.dest.left -= diffH;
 			else
 				theEye.dest.left -= speed;
 			theEye.dest.right = theEye.dest.left + 48;
-		}
-		else if (diffH < 0)
-		{
+		} else if (diffH < 0) {
 			if (-diffH < speed)
 				theEye.dest.left -= diffH;
 			else
 				theEye.dest.left += speed;
 			theEye.dest.right = theEye.dest.left + 48;
 		}
-		if (diffV > 0)
-		{
+		if (diffV > 0) {
 			if (diffV < speed)
 				theEye.dest.bottom -= diffV;
 			else
 				theEye.dest.bottom -= speed;
 			theEye.dest.top = theEye.dest.bottom - 31;
-		}
-		else if (diffV < 0)
-		{
+		} else if (diffV < 0) {
 			if (-diffV < speed)
 				theEye.dest.bottom -= diffV;
 			else
@@ -1094,8 +1088,7 @@ void HandleEye (void)
 		{
 			if (theEye.srcNum == 0)		/* if eye open, player is killed */
 			{
-				if (lightningCount == 0)
-				{
+				if (lightningCount == 0) {
 					lightH = thePlayer.dest.left + 24;
 					lightV = thePlayer.dest.bottom - 24;
 					lightningCount = 6;
