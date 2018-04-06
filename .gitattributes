@@ -1,0 +1,6 @@
+*.{c,C,cc,h} whitespace=trailing-space
+
+# Some files should not be treated as text when diffing or merging.
+Resources_from_Glypha_dot_rsrc/*/* binary
+*.icns binary
+*.rsrc binary
