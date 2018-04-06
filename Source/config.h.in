@@ -64,6 +64,9 @@
 /* Define to 1 if you have a working `mmap' system call. */
 #undef HAVE_MMAP
 
+/* Define to 1 if -fpascal-strings works. */
+#undef HAVE_NATIVE_PASCAL_STRINGS
+
 /* Define to 1 if you have the `p2cstr' function. */
 #undef HAVE_P2CSTR
 

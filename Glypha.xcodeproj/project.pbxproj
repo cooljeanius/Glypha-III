@@ -180,16 +180,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		00C05EF400D9F9A97F000001 /* Externs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Externs.h; path = Source/Externs.h; sourceTree = "<group>"; };
-		00C05EF500D9F9A97F000001 /* Enemy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = Enemy.c; path = Source/Enemy.c; sourceTree = "<group>"; };
-		00C05EF600D9F9A97F000001 /* Graphics.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = Graphics.c; path = Source/Graphics.c; sourceTree = "<group>"; };
-		00C05EF700D9F9A97F000001 /* Interface.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = Interface.c; path = Source/Interface.c; sourceTree = "<group>"; };
-		00C05EF800D9F9A97F000001 /* Main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = Main.c; path = Source/Main.c; sourceTree = "<group>"; };
-		00C05EF900D9F9A97F000001 /* Play.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = Play.c; path = Source/Play.c; sourceTree = "<group>"; };
-		00C05EFA00D9F9A97F000001 /* Prefs.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = Prefs.c; path = Source/Prefs.c; sourceTree = "<group>"; };
-		00C05EFB00D9F9A97F000001 /* SetUpTakeDown.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = SetUpTakeDown.c; path = Source/SetUpTakeDown.c; sourceTree = "<group>"; };
-		00C05EFC00D9F9A97F000001 /* Sound.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = Sound.c; path = Source/Sound.c; sourceTree = "<group>"; };
-		00C05EFD00D9F9A97F000001 /* Utilities.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = Utilities.c; path = Source/Utilities.c; sourceTree = "<group>"; };
+		00C05EF400D9F9A97F000001 /* Externs.h */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.h; name = Externs.h; path = Source/Externs.h; sourceTree = "<group>"; tabWidth = 4; };
+		00C05EF500D9F9A97F000001 /* Enemy.c */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.c; name = Enemy.c; path = Source/Enemy.c; sourceTree = "<group>"; tabWidth = 4; };
+		00C05EF600D9F9A97F000001 /* Graphics.c */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.c; name = Graphics.c; path = Source/Graphics.c; sourceTree = "<group>"; tabWidth = 4; };
+		00C05EF700D9F9A97F000001 /* Interface.c */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.c; name = Interface.c; path = Source/Interface.c; sourceTree = "<group>"; tabWidth = 4; };
+		00C05EF800D9F9A97F000001 /* Main.c */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.c; name = Main.c; path = Source/Main.c; sourceTree = "<group>"; tabWidth = 4; };
+		00C05EF900D9F9A97F000001 /* Play.c */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.c; name = Play.c; path = Source/Play.c; sourceTree = "<group>"; tabWidth = 4; };
+		00C05EFA00D9F9A97F000001 /* Prefs.c */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.c; name = Prefs.c; path = Source/Prefs.c; sourceTree = "<group>"; tabWidth = 4; };
+		00C05EFB00D9F9A97F000001 /* SetUpTakeDown.c */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.c; name = SetUpTakeDown.c; path = Source/SetUpTakeDown.c; sourceTree = "<group>"; tabWidth = 4; };
+		00C05EFC00D9F9A97F000001 /* Sound.c */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.c; name = Sound.c; path = Source/Sound.c; sourceTree = "<group>"; tabWidth = 4; };
+		00C05EFD00D9F9A97F000001 /* Utilities.c */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.c; name = Utilities.c; path = Source/Utilities.c; sourceTree = "<group>"; tabWidth = 4; };
 		0249A665FF388DC511CA2CEA /* Glypha III.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = "Glypha III.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0249A669FF388E3911CA2CEA /* libstdc++-static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libstdc++-static.a"; path = "/usr/lib/libstdc++-static.a"; sourceTree = "<absolute>"; };
 		04DED90400DCE4907F000001 /* Glypha.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Glypha.icns; sourceTree = "<group>"; };
@@ -289,7 +289,7 @@
 		6157CFB0177B55B300E53D75 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A59D4C6C191814F4001D2167 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
 		A59D4CFD19182B36001D2167 /* SysBeepTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SysBeepTest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A59D4D0519182B4D001D2167 /* SysBeepTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SysBeepTest.c; path = Source/SysBeepTest.c; sourceTree = "<group>"; };
+		A59D4D0519182B4D001D2167 /* SysBeepTest.c */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.c; name = SysBeepTest.c; path = Source/SysBeepTest.c; sourceTree = "<group>"; tabWidth = 4; };
 		A5A2680B1917BC6F00EEBBC2 /* Glypha.r */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.rez; path = Glypha.r; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -370,11 +370,11 @@
 		20286C2CFDCF999611CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6157CF15177B52CD00E53D75 /* snds */,
+				6157CF15177B52CD00E53D75 /* snd_ */,
 				6157CEE2177B4F5500E53D75 /* zade */,
-				6157CEDB177B4F2B00E53D75 /* strings */,
-				6157CE41177B4EED00E53D75 /* picts */,
-				6157CE3C177B4ED900E53D75 /* icons */,
+				6157CEDB177B4F2B00E53D75 /* STR_ */,
+				6157CE41177B4EED00E53D75 /* PICT */,
+				6157CE3C177B4ED900E53D75 /* ICON */,
 				6157CE36177B4E6200E53D75 /* Glypha_B.icns */,
 				6157CE26177B4DAC00E53D75 /* Glypha_A.icns */,
 				A5A2680B1917BC6F00EEBBC2 /* Glypha.r */,
@@ -395,7 +395,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6157CE3C177B4ED900E53D75 /* icons */ = {
+		6157CE3C177B4ED900E53D75 /* ICON */ = {
 			isa = PBXGroup;
 			children = (
 				6157CF5A177B52DD00E53D75 /* 00137.ico */,
@@ -403,11 +403,11 @@
 				6157CE3D177B4ED900E53D75 /* 00137_icon.png */,
 				6157CE3E177B4ED900E53D75 /* 00997_icon.png */,
 			);
-			name = icons;
-			path = Resources_from_Glypha.rsrc_/ICON;
+			name = ICON;
+			path = Resources_from_Glypha_dot_rsrc/ICON;
 			sourceTree = "<group>";
 		};
-		6157CE41177B4EED00E53D75 /* picts */ = {
+		6157CE41177B4EED00E53D75 /* PICT */ = {
 			isa = PBXGroup;
 			children = (
 				6157CE42177B4EED00E53D75 /* 00128.pict */,
@@ -453,19 +453,19 @@
 				6157CE6A177B4EED00E53D75 /* 00148.pict */,
 				6157CE6B177B4EED00E53D75 /* 00148.png */,
 			);
-			name = picts;
-			path = Resources_from_Glypha.rsrc_/PICT;
+			name = PICT;
+			path = Resources_from_Glypha_dot_rsrc/PICT;
 			sourceTree = "<group>";
 		};
-		6157CEDB177B4F2B00E53D75 /* strings */ = {
+		6157CEDB177B4F2B00E53D75 /* STR_ */ = {
 			isa = PBXGroup;
 			children = (
 				6157CF72177B539D00E53D75 /* 00128.strings */,
 				6157CF74177B53A800E53D75 /* 00129.strings */,
 				6157CF76177B53AF00E53D75 /* 00160_Prefs.strings */,
 			);
-			name = strings;
-			path = Resources_from_Glypha.rsrc_/STR_;
+			name = STR_;
+			path = Resources_from_Glypha_dot_rsrc/STR_;
 			sourceTree = "<group>";
 		};
 		6157CEE2177B4F5500E53D75 /* zade */ = {
@@ -474,10 +474,10 @@
 				6157CF78177B53B800E53D75 /* 00000_Owner_resource.zade */,
 			);
 			name = zade;
-			path = Resources_from_Glypha.rsrc_/zade;
+			path = Resources_from_Glypha_dot_rsrc/zade;
 			sourceTree = "<group>";
 		};
-		6157CF15177B52CD00E53D75 /* snds */ = {
+		6157CF15177B52CD00E53D75 /* snd_ */ = {
 			isa = PBXGroup;
 			children = (
 				6157CF16177B52CD00E53D75 /* 01000_Ahnk.aiff */,
@@ -515,8 +515,8 @@
 				6157CF36177B52CD00E53D75 /* 01016_Scrape_2.aiff */,
 				6157CF37177B52CD00E53D75 /* 01016_Scrape_2.snd */,
 			);
-			name = snds;
-			path = Resources_from_Glypha.rsrc_/snd_;
+			name = snd_;
+			path = Resources_from_Glypha_dot_rsrc/snd_;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -998,7 +998,8 @@
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_PEDANTIC = YES;
-				GCC_WARN_PROTOTYPE_CONVERSION = YES;
+				"GCC_WARN_PROTOTYPE_CONVERSION[arch=ppc64]" = YES;
+				"GCC_WARN_PROTOTYPE_CONVERSION[arch=x86_64]" = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;

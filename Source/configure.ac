@@ -7,7 +7,7 @@ AC_CONFIG_SRCDIR([Enemy.c])
 AC_CONFIG_HEADER([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CANONICAL_TARGET
-AM_INIT_AUTOMAKE([1.11 foreign dejagnu dist-bzip2 dist-zip])
+AM_INIT_AUTOMAKE([1.11.6 foreign dejagnu dist-bzip2 dist-zip])
 AM_MAINTAINER_MODE
 EBG_DEVELOPER_DIR
 
@@ -181,6 +181,7 @@ AC_CHECK_HEADERS([AudioToolbox/AudioServices.h CarbonCore/Files.h \
 
 # always reset:
 CFLAGS="${my_saved_CFLAGS}"
+AC_SUBST([my_saved_CFLAGS])dnl
 AC_CHECK_HEADERS([stdio.h])dnl
 
 # Checks for typedefs, structures, and compiler characteristics.
@@ -197,7 +198,9 @@ AX_GCC_ARCHFLAG
 #FIXME: This check will (sometimes) say that the compiler does not
 # support the -fpascal-strings flag, even when it does actually support it:
 AX_CHECK_COMPILE_FLAG([-fpascal-strings],
-                      [export CFLAGS="${CFLAGS} -fpascal-strings"],
+                      [export CFLAGS="${CFLAGS} -fpascal-strings"
+                       AC_DEFINE([HAVE_NATIVE_PASCAL_STRINGS],[1],
+                                 [Define to 1 if -fpascal-strings works.])],
                       [AC_MSG_WARN([this project uses pascal strings but your compiler does not appear to support them])])dnl
 
 CFLAGS_SAVED_AGAIN="${CFLAGS}"
@@ -213,6 +216,7 @@ AX_CHECK_COMPILE_FLAG([-Wno-four-char-constants],
 AC_SUBST([APPLE_CFLAGS])dnl
   ## reset to safe ones:
 CFLAGS="${CFLAGS_SAVED_AGAIN}"
+AC_SUBST([CFLAGS_SAVED_AGAIN])dnl
 
 # Checks for library functions.
 AC_MSG_CHECKING([for some functions...])

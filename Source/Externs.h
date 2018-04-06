@@ -1,4 +1,4 @@
-
+/* -*- mode: C; c-basic-offset: 4; tab-width: 4 -*- vim:et:sw=4:ts=4:sts=4 */
 /*=========================================================================
  *-------------------------------------------------------------------------
  *									Externs.h
@@ -562,6 +562,15 @@ extern Boolean WaitNextEvent(EventMask eventMask, EventRecord *theEvent,
 #endif /* __LP64__ && __STDC__ */
 
 /*-------------------------------------------------------------  Defines */
+
+#ifndef __pascal_string
+# define __pascal_string(s)						\
+   ((const unsigned char *)&(struct {					\
+                               unsigned char __len;			\
+                               const char __string[__builtin_strlen(s)];\
+                             }){ __builtin_strlen(s), s })
+#endif /* !__pascal_string */
+
 #define	kPutInFront			(WindowPtr)-1L
 #define	kNormalUpdates		TRUE
 

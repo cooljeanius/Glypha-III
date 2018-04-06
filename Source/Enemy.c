@@ -1,4 +1,4 @@
-
+/* -*- mode: C; c-basic-offset: 4; tab-width: 4 -*- vim:et:sw=4:ts=4:sts=4 */
 /*=========================================================================
  *-------------------------------------------------------------------------
  *									Enemy.c
@@ -221,9 +221,10 @@ void InitEnemy(short i, Boolean reincarnated)
 		SetEnemyAttributes(i);
 
 		if (reincarnated) {
-			theEnemies[i].frame = (RandomInt(48) + 8 + (numOwls * 32));
+			theEnemies[i].frame = (RandomInt((short)48) + 8 + (numOwls * 32));
 		} else {
-			theEnemies[i].frame = (RandomInt(48) + 32 + (64 * i) + (numOwls * 32));
+			theEnemies[i].frame = (RandomInt((short)48) + 32 + (64 * i)
+								   + (numOwls * 32));
         }
 
 		if ((levelOn % 5) == 4)	{		/* Egg Wave */
@@ -399,7 +400,7 @@ void CheckEnemyRoofCollision(short i)
 		theEnemies[i].mode = kDeadAndGone;
 		deadEnemies++;
 
-		PlayExternalSound(kSplashSound, kSplashPriority);
+		PlayExternalSound((short)kSplashSound, (short)kSplashPriority);
 		InitEnemy(i, TRUE);
 	}
 }
@@ -417,7 +418,7 @@ void HandleIdleEnemies (short i)
 		theEnemies[i].vVel = 0;
 		theEnemies[i].frame = 0;
 		SetEnemyAttributes(i);
-		PlayExternalSound(kSpawnSound, kSpawnPriority);
+		PlayExternalSound((short)kSpawnSound, (short)kSpawnPriority);
 	}
 }
 
@@ -771,7 +772,7 @@ void HandleEggEnemy(short i)
 		theEnemies[i].dest.top = (theEnemies[i].dest.bottom - theEnemies[i].frame);
 		if (theEnemies[i].frame == 0) {		/* a sphinx is born! */
 			theEnemies[i].frame = 0;
-			PlayExternalSound(kSpawnSound, kSpawnPriority);
+			PlayExternalSound((short)kSpawnSound, (short)kSpawnPriority);
 			center = ((theEnemies[i].dest.left + theEnemies[i].dest.right) >> 1);
 			theEnemies[i].dest.left = (short)(center - 24);
 			theEnemies[i].dest.right = (short)(center + 24);
@@ -851,10 +852,10 @@ void MoveEnemies(void)
 	}
 
 	if (doEnemyFlapSound) {
-		PlayExternalSound(kFlap2Sound, kFlap2Priority);
+		PlayExternalSound((short)kFlap2Sound, (short)kFlap2Priority);
     }
 	if (doEnemyScrapeSound) {
-		PlayExternalSound(kScrape2Sound, kScrape2Priority);
+		PlayExternalSound((short)kScrape2Sound, (short)kScrape2Priority);
     }
 	if ((deadEnemies >= numEnemiesThisLevel) && (countDownTimer == 0)) {
 		countDownTimer = 30;
@@ -865,8 +866,8 @@ void MoveEnemies(void)
 
 void InitHandLocation(void)
 {
-	SetRect(&theHand.dest, 0, 0, 56, 57);
-	OffsetRect(&theHand.dest, 48, 460);
+	SetRect(&theHand.dest, (short)0, (short)0, (short)56, (short)57);
+	OffsetRect(&theHand.dest, (short)48, (short)460);
 }
 
 /*----------------------------------------------------------  HandleHand */
@@ -965,8 +966,8 @@ void HandleHand(void)
 
 void InitEye(void)
 {
-	SetRect(&theEye.dest, 0, 0, 48, 31);
-	OffsetRect(&theEye.dest, 296, 97);
+	SetRect(&theEye.dest, (short)0, (short)0, (short)48, (short)31);
+	OffsetRect(&theEye.dest, (short)296, (short)97);
 	theEye.mode = kWaiting;
 	theEye.frame = ((numOwls + 2) * 720);
 	theEye.srcNum = 0;
@@ -1099,7 +1100,7 @@ void HandleEye (void)
 				else
 					thePlayer.srcNum = 9;
 				thePlayer.dest.bottom = thePlayer.dest.top + 37;
-				PlayExternalSound(kBoom2Sound, kBoom2Priority);
+				PlayExternalSound((short)kBoom2Sound, (short)kBoom2Priority);
 			}
 			else						/* wow, player killed the eye */
 			{
@@ -1110,7 +1111,7 @@ void HandleEye (void)
 				}
 				theScore += 2000L;
 				UpdateScoreNumbers();
-				PlayExternalSound(kBonusSound, kBonusPriority);
+				PlayExternalSound((short)kBonusSound, (short)kBonusPriority);
 
 				KillOffEye();
 			}
@@ -1220,7 +1221,7 @@ void ResolveEnemyPlayerHit(short i)
 			} else {
 				theEnemies[i].facingRight = FALSE;
             }
-			PlayExternalSound(kScreechSound, kScreechPriority);
+			PlayExternalSound((short)kScreechSound, (short)kScreechPriority);
 		}
 
 		wasVel = thePlayer.hVel;
@@ -1240,11 +1241,11 @@ void CheckPlayerEnemyCollision(void)
 	short	i;
 
 	playTest = thePlayer.dest;
-	InsetRect(&playTest, 8, 8);
+	InsetRect(&playTest, (short)8, (short)8);
 	if (thePlayer.wrapping) {
 		wrapTest = thePlayer.wrap;
 	}
-	InsetRect(&wrapTest, 8, 8);
+	InsetRect(&wrapTest, (short)8, (short)8);
 
 	for ((i = 0); (i < numEnemies); i++) {
 		if ((theEnemies[i].mode != kIdle) && (theEnemies[i].mode != kDeadAndGone)) {

@@ -2,7 +2,7 @@
 
 ACLOCAL_AMFLAGS = -I m4 --install
 
-AUTOMAKE_OPTIONS = 1.11 foreign dejagnu
+AUTOMAKE_OPTIONS = 1.11.6 foreign dejagnu
 
 all: xcode
 

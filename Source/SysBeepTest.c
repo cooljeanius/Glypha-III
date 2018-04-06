@@ -1,3 +1,4 @@
+/* -*- mode: C; c-basic-offset: 4; tab-width: 4 -*- vim:et:sw=4:ts=4:sts=4 */
 /* SysBeepTest.c */
 
 #include <Carbon/Carbon.h>
