@@ -58,9 +58,6 @@
    to 0 otherwise. */
 #undef HAVE_MALLOC
 
-/* Define to 1 if you have the <memory.h> header file. */
-#undef HAVE_MEMORY_H
-
 /* Define to 1 if you have a working `mmap' system call. */
 #undef HAVE_MMAP
 
@@ -133,7 +130,9 @@
 /* Define to 1 if the C compiler supports function prototypes. */
 #undef PROTOTYPES
 
-/* Define to 1 if you have the ANSI C header files. */
+/* Define to 1 if all of the C90 standard headers exist (not just the ones
+   required in a freestanding environment). This macro is provided for
+   backward compatibility; new code need not use it. */
 #undef STDC_HEADERS
 
 /* Version number of package */
