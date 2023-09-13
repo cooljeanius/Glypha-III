@@ -1,5 +1,4 @@
 *.{c,C,cc,h} whitespace=trailing-space
-*.r linguist-language=Rez
 
 # Some files should not be treated as text when diffing or merging.
 Resources_from_Glypha_dot_rsrc/*/* binary
