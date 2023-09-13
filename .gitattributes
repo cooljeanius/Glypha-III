@@ -1,5 +1,5 @@
 *.{c,C,cc,h} whitespace=trailing-space
-# *.r linguist-language=Rez
+# (*.r files are now successfully being detected as Rez, so override is no longer necessary)
 
 # Some files should not be treated as text when diffing or merging.
 Resources_from_Glypha_dot_rsrc/*/* binary
