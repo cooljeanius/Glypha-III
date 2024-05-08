@@ -14,3 +14,6 @@ Some time:
 - re-implement deprecated APIs to be non-deprecated
 - handle window re-sizing
 - handle window activation and de-activation
+
+(note: the contents of this file have been migrated to GitHub issues, but
+are preserved here anyways in case GitHub becomes inaccessible or something)
