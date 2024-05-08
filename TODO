@@ -6,7 +6,7 @@ Some time:
 - check up on the sufficiency of the configure script
 - move all switch statements to use enums (instead of defines) where
   possible
-- some graphics fail to draw; investigate why
+- some graphics fail to draw; investigate why (tracked in issue #3 on GH)
 - something happened to the text color for the high scores; they are now
   practically illegible against their background
 - add better visual feedback for the hit detection
