@@ -27,13 +27,13 @@
 /* Define to 1 if you have the <Carbon.h> header file. */
 #undef HAVE_CARBON_H
 
-/* Define to 1 if you have the `CopyPascalStringToC' function. */
+/* Define to 1 if you have the 'CopyPascalStringToC' function. */
 #undef HAVE_COPYPASCALSTRINGTOC
 
-/* Define to 1 if you have the `getenv' function. */
+/* Define to 1 if you have the 'getenv' function. */
 #undef HAVE_GETENV
 
-/* Define to 1 if you have the `getpagesize' function. */
+/* Define to 1 if you have the 'getpagesize' function. */
 #undef HAVE_GETPAGESIZE
 
 /* Define to 1 if you have the <HIToolbox/Events.h> header file. */
@@ -51,26 +51,26 @@
 /* Define to 1 if you have the `stdc++' library (-lstdc++). */
 #undef HAVE_LIBSTDC__
 
-/* Define to 1 if you have the `stdc++-static' library (-lstdc++-static). */
+/* Define to 1 if you have the 'stdc++-static' library (-lstdc++-static). */
 #undef HAVE_LIBSTDC___STATIC
 
-/* Define to 1 if your system has a GNU libc compatible `malloc' function, and
+/* Define to 1 if your system has a GNU libc compatible 'malloc' function, and
    to 0 otherwise. */
 #undef HAVE_MALLOC
 
-/* Define to 1 if you have a working `mmap' system call. */
+/* Define to 1 if you have a working 'mmap' system call. */
 #undef HAVE_MMAP
 
 /* Define to 1 if -fpascal-strings works. */
 #undef HAVE_NATIVE_PASCAL_STRINGS
 
-/* Define to 1 if you have the `p2cstr' function. */
+/* Define to 1 if you have the 'p2cstr' function. */
 #undef HAVE_P2CSTR
 
 /* Define to 1 if you have the <QD/QuickdrawAPI.h> header file. */
 #undef HAVE_QD_QUICKDRAWAPI_H
 
-/* Define to 1 if you have the `sleep' function. */
+/* Define to 1 if you have the 'sleep' function. */
 #undef HAVE_SLEEP
 
 /* Define to 1 if stdbool.h conforms to C99. */
@@ -103,7 +103,7 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
-/* Define to 1 if the system has the type `_Bool'. */
+/* Define to 1 if the system has the type '_Bool'. */
 #undef HAVE__BOOL
 
 /* Name of package */
@@ -130,7 +130,7 @@
 /* Define to 1 if the C compiler supports function prototypes. */
 #undef PROTOTYPES
 
-/* Define to 1 if all of the C90 standard headers exist (not just the ones
+/* Define to 1 if all of the C89 standard headers exist (not just the ones
    required in a freestanding environment). This macro is provided for
    backward compatibility; new code need not use it. */
 #undef STDC_HEADERS
@@ -153,12 +153,12 @@
 /* Define like PROTOTYPES; this can be used by system headers. */
 #undef __PROTOTYPES
 
-/* Define to empty if `const' does not conform to ANSI C. */
+/* Define to empty if 'const' does not conform to ANSI C. */
 #undef const
 
 /* Define to rpl_malloc if the replacement function should be used. */
 #undef malloc
 
-/* Define to empty if the keyword `volatile' does not work. Warning: valid
-   code using `volatile' can become incorrect without. Disable with care. */
+/* Define to empty if the keyword 'volatile' does not work. Warning: valid
+   code using 'volatile' can become incorrect without. Disable with care. */
 #undef volatile

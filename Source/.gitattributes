@@ -1,8 +1,12 @@
-aclocal.m4 linguist-vendored
+aclocal.m4 linguist-generated
 build-aux/compile linguist-vendored
 build-aux/config.guess linguist-vendored
 build-aux/config.sub linguist-vendored
 build-aux/depcomp linguist-vendored
 build-aux/install-sh linguist-vendored
 build-aux/missing linguist-vendored
+config.h.in linguist-generated
+configure linguist-generated
+configure.scan linguist-generated
 m4/*.m4 linguist-vendored
+Makefile.in linguist-generated

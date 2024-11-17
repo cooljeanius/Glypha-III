@@ -4,7 +4,7 @@ dnl# Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.69])
 AC_INIT([Glypha],[III],[/dev/null])
 AC_CONFIG_SRCDIR([Enemy.c])
-AC_CONFIG_HEADER([config.h])
+AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CANONICAL_TARGET
@@ -23,7 +23,6 @@ XORG_MACROS_VERSION([1.16.0])dnl
 ])dnl
 XORG_PROG_RAWCPP
 XORG_LD_WRAP
-AC_PROG_GCC_TRADITIONAL
 AC_BAKEFILE_PROG_MWCC
 AC_BAKEFILE_PROG_MWCXX
 AC_BAKEFILE_METROWERKS_EXTO
