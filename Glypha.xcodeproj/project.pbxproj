@@ -198,7 +198,6 @@
 		20286C33FDCF999611CA2CEA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		6157CB18177B48B200E53D75 /* Info-Glypha__Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Glypha__Upgraded_.plist"; sourceTree = "<group>"; };
 		6157CB19177B48B200E53D75 /* Glypha III.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Glypha III.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6157CE1E177B4D8E00E53D75 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Credits.rtf; sourceTree = "<group>"; };
 		6157CE26177B4DAC00E53D75 /* Glypha_A.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Glypha_A.icns; sourceTree = "<group>"; };
 		6157CE36177B4E6200E53D75 /* Glypha_B.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Glypha_B.icns; sourceTree = "<group>"; };
 		6157CE3D177B4ED900E53D75 /* 00137_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 00137_icon.png; sourceTree = "<group>"; };
@@ -245,10 +244,6 @@
 		6157CE69177B4EED00E53D75 /* 00147.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 00147.png; sourceTree = "<group>"; };
 		6157CE6A177B4EED00E53D75 /* 00148.pict */ = {isa = PBXFileReference; lastKnownFileType = image.pict; path = 00148.pict; sourceTree = "<group>"; };
 		6157CE6B177B4EED00E53D75 /* 00148.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 00148.png; sourceTree = "<group>"; };
-		6157CEDC177B4F2B00E53D75 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/00128.strings; sourceTree = "<group>"; };
-		6157CEDD177B4F2B00E53D75 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/00129.strings; sourceTree = "<group>"; };
-		6157CEDE177B4F2B00E53D75 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/00160_Prefs.strings; sourceTree = "<group>"; };
-		6157CEE3177B4F5500E53D75 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = English; path = English.lproj/00000_Owner_resource.zade; sourceTree = "<group>"; };
 		6157CF16177B52CD00E53D75 /* 01000_Ahnk.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = 01000_Ahnk.aiff; sourceTree = "<group>"; };
 		6157CF17177B52CD00E53D75 /* 01000_Ahnk.snd */ = {isa = PBXFileReference; lastKnownFileType = file; path = 01000_Ahnk.snd; sourceTree = "<group>"; };
 		6157CF18177B52CD00E53D75 /* 01001_Bird.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = 01001_Bird.aiff; sourceTree = "<group>"; };
@@ -285,8 +280,13 @@
 		6157CF37177B52CD00E53D75 /* 01016_Scrape_2.snd */ = {isa = PBXFileReference; lastKnownFileType = file; path = 01016_Scrape_2.snd; sourceTree = "<group>"; };
 		6157CF5A177B52DD00E53D75 /* 00137.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = 00137.ico; sourceTree = "<group>"; };
 		6157CF5B177B52DD00E53D75 /* 00997.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = 00997.ico; sourceTree = "<group>"; };
-		6157CFA2177B555B00E53D75 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		6157CFB0177B55B300E53D75 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A56FAF2E2CEAAA5F008EEFF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		A56FAF2F2CEAAA5F008EEFF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A56FAF302CEAAA5F008EEFF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A56FAF312CEAAA5F008EEFF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/00128.strings; sourceTree = "<group>"; };
+		A56FAF322CEAAA5F008EEFF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/00129.strings; sourceTree = "<group>"; };
+		A56FAF332CEAAA5F008EEFF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/00160_Prefs.strings; sourceTree = "<group>"; };
+		A56FAF342CEAAA5F008EEFF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/00000_Owner_resource.zade; sourceTree = "<group>"; };
 		A59D4C6C191814F4001D2167 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
 		A59D4CFD19182B36001D2167 /* SysBeepTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SysBeepTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A59D4D0519182B4D001D2167 /* SysBeepTest.c */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.c; name = SysBeepTest.c; path = Source/SysBeepTest.c; sourceTree = "<group>"; tabWidth = 4; };
@@ -583,17 +583,19 @@
 		20286C28FDCF999611CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 1320;
 				ORGANIZATIONNAME = com.mps.glypha;
 			};
 			buildConfigurationList = A593095D1523076F006EE7A4 /* Build configuration list for PBXProject "Glypha" */;
 			compatibilityVersion = "Xcode 3.1";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
-				Japanese,
-				French,
-				German,
+				de,
+				en,
+				ja,
+				fr,
+				Base,
 			);
 			mainGroup = 20286C29FDCF999611CA2CEA /* Glypha */;
 			projectDirPath = "";
@@ -779,7 +781,7 @@
 		6157CF72177B539D00E53D75 /* 00128.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6157CEDC177B4F2B00E53D75 /* English */,
+				A56FAF312CEAAA5F008EEFF0 /* en */,
 			);
 			name = 00128.strings;
 			sourceTree = "<group>";
@@ -787,7 +789,7 @@
 		6157CF74177B53A800E53D75 /* 00129.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6157CEDD177B4F2B00E53D75 /* English */,
+				A56FAF322CEAAA5F008EEFF0 /* en */,
 			);
 			name = 00129.strings;
 			sourceTree = "<group>";
@@ -795,7 +797,7 @@
 		6157CF76177B53AF00E53D75 /* 00160_Prefs.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6157CEDE177B4F2B00E53D75 /* English */,
+				A56FAF332CEAAA5F008EEFF0 /* en */,
 			);
 			name = 00160_Prefs.strings;
 			sourceTree = "<group>";
@@ -803,7 +805,7 @@
 		6157CF78177B53B800E53D75 /* 00000_Owner_resource.zade */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6157CEE3177B4F5500E53D75 /* English */,
+				A56FAF342CEAAA5F008EEFF0 /* en */,
 			);
 			name = 00000_Owner_resource.zade;
 			sourceTree = "<group>";
@@ -811,7 +813,7 @@
 		6157CF7A177B53C500E53D75 /* Credits.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6157CE1E177B4D8E00E53D75 /* English */,
+				A56FAF2E2CEAAA5F008EEFF0 /* en */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -819,7 +821,7 @@
 		6157CFA4177B556900E53D75 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6157CFA2177B555B00E53D75 /* English */,
+				A56FAF302CEAAA5F008EEFF0 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -827,7 +829,7 @@
 		6157CFB2177B55C200E53D75 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6157CFB0177B55B300E53D75 /* English */,
+				A56FAF2F2CEAAA5F008EEFF0 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -838,11 +840,12 @@
 		6157CB15177B48B200E53D75 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_CHECK_RETURN_VALUE_OF_OPERATOR_NEW = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -862,6 +865,7 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mps.glypha;
 				PRODUCT_NAME = "Glypha III";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -890,11 +894,12 @@
 		6157CB16177B48B200E53D75 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = OBSCURE_CURSOR_DURING_PLAY;
@@ -908,6 +913,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mps.glypha;
 				PRODUCT_NAME = "Glypha III";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -927,6 +933,8 @@
 		6157CB17177B48B200E53D75 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "-";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
@@ -937,6 +945,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mps.glypha;
 				PRODUCT_NAME = "Glypha III";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -961,14 +970,34 @@
 					normal,
 					debug,
 				);
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPYING_PRESERVES_HFS_DATA = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_AUTO_VECTORIZATION = YES;
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_ENABLE_EXCEPTIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_PASCAL_STRINGS = YES;
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_ENABLE_SSE41_EXTENSIONS = YES;
@@ -1017,8 +1046,10 @@
 				"MACOSX_DEPLOYMENT_TARGET[arch=ppc64]" = 10.5;
 				"MACOSX_DEPLOYMENT_TARGET[arch=ppc]" = 10.3;
 				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
+				ONLY_ACTIVE_ARCH = YES;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				SDKROOT = macosx;
 				"SDKROOT[arch=ppc64]" = macosx10.5;
 				"SDKROOT[arch=x86_64]" = macosx10.6;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
@@ -1043,7 +1074,27 @@
 					x86_64,
 				);
 				"ARCHS[sdk=macosx10.6]" = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPYING_PRESERVES_HFS_DATA = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_AUTO_VECTORIZATION = YES;
 				GCC_DYNAMIC_NO_PIC = YES;
@@ -1077,7 +1128,7 @@
 				"MACOSX_DEPLOYMENT_TARGET[sdk=macosx10.6][arch=x86_64]" = 10.5;
 				OTHER_CFLAGS = "-m32";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				SDKROOT = macosx10.5;
+				SDKROOT = macosx;
 				"SDKROOT[arch=i386]" = macosx10.4;
 				"SDKROOT[arch=ppc64]" = macosx10.5;
 				"SDKROOT[arch=ppc]" = macosx10.4;
@@ -1098,7 +1149,27 @@
 					i386,
 					x86_64,
 				);
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPYING_PRESERVES_HFS_DATA = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_ENABLE_EXCEPTIONS = YES;
 				GCC_ENABLE_TRIGRAPHS = YES;
@@ -1111,6 +1182,7 @@
 				GENERATE_PKGINFO_FILE = YES;
 				LD_GENERATE_MAP_FILE = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				SDKROOT = macosx;
 				"SDKROOT[arch=ppc64]" = macosx10.5;
 				"SDKROOT[arch=x86_64]" = macosx10.6;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
@@ -1122,11 +1194,11 @@
 		A593095A1523076E006EE7A4 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUGGING_SYMBOLS = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				HEADER_SEARCH_PATHS = "";
@@ -1150,10 +1222,10 @@
 		A593095B1523076E006EE7A4 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUGGING_SYMBOLS = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				HEADER_SEARCH_PATHS = "";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -1176,6 +1248,7 @@
 		A593095C1523076E006EE7A4 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				DEBUGGING_SYMBOLS = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_OPTIMIZATION_LEVEL = 3;
@@ -1209,15 +1282,34 @@
 					normal,
 					profile,
 				);
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPYING_PRESERVES_HFS_DATA = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_AUTO_VECTORIZATION = YES;
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_EXCEPTIONS = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_PASCAL_STRINGS = YES;
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_ENABLE_SSE41_EXTENSIONS = YES;
@@ -1271,6 +1363,7 @@
 				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 10.5;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				SDKROOT = macosx;
 				"SDKROOT[arch=ppc64]" = macosx10.5;
 				"SDKROOT[arch=x86_64]" = macosx10.6;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
@@ -1285,10 +1378,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_VARIANTS = normal;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 1;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -1305,6 +1399,7 @@
 				OTHER_CFLAGS = "-g";
 				OTHER_LDFLAGS = "-lgcov";
 				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mps.glypha;
 				PRODUCT_NAME = "Glypha III";
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
@@ -1338,11 +1433,11 @@
 		A59603981A673024005A93B1 /* Profiling */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUGGING_SYMBOLS = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				HEADER_SEARCH_PATHS = "";
@@ -1367,13 +1462,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = /usr/local/bin;
-				PREBINDING = NO;
 				PRODUCT_NAME = SysBeepTest;
 			};
 			name = Profiling;
@@ -1382,13 +1477,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = /usr/local/bin;
-				PREBINDING = NO;
 				PRODUCT_NAME = SysBeepTest;
 			};
 			name = Development;
@@ -1397,9 +1492,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
@@ -1410,7 +1506,6 @@
 					"-g3",
 					"-ggdb3",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = SysBeepTest;
 				"SDKROOT[arch=ppc]" = macosx10.5;
 				ZERO_LINK = NO;
@@ -1421,10 +1516,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "-";
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/bin;
-				PREBINDING = NO;
 				PRODUCT_NAME = SysBeepTest;
 			};
 			name = Default;

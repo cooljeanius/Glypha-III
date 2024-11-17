@@ -2,12 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSHumanReadableCopyright</key>
-	<string>Public Domain</string>
-	<key>CFBundleDisplayName</key>
-	<string>Glypha III</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>Glypha III</string>
 	<key>CFBundleExecutable</key>
 	<string>Glypha III</string>
 	<key>CFBundleGetInfoString</key>
@@ -15,7 +13,7 @@
 	<key>CFBundleIconFile</key>
 	<string>Glypha.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.mps.glypha</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -30,5 +28,7 @@
 	<string>1.1.1</string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>Public Domain</string>
 </dict>
 </plist>

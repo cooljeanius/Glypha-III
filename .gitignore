@@ -1,5 +1,8 @@
 *.pbxuser
 *.perspectivev3
+*.xcuserstate
+*/xcuserdata/*
+*.xcuserdatad
 *.build
 build/*
 *.cache
